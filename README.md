@@ -35,6 +35,10 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - adds a `.grid-container` wrapper div + styling
 - updates how width is calculated for grid
 
+### Work in progress/Incomplete features:
+- **Event Toggle:** *A toggle feature (w/in 'Settings' menu) that will represent the 5% event flower spawning chance ONLY during their designated event. The feature will allow the user to turn the 'Event Toggle' ON or OFF (upon page loading, toggle will be OFF) & allow user to select an event, which will then allow the designated event flower's natural spawning percentages to be displayed in the Flower Pecentage display menus.*
+- **See [Version 1.0.0](https://github.com/flowerfulpowerful/hkiaflowergen/tree/main?tab=readme-ov-file#version-100) List:** *Continued efforts towards those listed there.*
+
 ## Version 1.5.1
 ### Updates:
 - **List of Flowers:** *Added Rose + their pattern to the generator.*
