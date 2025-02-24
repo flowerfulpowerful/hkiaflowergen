@@ -15,7 +15,7 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - **Grid Code Export & Import:** *Copy & share (or save) your grid codes, and import them to display a new grid.*
 - **Feedback Form:** *Suggest improvements or leave **kind** feedback to help us improve!*
 
-
+> [!TIP]
 # Tutorials
 - **[In-depth tutorial](https://discord.com/channels/1105575633943277629/1274566291264376983/1274793831769837710) on how to use the import/export, percentage toggle, and paint mode**
 
@@ -33,6 +33,7 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
   
 **Thank you to [susanafotu](https://github.com/susanafotu) for helping with the mobile grid-sizing issue! You rock!!! <3**
 
+> [!IMPORTANT]
 ### New Feature Notes:
 - **Event Flowers:** *[Last version](https://github.com/flowerfulpowerful/hkiaflowergen/blob/main/README.md#version-151) we tried to see how it would work if we implemented the 5% event flower spawning chance in a normal grid flower % display. We've taken in the feedback and are working on creating a toggle feature for events. See V.1.5.2 "[Work in progress/Incomplete features](https://github.com/flowerfulpowerful/hkiaflowergen?tab=readme-ov-file#work-in-progressincomplete-features)" for more information about this.*
 
@@ -41,7 +42,7 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - adds a `.grid-container` wrapper div + styling
 - updates how width is calculated for grid
 - *chore: fix width so it fits smaller grids*
-
+> [!NOTE]
 ### Work in progress/Incomplete features:
 - **Event Toggle:** *A toggle feature (w/in 'Settings' menu) that will represent the 5% event flower spawning chance ONLY during their designated event. The feature will allow the user to turn the 'Event Toggle' ON or OFF (upon page loading, toggle will be OFF) & allow user to select an event, which will then allow the designated event flower's natural spawning percentages to be displayed in the Flower Pecentage display menus.*
 - **Mobile Compatibility:** *Make smaller grids (1x1 until 5x5 grid size) look less janky/spaced out on smaller devices (450px width or below).*
