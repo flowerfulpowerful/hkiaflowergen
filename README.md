@@ -30,6 +30,10 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
   
 **Thank you to [susanafotu](https://github.com/susanafotu) for helping with the mobile grid-sizing issue! You rock!!! <3**
 
+#### Additional Imformation (per susanafotu's [PR](https://github.com/flowerfulpowerful/hkiaflowergen/pull/2))
+- moves phone layout CSS to be nested under declaration of grid class name (improves separation of concerns and IMO makes the stylings easier to update)
+- adds a `.grid-container` wrapper div + styling
+- updates how width is calculated for grid
 
 ## Version 1.5.1
 ### Updates:
