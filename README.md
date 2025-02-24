@@ -47,12 +47,18 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - **Mobile Compatibility:** *Make smaller grids (1x1 until 5x5 grid size) look less janky/spaced out on smaller devices (450px width or below).*
 - **See [Version 1.0.0](https://github.com/flowerfulpowerful/hkiaflowergen/tree/main?tab=readme-ov-file#version-100) List:** *Continued efforts towards those listed there.*
 
-## Version 1.5.1
+<details>
+<summary><h2>Version 1.5.1</h2></summary>
+
 ### Updates:
 - **List of Flowers:** *Added Rose + their pattern to the generator.*
 ### New Feature Notes:
 - **Event Flowers:** *Event flowers have 5% spawn chance outside of the Greenhouse ONLY during events. We currently don't calculate the 5% when the Greenhouse Toggle is OFF; however, we are brainstorming a possible feature that will represent this 5% spawning chance ONLY during events.*
 - - Additionally, since it's the H&H event, Rose spawn % will appear when the Greenhouse Toggle is OFF, but not other event flowers. This is a ***temporary*** feature that will be removed when H&H is over—we're just testing out the feature atm!
+
+</details>
+
+
 
 ## Version 1.5.0
 ### Updates:
@@ -71,10 +77,15 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 
 </details>
 
+<details>
+<summary><h2>Version 1.0.5</h2></summary>
 
-## Version 1.0.5
 ### Updates:
 - **Update List of Flowers:** *Added Bowblossom, Dreampuff, Glowbal, Petunia, Poinsettia + their patterns to the generator.*
+
+</details>
+
+
 
 ## Version 1.0.0
 ### Features include:
