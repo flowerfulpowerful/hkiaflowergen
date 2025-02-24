@@ -41,7 +41,7 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 
 ### Work in progress/Incomplete features:
 - **Event Toggle:** *A toggle feature (w/in 'Settings' menu) that will represent the 5% event flower spawning chance ONLY during their designated event. The feature will allow the user to turn the 'Event Toggle' ON or OFF (upon page loading, toggle will be OFF) & allow user to select an event, which will then allow the designated event flower's natural spawning percentages to be displayed in the Flower Pecentage display menus.*
-- - **Mobile Compatibility:** *Make smaller grids (1x1 until 5x5 grid size) look less janky/spaced out on smaller devices (450px width or below).*
+- **Mobile Compatibility:** *Make smaller grids (1x1 until 5x5 grid size) look less janky/spaced out on smaller devices (450px width or below).*
 - **See [Version 1.0.0](https://github.com/flowerfulpowerful/hkiaflowergen/tree/main?tab=readme-ov-file#version-100) List:** *Continued efforts towards those listed there.*
 
 ## Version 1.5.1
@@ -49,6 +49,7 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - **List of Flowers:** *Added Rose + their pattern to the generator.*
 ### New Feature Notes:
 - **Event Flowers:** *Event flowers have 5% spawn chance outside of the Greenhouse ONLY during events. We currently don't calculate the 5% when the Greenhouse Toggle is OFF; however, we are brainstorming a possible feature that will represent this 5% spawning chance ONLY during events.*
+- - Additionally, since it's the H&H event, Rose spawn % will appear when the Greenhouse Toggle is OFF, but not other event flowers. This is a ***temporary*** feature that will be removed when H&H is over—we're just testing out the feature atm!
 
 ## Version 1.5.0
 ### Updates:
