@@ -63,12 +63,10 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - **See [Version 1.0.0](https://github.com/flowerfulpowerful/hkiaflowergen/tree/main?tab=readme-ov-file#version-100) List:** *Continued efforts towards those listed there.*
 - ~~**Mobile Compatibility:** *Make larger grids more accessible for smaller devices (maximum grid size: 20x20).* <sub><sup> *I'm struggling to do this so if anyone can offer insight, please send a message in "Issues" <3* <sub><sup>~~
 
-<details>
-<summary>## Version 1.0.6</summary>
-<br>
+
+## Version 1.0.6
 ### Updates:
 - **Update List of Flowers:** *Added Frostfeather + their pattern to the generator.*
-</details>
 
 ## Version 1.0.5
 ### Updates:
