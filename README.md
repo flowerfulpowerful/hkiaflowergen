@@ -34,7 +34,7 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 **Thank you to [susanafotu](https://github.com/susanafotu) for helping with the mobile grid-sizing issue! You rock!!! <3**
 
 ### New Feature Notes:
-- **Event Flowers:** *Last version we tried to see how it would work if we implemented the 5% event flower spawning chance in a normal grid flower % display. We've taken in the feedback and are working on creating a toggle feature for events. See V.1.5.2 "[Work in progress/Incomplete features](https://github.com/flowerfulpowerful/hkiaflowergen?tab=readme-ov-file#work-in-progressincomplete-features)" for more information about this.*
+- **Event Flowers:** *[Last version](https://github.com/flowerfulpowerful/hkiaflowergen/blob/main/README.md#version-151) we tried to see how it would work if we implemented the 5% event flower spawning chance in a normal grid flower % display. We've taken in the feedback and are working on creating a toggle feature for events. See V.1.5.2 "[Work in progress/Incomplete features](https://github.com/flowerfulpowerful/hkiaflowergen?tab=readme-ov-file#work-in-progressincomplete-features)" for more information about this.*
 
 #### Additional Information (per susanafotu's [PR](https://github.com/flowerfulpowerful/hkiaflowergen/pull/2))
 - moves phone layout CSS to be nested under declaration of grid class name (improves separation of concerns and IMO makes the stylings easier to update)
