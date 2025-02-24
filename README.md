@@ -27,6 +27,7 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 ## Version 1.5.2
 ### Updates:
 - **Mobile Compatibility:** *Make larger grids more accessible for smaller devices (maximum grid size: 20x20).*
+  
 **Thank you to [susanafotu](https://github.com/susanafotu) for helping with the mobile grid-sizing issue! You rock!!! <3**
 
 
