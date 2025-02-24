@@ -3,7 +3,7 @@ Created by Vi & Collaborators
 
 *Not an official affiliate with Sunblink or Hello Kitty Island Adventure, community project.*
 
-## About
+# About
 The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/)** allows you to create a replica of your flower plot set-up and view the spawning/growing probabilities for individual flower combinations.
 
 ### Features include:
@@ -16,13 +16,15 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - **Feedback Form:** *Suggest improvements or leave **kind** feedback to help us improve!*
 
 
-## Tutorials
+# Tutorials
 - **[In-depth tutorial](https://discord.com/channels/1105575633943277629/1274566291264376983/1274793831769837710) on how to use the import/export, percentage toggle, and paint mode**
 
 - **[Info on how percentages work #1](https://discord.com/channels/1105575633943277629/1274566291264376983/1274580948385796097)**
 - **[Info on how percentages work #2](https://discord.com/channels/1105575633943277629/1274566291264376983/1274580080323985481)** 
 
 - **[Flower "tips & tricks" graphics](https://discord.com/channels/1105575633943277629/1274566291264376983/1274583662628704361)**
+
+# Updates/Versions
 
 ## Version 1.5.2
 ### Updates:
@@ -61,9 +63,12 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - **See [Version 1.0.0](https://github.com/flowerfulpowerful/hkiaflowergen/tree/main?tab=readme-ov-file#version-100) List:** *Continued efforts towards those listed there.*
 - ~~**Mobile Compatibility:** *Make larger grids more accessible for smaller devices (maximum grid size: 20x20).* <sub><sup> *I'm struggling to do this so if anyone can offer insight, please send a message in "Issues" <3* <sub><sup>~~
 
-## Version 1.0.6
+<details>
+<summary>## Version 1.0.6</summary>
+<br>
 ### Updates:
 - **Update List of Flowers:** *Added Frostfeather + their pattern to the generator.*
+</details>
 
 ## Version 1.0.5
 ### Updates:
