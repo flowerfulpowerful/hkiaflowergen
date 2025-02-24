@@ -5,6 +5,7 @@ body, html {
     font-family: "Fredoka", sans-serif;
     background: url('assets/background.png') no-repeat center center fixed;
     background-size: cover;
+
 }
 
 .fredoka-font {
@@ -313,6 +314,24 @@ body, html {
 
 }
 */
+
+/* Hide scrollbars but keep scrolling */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+/* Hide scrollbar in Firefox */
+html {
+    scrollbar-width: none; /* Hides scrollbar */
+}
+
+/* Hides scrollbar in older versions of Microsoft Edge & Internet Explorer */
+body {
+    -ms-overflow-style: none; /* Hides scrollbar */
+}
+
 
 #possible-flowers-list {
     position: absolute;
