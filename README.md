@@ -9,7 +9,7 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 ### Features include:
 - **Grid-wide & plot-wide actions:** *Use the Clear Plot button to remove all flowers in a grid, or the Paint Tool to disable plots and copy & paste flowers.*
 - **Grid Customization:** *Change the size of the grid.*
-- <sub><sup> **Auto Plot Generator:** *Use the "Plot Layout" feature in the Grid Customization menu to generate preset flower plot layouts. These flower plot layouts are identical to the ones seen in-game. Selecting the "None" option will allow the user to create their own custom grids (10x10 maximum size).* <sub><sup>
+- - **Auto Plot Generator:** *Use the "Plot Layout" feature in the Grid Customization menu to generate preset flower plot layouts. These flower plot layouts are identical to the ones seen in-game. Selecting the "None" option will allow the user to create their own custom grids (10x10 maximum size).*
 - **Percentage View:** *View percentages for individual plots or all plots in a grid.*
 - **Percentage Configuration:** *Toggle "Standard" or "Greenhouse" (100%) percentage rates.*
 - **Grid Code Export & Import:** *Copy & share (or save) your grid codes, and import them to display a new grid.*
