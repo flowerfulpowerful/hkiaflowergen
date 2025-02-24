@@ -26,9 +26,12 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 
 ## Version 1.5.2
 ### Updates:
-- **Mobile Compatibility:** *Make larger grids more accessible for smaller devices (maximum grid size: 20x20).*
+- **Mobile Compatibility:** *Make larger grids more accessible for smaller devices (maximum grid size: 20x20). We added the ability to scroll larger grids so the entire grid can be accessed on mobile devices (450px width or below).*
   
 **Thank you to [susanafotu](https://github.com/susanafotu) for helping with the mobile grid-sizing issue! You rock!!! <3**
+
+### New Feature Notes:
+- **Event Flowers:** *Last version we tried to see how it would work if we implemented the 5% event flower spawning chance in a normal grid flower % display. We've taken in the feedback and are working on creating a toggle feature for events. See V.1.5.2 "[Work in progress/Incomplete features](https://github.com/flowerfulpowerful/hkiaflowergen?tab=readme-ov-file#work-in-progressincomplete-features)" for more information about this.*
 
 #### Additional Information (per susanafotu's [PR](https://github.com/flowerfulpowerful/hkiaflowergen/pull/2))
 - moves phone layout CSS to be nested under declaration of grid class name (improves separation of concerns and IMO makes the stylings easier to update)
@@ -38,6 +41,7 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 
 ### Work in progress/Incomplete features:
 - **Event Toggle:** *A toggle feature (w/in 'Settings' menu) that will represent the 5% event flower spawning chance ONLY during their designated event. The feature will allow the user to turn the 'Event Toggle' ON or OFF (upon page loading, toggle will be OFF) & allow user to select an event, which will then allow the designated event flower's natural spawning percentages to be displayed in the Flower Pecentage display menus.*
+- - **Mobile Compatibility:** *Make smaller grids (1x1 until 5x5 grid size) look less janky/spaced out on smaller devices (450px width or below).*
 - **See [Version 1.0.0](https://github.com/flowerfulpowerful/hkiaflowergen/tree/main?tab=readme-ov-file#version-100) List:** *Continued efforts towards those listed there.*
 
 ## Version 1.5.1
