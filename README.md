@@ -31,17 +31,12 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - **Mobile Compatibility:** *Make larger grids more accessible for smaller devices (maximum grid size: 20x20).*
 - - *We added the ability to scroll larger grids so the entire grid can be accessed on mobile devices (450px width or below).*
   - *There are still some issues with mobile devices & smaller grids (See V.1.5.2 "Work in progress/Incomplete features" for more)*
+  - ***Additional Information (per susanafotu's [PR](https://github.com/flowerfulpowerful/hkiaflowergen/pull/2))***
   
 **Thank you to [susanafotu](https://github.com/susanafotu) for helping with the mobile grid-sizing issue! You rock!!! <3**
 
 ### New Feature Notes:
 - **Event Flowers:** *[Last version](https://github.com/flowerfulpowerful/hkiaflowergen/blob/main/README.md#version-151) we tried to see how it would work if we implemented the 5% event flower spawning chance in a normal grid flower % display. We've taken in the feedback and are working on creating a toggle feature for events. See V.1.5.2 "Work in progress/Incomplete features" for more information about this.*
-
-#### Additional Information (per susanafotu's [PR](https://github.com/flowerfulpowerful/hkiaflowergen/pull/2))
-- moves phone layout CSS to be nested under declaration of grid class name (improves separation of concerns and IMO makes the stylings easier to update)
-- adds a `.grid-container` wrapper div + styling
-- updates how width is calculated for grid
-- *chore: fix width so it fits smaller grids*
 
 ### Work in progress/Incomplete features:
 - **Event Toggle:** *A toggle feature (w/in 'Settings' menu) that will represent the 5% event flower spawning chance ONLY during their designated event. The feature will allow the user to turn the 'Event Toggle' ON or OFF (upon page loading, toggle will be OFF) & allow user to select an event, which will then allow the designated event flower's natural spawning percentages to be displayed in the Flower Pecentage display menus.*
