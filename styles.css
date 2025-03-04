@@ -5,7 +5,6 @@ body, html {
     font-family: "Fredoka", sans-serif;
     background: url('assets/background.png') no-repeat center center fixed;
     background-size: cover;
-
 }
 
 .fredoka-font {
@@ -315,24 +314,6 @@ body, html {
 }
 */
 
-/* Hide scrollbars but keep scrolling */
-::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    display: none;
-}
-
-/* Hide scrollbar in Firefox */
-html {
-    scrollbar-width: none; /* Hides scrollbar */
-}
-
-/* Hides scrollbar in older versions of Microsoft Edge & Internet Explorer */
-body {
-    -ms-overflow-style: none; /* Hides scrollbar */
-}
-
-
 #possible-flowers-list {
     position: absolute;
     top: 35%; 
@@ -567,17 +548,6 @@ body {
 
 
 /* GRID STUFF */
-.grid-container {
-    padding: 0 20px 50px; /* Add padding to prevent content from touching the edges */
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    width: calc(100vw - 40px);
-    
-    @media (max-width: 450px){
-        display: block;
-    }
-}
 
 .grid {
     display: grid;
@@ -585,22 +555,13 @@ body {
     grid-template-rows: repeat(10, 1fr);
     gap: 5px;
     column-gap: 2px;
-    max-width: -webkit-fill-available !important; /* Use full width to allow centering */
-    width: fit-content;
+    max-width: 600px; 
+    width: auto;
+    margin: 0 auto;
     margin-top: 20px; /* Add margin to separate grid from buttons */
-    overflow: scroll;
-    
-    @media (max-width: 450px) {
-        grid-template-columns: repeat(10, 1fr);
-        grid-template-rows: repeat(10, 1fr);
-        gap: 5px;
-        column-gap: 2px;
-        width: 100%; /* Use full width for small screens */
-        box-sizing: border-box;
-    }
+    justify-content: center;
 }
 
-/* GRID BOXES */
 .grid div {
     width: 50px;
     height: 50px;
@@ -616,12 +577,6 @@ body {
     word-wrap: break-word;
     transition: transform 0.2s ease; /* Smooth scaling transition */
     border-radius: 10px; /* Add rounded corners */
-
-    @media (max-width: 450px) {
-        width: 30px;
-        height: 30px;
-        font-size: 5px; /* Adjusted font size */
-    }
 }
 
 .grid div:hover {
@@ -663,6 +618,7 @@ body {
     .setting-button {
         width: 30px;
     }
+
 
     .popup-button {
 
@@ -788,6 +744,49 @@ body {
        
     }
 
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        gap: 5px;
+        column-gap: 2px;
+        width: auto;
+        max-width: 90%; /* Optional: adjust to control maximum width */
+        margin: 0 auto; /* Ensures the grid stays centered */
+        padding-left: 30px; /* Adjust as needed */
+        padding-right: 30px; /* Adjust as needed */
+        box-sizing: border-box; /* Includes padding within the grid's width */
+    }
+
+    .grid div {
+        width: 30px;
+        height: 30px;
+
+        font-size: 5px; /* Adjusted font size */
+    }
+
+/* IDK THIS KINDA WORKS BUT really DOESN'T SO KEEP ABOVE CODE FOR NOW */
+ /*   .grid {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        gap: 2px;
+        width: 100%; /* Make the grid container fill the available width */
+ /*       max-width: 100%; /* Keep the grid within 90% of the viewport width */
+ /*       margin: 0 auto; /* Center the grid horizontally */
+ /*       aspect-ratio: 1 / 1; /* Maintain a square aspect ratio for the grid */
+ /*       padding: 0px 0px; /* Optional: Add horizontal padding */
+ /*       box-sizing: border-box; /* Includes padding and border in the width calculation */
+ /*   }
+    
+    .grid div {
+        width: 100%; /* Make each cell automatically resize based on the container */
+ /*       height: auto; /* Maintain proportional height */
+ /*       aspect-ratio: 1 / 1; /* Ensure square cells */
+ /*       font-size: 5px; /* Adjusted font size */
+ /*   } */
+
+
     .container {
         text-align: center;
         margin-top: 50px; /* Add margin to space it from the top */
@@ -796,7 +795,9 @@ body {
         /* Removed position: absolute; */
         /* Removed top, left, and transform properties */
         /* Use position: relative; if you still need to position elements within the container */
-        align-items: center;
+        /* align-items: center; */
+        /* justify-content: center; */
+        overflow-x: scroll;
     }
     
     .title-image {
