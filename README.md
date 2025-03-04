@@ -34,6 +34,9 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 ### Work in progress/Incomplete features:
 - **Event Toggle:** *A toggle feature (w/in 'Settings' menu) that will represent the 5% event flower spawning chance ONLY during their designated event. The feature will allow the user to turn the 'Event Toggle' ON or OFF (upon page loading, toggle will be OFF) & allow user to select an event, which will then allow the designated event flower's natural spawning percentages to be displayed in the Flower Pecentage display menus.*
 - **Mobile Compatibility:** Back to square one! (Version 1.5.0)
+- **Add New Flowers:** Add the Blazebulb + Molten effect.
+- **Add New Plot Layout:** Add the Caldera plot to the plot generator.
+- **In-game Flower Breeding Changes:** A bug impacting flowers will soon be changed (game version 2.5) — we will be sure to stay on top of any possible changes this may cause to flowers.
 - **See [Version 1.0.0](https://github.com/flowerfulpowerful/hkiaflowergen/tree/main?tab=readme-ov-file#version-100) List:** *Continued efforts towards those listed there.*
 
 <details>
