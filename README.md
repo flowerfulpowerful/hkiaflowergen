@@ -32,7 +32,7 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - **Caldera Plot Layout:** Added the new Caldera plot layout in the Plot Generator.
 - **Minor Fixes:** Added missing import/export mapping, Heavy Nettle correct pattern availability
 
-## Additional Information:
+### Additional Information:
 - Color jump/transfer still can't be done to other flowers if it can be reached via their default colors (i.e. lime can't be transferred to bellbutton, since it can be reached from yellow (default)+blue(default)=green(default^2)+white(default)). This will be changed once the game update that fixes this is live.
 
 ### Work in progress/Incomplete features:
