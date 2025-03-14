@@ -26,7 +26,22 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 
 # Updates/Versions
 
-## Version 1.5.3
+## Version 1.5.4
+### Updates:
+- **Added New Flowers:** Added the Blazebulb + Molten effect.
+- **Caldera Plot Layout:** Added the new Caldera plot layout in the Plot Generator.
+- **Minor Fixes:** Added missing import/export mapping, Heavy Nettle correct pattern availability
+
+## Additional Information:
+- Color jump/transfer still can't be done to other flowers if it can be reached via their default colors (i.e. lime can't be transferred to bellbutton, since it can be reached from yellow (default)+blue(default)=green(default^2)+white(default)). This will be changed once the game update that fixes this is live.
+
+### Work in progress/Incomplete features:
+- **Event Toggle:** *A toggle feature (w/in 'Settings' menu) that will represent the 5% event flower spawning chance ONLY during their designated event. The feature will allow the user to turn the 'Event Toggle' ON or OFF (upon page loading, toggle will be OFF) & allow user to select an event, which will then allow the designated event flower's natural spawning percentages to be displayed in the Flower Pecentage display menus.*
+- **See [Version 1.0.0](https://github.com/flowerfulpowerful/hkiaflowergen/tree/main?tab=readme-ov-file#version-100) List:** *Continued efforts towards those listed there.*
+
+<details>
+<summary><h2>Version 1.5.3</h2></summary>
+
 ### Updates:
 - **Mobile Compatibility:** We unfortunately had to revert previous changes to mobile compatibility due to a PR.
 - Everything should now be working as is was prior to Version 1.5.2; however, the 5% event flower spawning chance in a normal grid flower % display for the H&H event is also removed ([See version 1.5.1](https://github.com/flowerfulpowerful/hkiaflowergen/blob/main/README.md#version-151)).
@@ -38,6 +53,10 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 - **Add New Plot Layout:** Add the Caldera plot to the plot generator.
 - **In-game Flower Breeding Changes:** A bug impacting flowers will soon be changed (game version 2.5) — we will be sure to stay on top of any possible changes this may cause to flowers.
 - **See [Version 1.0.0](https://github.com/flowerfulpowerful/hkiaflowergen/tree/main?tab=readme-ov-file#version-100) List:** *Continued efforts towards those listed there.*
+
+---
+</details>
+
 
 <details>
 <summary><h2>Version 1.5.2</h2></summary>
