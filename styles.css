@@ -173,14 +173,14 @@ body, html {
 .popup-horizontalbutton3 {
     
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); 
     grid-template-rows: repeat(3, 1fr);
     
    /* display: flex;
     justify-content: space-between;  Spreads buttons across the container */
     
     position: absolute;
-    top: 65%; /* Center vertically */
+    top: 65%; /* Center vertically */ /* 60% for 3 rows */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%); /* Center the container */
     z-index: 1001; /* Ensure it's on top of other content */
@@ -477,6 +477,43 @@ body, html {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
+}
+
+/* Container styling */
+.event-container {
+    /* display: flex;*/
+   flex-direction: column;
+   align-items: center;
+   padding: 15px;
+   border-radius: 10px;
+   background-color: rgba(255, 182, 193, 0.8); /* Light pink with transparency */
+   font-size: 16px;
+   margin-bottom: 20px; /* Space between textbox and button */
+   justify-content: center;
+   z-index: 1003;
+   font-family: "Fredoka", sans-serif;
+   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+/* Label styling */
+.event-label {
+   font-weight: bold;
+   margin-bottom: 5px;
+}
+
+.event-box {
+   width: 100%;
+   padding: 8px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-family: "Fredoka", sans-serif;
+}
+
+.eventsubmit-Button {
+   display: block;
+   margin: 10px auto;
+   cursor: pointer;
 }
 
 
@@ -825,7 +862,7 @@ body, html {
         justify-content: space-between;  Spreads buttons across the container */
         
         position: absolute;
-        top: 65%; /* Center vertically */
+        top: 65%; /* Center vertically */ /* 60% for 3 rows */
         left: 50%; /* Center horizontally */
         transform: translate(-50%, -50%); /* Center the container */
         z-index: 1001; /* Ensure it's on top of other content */
@@ -877,5 +914,16 @@ body, html {
     font-size: 12px;
 }
 
+/* Container styling */
+.event-container {
+    width: 140px;
+    height: 140px;
+    font-size: 12px;
+}
+
+.event-box {
+  font-size: 12px;
+
+}
 
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M3V5W7VWCJ"></script>
 <script>
@@ -11,6 +12,8 @@
   gtag('config', 'G-M3V5W7VWCJ');
 </script>
     <!-- Google tag (gtag.js) -->
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HKIA Flower Generator</title>
@@ -59,6 +62,7 @@
     <div class="container">
     <img src="assets/invisibletext.png" alt="invisibletext" class="title-image">
     </div>
+
 
   <!-- Tutorial Pop-up -->
     <div class="popup" id="tutorialPopup">
@@ -128,6 +132,7 @@
                         <option value="mh4">Hothead Pizza Cliff Bottom</option>
                         <option value="mh5">Hothead Pizza Cliff Top</option>
                         <option value="mh6">Hothead Hot Springs Bridge</option>
+                        <option value="mh7">Hothead Caldera</option>
 
                         <option value="mm1">Meadow Fields Mini</option>                        
                         <option value="mm2">Meadow Fields East</option>
@@ -175,6 +180,7 @@
     <img type="export-plot" id="exportButton" class="setting-button" src="assets/export.png" alt="Export">
     <img type="soundconfig" id="soundconfig" class="setting-button" src="assets/sound-on.png" alt="Sound">
     <img type="percentconfig" id="percentconfigButton" class="setting-button" src="assets/percent-greenhouse.png" alt="Percentage Config">
+    <!-- <img type="eventconfig" id="eventconfigButton" class="setting-button" src="assets/eventToggle-off.png" alt="Event Config"> -->
     <img type="feedback-button" src="assets/feedbackbutton.png" alt="Feedback" class="setting-button" id="feedbackButton">
   <!--  <img type="createflower-button" src="assets/createflowerbutton.png" alt="Create a Flower" class="setting-button" id="createflowerButton"> -->
     
@@ -208,6 +214,24 @@
                                 </div>
                             </div>
 
+<!-- Event InputBox -->
+<div class="popup textbox-container event-container" id="eventPopup">
+    <label for="eventSelect" class="event-label">Select an Event:</label>
+    <select id="eventSelect" class="event-box">
+        <option value="No Event" selected>No Event</option>
+        <option value="Colorblaze Carnival">Colorblaze Carnival</option>
+        <option value="Month of Meh">Month of Meh</option>
+        <option value="Jam Jamboree">Jam Jamboree</option>
+        <option value="50th Anniversary">50th Anniversary</option>
+        <option value="Give & Gather">Give & Gather</option>
+        <option value="Lighttime Jubilee">Lighttime Jubilee</option>
+        <option value="Hugs & Hearts">Hugs & Hearts</option>
+    </select>
+    <br>
+    <img id="event-submitButton" class="eventsubmit-Button popup-button2" src="assets/submitbutton.png" alt="Submit Event">
+</div>
+
+                         
   
  <!-- Plant Flower Pop-up -->
 <div class="popup" id="popup-form">
@@ -245,6 +269,7 @@
                    <option value="Bowblossom">Bowblossom</option>
                    <option value="Frostfeather">Frostfeather</option>
                    <option value="Rose">Rose</option>
+                    <option value="Blazebulb">Blazebulb</option>
                     <!-- <option value="Pinwheel">Pinwheel</option> -->
                     <!-- <option value="Happadil">Happadil</option> -->
                     <!-- <option value="Windspray">Windspray</option> -->
@@ -296,10 +321,12 @@
                    <option value="Glow">Glow</option>
                    <option value="Frost">Frost</option>
                    <option value="Ring">Ring</option>
+                    <option value="Molten">Molten</option>
+
                     <!-- Add other options here -->
                      <!-- Unknown Patterns
                       Alternate
-                      Confetti
+                      Confetti -- happadil
                       Ring
                      -->
                 </select>
