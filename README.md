@@ -26,7 +26,13 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 
 # Updates/Versions
 
-## Version 1.5.4
+## Version 1.5.5
+### Updates:
+- **Added New Flowers:** Added the Happadil + Confetti pattern.
+
+<details>
+<summary><h2>Version 1.5.4</h2></summary>
+
 ### Updates:
 - **Added New Flowers:** Added the Blazebulb + Molten effect.
 - **Caldera Plot Layout:** Added the new Caldera plot layout in the Plot Generator.
@@ -38,6 +44,8 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 ### Work in progress/Incomplete features:
 - **Event Toggle:** *A toggle feature (w/in 'Settings' menu) that will represent the 5% event flower spawning chance ONLY during their designated event. The feature will allow the user to turn the 'Event Toggle' ON or OFF (upon page loading, toggle will be OFF) & allow user to select an event, which will then allow the designated event flower's natural spawning percentages to be displayed in the Flower Pecentage display menus.*
 - **See [Version 1.0.0](https://github.com/flowerfulpowerful/hkiaflowergen/tree/main?tab=readme-ov-file#version-100) List:** *Continued efforts towards those listed there.*
+---
+</details>
 
 <details>
 <summary><h2>Version 1.5.3</h2></summary>
