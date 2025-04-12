@@ -30,6 +30,9 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 ### Updates:
 - **Weighted Calculations:** Weighted calculations have been fixed.
 
+### Additional Information:
+- Color jump/transfer still can't be done to other flowers if it can be reached via their default colors (i.e. lime can't be transferred to bellbutton, since it can be reached from yellow (default)+blue(default)=green(default^2)+white(default)). This will be changed once the game update that fixes this is live.
+
 <details>
 <summary><h2>Version 1.5.5</h2></summary>
 
