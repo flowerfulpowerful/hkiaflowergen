@@ -46,8 +46,7 @@ Thank you for your constant feedback for the HKIA Flower Generator. We want to l
 
 <details>
 <summary><h2>Version 1.5.6</h2></summary>
-  
-## Version 1.5.6
+
 ### Updates:
 - **Weighted Calculations:** Weighted calculations have been fixed.
 
