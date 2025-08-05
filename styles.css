@@ -329,6 +329,15 @@ body, html {
     width: 40%; /* Ensure it spans the width of the popup */
 }
 
+#possible-flowers-list li {
+    border-bottom: 1px solid #e0e0e0; /* Light gray horizontal line */
+    padding: 10px 0;
+}
+
+#possible-flowers-list li:last-child {
+    border-bottom: none; /* Remove border from last item */
+}
+
 #all-possible-flowers-list {
     position: absolute;
     top:40%; 
@@ -342,6 +351,15 @@ body, html {
     padding: 0;
     margin: 0;
     width: 40%;
+}
+
+#all-possible-flowers-list li {
+    border-bottom: 1px solid #e0e0e0; /* Light gray horizontal line */
+    padding: 10px 0;
+}
+
+#all-possible-flowers-list li:last-child {
+    border-bottom: none; /* Remove border from last item */
 }
 
 .flower-item {
@@ -630,6 +648,9 @@ body, html {
 
 .grid div.patterned {
     border-color: #2040e3;
+}
+.grid div.invalidFlower {
+    border-color: #F00000;
 }
 
 .grid div.hovered {
