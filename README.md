@@ -26,12 +26,35 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 
 # Updates/Versions
 
+## Version 1.5.7
+### Updates:
+- **Plot Generation:** Fixed incorrectly labeled plot generation options + added new flower plots (i.e. Crystal Caves plot).
+- **Added New Flowers & Patterns/Effects:** Added Crystalia and Pinwheel flowers + Crystal effect and Alternate pattern.
+- **Invalid Flowers:** Invalid flowers will now have a red outline around their plot.
+- **Color jump/Transfer:** Implemented in-game changes where Color jump/transfer couldn't be done to other flowers if it could be reached via their default colors (i.e. lime can't be transferred to bellbutton, since it can be reached from yellow (default)+blue(default)=green(default^2)+white(default)) — **Color jump/transfer will now be possible**.
+
+### Minor Tweaks:
+- **Percentage List Changes:** Removed the "None" text so that its just empty if it's "None".
+- **Percentage Accuracy:** Fixed the percentages to be as accurate as possible (3 decimal points in specific plot % view)
+- **Flower Effects:** Fixed the Effect patterns (Molten wasn't an effect pattern for some reason).
+- **Percentage List Changes:** Added a light gray horizontal bar for visual separation between flower percentages.
+
+### Additional Information:
+Thank you for your constant feedback for the HKIA Flower Generator. We want to let you know that we do read *all* of your feedback messages! That being said, due to this being a voluntary project, at times changes and updates can be slow. We appreciate your patience, along with your kind words and support!
+
+***Question for HKIA Flower Generator users:*** Would you like us to implement a way to simulate events? Please let us know whether or not you'd like to see this feature added and your ideas on how we can make it happen. You can send a message via the "Feedback" button in the "Settings" menu.
+
+<details>
+<summary><h2>Version 1.5.6</h2></summary>
+  
 ## Version 1.5.6
 ### Updates:
 - **Weighted Calculations:** Weighted calculations have been fixed.
 
 ### Additional Information:
 - Color jump/transfer still can't be done to other flowers if it can be reached via their default colors (i.e. lime can't be transferred to bellbutton, since it can be reached from yellow (default)+blue(default)=green(default^2)+white(default)). This will be changed once the game update that fixes this is live.
+---
+</details>
 
 <details>
 <summary><h2>Version 1.5.5</h2></summary>
