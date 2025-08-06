@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M3V5W7VWCJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M3V5W7VWCJ');
+</script>
+    <!-- Google tag (gtag.js) -->
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKIA Flower Generator - Developer Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap');
+        </style>
+</head>
+<body>
+
+    <audio id="clickAudio" src="assets/audio/click.mp3"></audio>    
+    <audio id="bloopAudio" src="assets/audio/bloop.mp3"></audio>
+    <audio id="deepbloopAudio" src="assets/audio/deepbloop.mp3"></audio>
+    <audio id="multipopAudio" src="assets/audio/multipop.mp3"></audio>
+    <audio id="popAudio" src="assets/audio/pop.mp3"></audio>
+
+    <div class="container">
+        
+        <!-- Navigation Button -->
+        <div class="nav-container">
+            <div class="nav-sub-buttons" id="navSubButtons">
+                <img src="assets/pagenav-gen.png" alt="Generator" class="nav-sub-button" id="generatorButton">
+
+                <img src="assets/pagenav-blog.png" alt="Blog" class="nav-sub-button" id="blogButton">
+            </div>
+            <img src="assets/pagenav-idle.png" alt="Navigation" class="nav-button" id="navButton">
+        </div>
+        
+        <!-- Title Image -->
+        <img src="assets/logo.png" alt="Title" class="title-image">
+
+        <!-- Blog Content -->
+        <div class="blog-content">
+            <h1 class="blog-title">Developer Blog</h1>
+            
+            <!-- Category Menu -->
+            <div class="category-menu">
+                <img src="assets/blog-all.png" alt="All Posts" class="category-button active" id="allPostsButton">
+                <img src="assets/blog-updates.png" alt="Updates" class="category-button" id="updatesButton">
+                <img src="assets/blog-other.png" alt="Other" class="category-button" id="otherButton">
+            </div>
+            
+            <!-- Blog Posts -->
+            <div class="blog-posts">
+                <article class="blog-post" data-category="other">
+                    <h2 class="post-title">Community Feedback & A Question for You!</h2>
+                    <div class="post-meta">
+                        <span class="post-date">August 6, 2025</span>
+                        <span class="post-category">Community</span>
+                    </div>
+                    <div class="post-content">
+                        <p>Thank you for your constant feedback for the HKIA Flower Generator. We want to let you know that we do read all of your feedback messages! That being said, due to this being a voluntary project, at times changes and updates can be slow. We appreciate your patience, along with your kind words and support!</p>
+                        
+                        <h3>Question for HKIA Flower Generator users:</h3>
+                        <p>Would you like us to implement a way to simulate events? Please let us know whether or not you'd like to see this feature added and your ideas on how we can make it happen. You can send a message via the "Feedback" button in the "Settings" menu.</p>
+                        
+                        <p>We value your input and want to make sure we're building features that the community actually wants and needs!</p>
+                    </div>
+                </article>
+ 
+                <article class="blog-post" data-category="updates">
+                    <h2 class="post-title">Latest Updates - Version 1.5.7</h2>
+                    <div class="post-meta">
+                        <span class="post-date">August 5, 2025</span>
+                        <span class="post-category">Updates</span>
+                    </div>
+                    <div class="post-content">
+                        <p>Welcome to the latest update of the HKIA Flower Generator! Version 1.5.7 brings several important improvements and new features:</p>
+                        
+                        <h3>Major Updates:</h3>
+                        <ul>
+                            <li><strong>Plot Generation:</strong> Fixed incorrectly labeled plot generation options and added new flower plots (including Crystal Caves plot)</li>
+                            <li><strong>New Flowers & Patterns/Effects:</strong> Added Crystalia and Pinwheel flowers, plus Crystal effect and Alternate pattern</li>
+                            <li><strong>Invalid Flowers:</strong> Invalid flowers will now have a red outline around their plot for better visibility</li>
+                            <li><strong>Color Jump/Transfer:</strong> Implemented in-game changes where Color jump/transfer couldn't be done to other flowers if it could be reached via their default colors. Color jump/transfer will now be possible in these cases</li>
+                        </ul>
+                        
+                        <h3>Minor Tweaks:</h3>
+                        <ul>
+                            <li><strong>Percentage List Changes:</strong> Removed the "None" text so that it's just empty if it's "None"</li>
+                            <li><strong>Percentage Accuracy:</strong> Fixed the percentages to be as accurate as possible (3 decimal points in specific plot % view)</li>
+                            <li><strong>Flower Effects:</strong> Fixed the Effect patterns (Molten wasn't an effect pattern for some reason)</li>
+                            <li><strong>Visual Improvements:</strong> Added a light gray horizontal bar for visual separation between flower percentages</li>
+                        </ul>
+                        
+                    </div>
+                </article>
+
+                <article class="blog-post" data-category="other">
+                    <h2 class="post-title">Welcome to our Blog!</h2>
+                    <div class="post-meta">
+                        <span class="post-date">August 2, 2025</span>
+                        <span class="post-category">Note</span>
+                    </div>
+                    <div class="post-content">
+                        <p>We're excited to have our new blog page!</p>
+                        <p>This is the place where we will share updates, news, and other information about the HKIA Flower Generator.</p>
+                        <p>Stay tuned for more details as we continue development!</p>
+                    </div>
+                </article>
+
+
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Navigation Popup -->
+    <div class="popup" id="navigationPopup">
+        <img src="assets/longmenu.png" alt="Navigation Menu" class="popup-image">
+        <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="navigationExitButton">
+        
+        <div class="popup-content">
+            <div class="nav-menu-buttons">
+                <img src="assets/pagenav-gen.png" alt="Generator" class="nav-menu-button" id="goToGenerator">
+                <img src="assets/pagenav-blog.png" alt="Blog" class="nav-menu-button" id="goToBlog">
+            </div>
+        </div>
+    </div>
+
+    <script src="blog.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b1a9fefceffe44b59c667f3b6bddec28"}'></script><!-- End Cloudflare Web Analytics -->
+
+</body>
+</html> 
