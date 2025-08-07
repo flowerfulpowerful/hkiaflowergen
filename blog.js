@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Category button click handlers
     categoryButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const category = this.id.replace('Button', '').replace('Posts', '');
+            let category = this.id.replace('Button', '').replace('Posts', '');
             
             // Update active button
             categoryButtons.forEach(btn => btn.classList.remove('active'));
