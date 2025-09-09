@@ -28,7 +28,9 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 
 ## Updates will now be reported on our [Developer Blog](https://flowerfulpowerful.github.io/hkiaflowergen/blog.html) instead of the README.md file. 
 
-## Version 1.5.7
+<details>
+<summary><h2>Version 1.5.7</h2></summary>
+
 ### Updates:
 - **Plot Generation:** Fixed incorrectly labeled plot generation options + added new flower plots (i.e. Crystal Caves plot).
 - **Added New Flowers & Patterns/Effects:** Added Crystalia and Pinwheel flowers + Crystal effect and Alternate pattern.
@@ -45,6 +47,8 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 Thank you for your constant feedback for the HKIA Flower Generator. We want to let you know that we do read *all* of your feedback messages! That being said, due to this being a voluntary project, at times changes and updates can be slow. We appreciate your patience, along with your kind words and support!
 
 ***Question for HKIA Flower Generator users:*** Would you like us to implement a way to simulate events? Please let us know whether or not you'd like to see this feature added and your ideas on how we can make it happen. You can send a message via the "Feedback" button in the "Settings" menu.
+---
+</details>
 
 <details>
 <summary><h2>Version 1.5.6</h2></summary>
