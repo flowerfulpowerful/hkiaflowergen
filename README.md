@@ -26,6 +26,8 @@ The **[HKIA Flower Generator](https://flowerfulpowerful.github.io/hkiaflowergen/
 
 # Updates/Versions
 
+## Updates will now be reported on our [Developer Blog](https://flowerfulpowerful.github.io/hkiaflowergen/blog.html) instead of the README.md file. 
+
 ## Version 1.5.7
 ### Updates:
 - **Plot Generation:** Fixed incorrectly labeled plot generation options + added new flower plots (i.e. Crystal Caves plot).
