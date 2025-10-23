@@ -993,6 +993,40 @@ body {
     transform: scale(0.95);
 }
 
+/* Mode Controls Container */
+.mode-controls-container {
+    align-items: center;
+}
+
+/* Large screens (768px and larger) - vertical stacking for tablets and larger devices */
+@media (min-width: 768px) {
+    .mode-controls-container {
+        flex-direction: column !important;
+        align-items: center;
+        gap: 1rem !important;
+    }
+    
+    .paint-mode-switch-container,
+    .mode-switch-container {
+        justify-content: center !important;
+    }
+    
+    .paint-mode-indicators {
+        justify-content: center !important;
+    }
+}
+
+/* Analyze Button - Same size as mode switches */
+#analyzeButton {
+    width: 200px;
+    height: 40px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
     .mode-switch {
@@ -1011,6 +1045,12 @@ body {
     
     .paint-mode-text {
         font-size: 0.7rem;
+    }
+    
+    #analyzeButton {
+        width: 180px;
+        height: 36px;
+        font-size: 0.8rem;
     }
     
     /* Add more spacing for indicators on mobile */
@@ -1034,6 +1074,12 @@ body {
     }
     
     .mode-text {
+        font-size: 0.75rem;
+    }
+    
+    #analyzeButton {
+        width: 160px;
+        height: 32px;
         font-size: 0.75rem;
     }
     
@@ -2444,10 +2490,6 @@ body {
 
 .glossary-parent-table .parent-1 {
     border-right: 1px solid var(--light-pink);
-}
-
-.glossary-parent-table .parent-2 {
-    /* No border needed for last column */
 }
 
 .glossary-no-results {
