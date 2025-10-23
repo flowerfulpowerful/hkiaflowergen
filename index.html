@@ -1,283 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M3V5W7VWCJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M3V5W7VWCJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-M3V5W7VWCJ');
+    </script>
+        <!-- Google tag (gtag.js) -->
 
-  gtag('config', 'G-M3V5W7VWCJ');
-</script>
-    <!-- Google tag (gtag.js) -->
-
-    <!--Embedding Stuff -->
+            <!--Embedding Stuff -->
     <meta property="og:type" content="website" />
-<meta property="og:url" content="https://flowerfulpowerful.github.io/hkiaflowergen/" />
-<meta property="og:title" content="HKIA Flower Generator" />
-<meta property="og:description" content="The HKIA Flower Generator is an interactive website that can be used to assist you with flower breeding, color/pattern transfers, and organizing flower plots with accurate calculations." />
-<meta property="og:image" content="https://github.com/flowerfulpowerful/hkiaflowergen/raw/refs/heads/main/assets/embed1.png" />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="theme-color" content="#b2e48f"/>
-
-    <!--Embedding Stuff -->    
+    <meta property="og:url" content="https://flowerfulpowerful.github.io/hkiaflowergen/" />
+    <meta property="og:title" content="HKIA Flower Generator" />
+    <meta property="og:description" content="The HKIA Flower Generator is an interactive website that can be used to assist you with flower breeding, color/pattern transfers, and organizing flower plots with accurate calculations." />
+    <meta property="og:image" content="https://github.com/flowerfulpowerful/hkiaflowergen/raw/refs/heads/main/assets/embed1.png" />
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="theme-color" content="#b2e48f"/>
+    
+        <!--Embedding Stuff -->   
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hkia flower generator</title>
-        <link rel="icon" type="image/png" href="assets/favicon.png">
+    <title>HKIA Flower Breeding Simulator</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap');
-        </style>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
+    <!-- Audio Elements -->
     <audio id="clickAudio" src="assets/audio/click.mp3"></audio>    
     <audio id="bloopAudio" src="assets/audio/bloop.mp3"></audio>
     <audio id="deepbloopAudio" src="assets/audio/deepbloop.mp3"></audio>
     <audio id="multipopAudio" src="assets/audio/multipop.mp3"></audio>
     <audio id="popAudio" src="assets/audio/pop.mp3"></audio>
 
-    <div class="container">
-        
-        <!-- Navigation Button -->
-        <div class="nav-container">
-            <div class="nav-sub-buttons" id="navSubButtons">
-                <img src="assets/pagenav-gen.png" alt="Generator" class="nav-sub-button" id="generatorButton">
-                <img src="assets/pagenav-blog.png" alt="Blog" class="nav-sub-button" id="blogButton">
-
+    <!-- Navigation Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-pink-gradient sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="assets/logo.png" alt="HKIA Flower Simulator" class="logo-img me-2">
+                <span class="brand-text">Flower Simulator</span>
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars text-white"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="howToButton">
+                            <i class="fas fa-question-circle me-1"></i>How to Use
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="aboutButton">
+                            <i class="fas fa-info-circle me-1"></i>About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="settingsButton">
+                            <i class="fas fa-cog me-1"></i>Settings
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <img src="assets/pagenav-idle.png" alt="Navigation" class="nav-button" id="navButton">
         </div>
-        
-        <!-- Title Image -->
-        <img src="assets/logo.png" alt="Title" class="title-image">
+    </nav>
 
-        <!-- Main Buttons -->
-        <div class="buttons">
-            <img src="assets/howtobutton.png" alt="Tutorial" class="button" id="tutorialButton">
-            <img src="assets/aboutbutton.png" alt="About" class="button" id="aboutButton">
-            <img src="assets/settingsbutton.png" alt="Settings" class="button" id="settingsButton">
-         <!--  <br> <br> <br> -->
-        </div>
-
-        <!-- Second Row Buttons -->
-        <div class="buttons2">
-            <img src="assets/clear-grid.png" alt="Clear Grid" class="button2" id="cleargridButton">
-            <img src="assets/customizebutton.png" alt="Customize" class="button2" id="customizeButton">
-            <img src="assets/paint-off.png" alt="Paint Mode" class="button2" id="paintconfigButton">
-            <img src="assets/allflowersbutton.png" alt="All Flowers" class="button2" id="allflowersButton">
-
-         <!--  <br> <br> <br> -->
-        </div>
-
-        <!-- Grid -->
-         <div class="grid-container">
-            <div class="grid" id="flower-grid"></div>
-         </div>
-        
-    </div>
-    <div class="container">
-    <img src="assets/invisibletext.png" alt="invisibletext" class="title-image">
-    </div>
-
-
-  <!-- Tutorial Pop-up -->
-    <div class="popup" id="tutorialPopup">
-        <img src="assets/tutorial1.png" alt="Tutorial" class="popup-image" id="tutorialImage">
-        <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="tutorialExitButton">
-        <img src="assets/nextbutton3.png" alt="Next" class="popup-button" id="nextButton">
-        <img src="assets/backpage.png" alt="Back" class="popup-button" id="backButton">
-    </div>
-
-   <!-- About Pop-up -->
-    <div class="popup" id="aboutPopup">
-        <img src="assets/about.png" alt="About" class="popup-image">
-        <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="aboutExitButton">
-    </div>
-
-      <!-- Custom Grid Pop-up -->
-      <div class="popup" id="customizePopup">
-        <img src="assets/customgridmenu.png" alt="customgridmenu" class="popup-image">
-        <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="customizeExitButton">
-   
-        <div id="grid-form" class="popup-gridform popup-content">
-                <fieldset>
-
-                    <label for="gridSize">Grid Height & Width:</label>
-                    <input type="number" id="gridSize" name="gridSize" min="1" max="10" value="5" required>
-
-                    <label for="plotLayout">Plot Layout:</label>
-                    <small style="display: block; font-size: 7px; color: #666; margin-top: 2px;">
-                        (optional - auto plot layouts)
-                    </small>
-                    <select id="plotLayoutSelect" name="plotLayout">
-                        <option value="none" selected>None</option>
-                        <option value="sr1">Resort Hopscotch Islands</option>
-                        <option value="sr2">Resort Cozy Islands</option>
-                        <option value="sr3">Resort Cabin</option>
-                        <option value="sr4">Resort Cabin Pond</option>
-                        <option value="sr5">Resort Lower West</option>
-                        <option value="sr6">Resort Middle West</option>
-                        <option value="sr7">Resort Gudetama Sign</option>
-                        <option value="sr8">Resort Cliff Top</option>
-                        <option value="sr9">Resort Cliff Bottom</option>
-                        <option value="sr10">Resort Upper West</option>
-                        <option value="sr11">Resort Topmost West</option>
-                        <option value="sr12">Resort Gate</option>
-
-                        <option value="ss1">Swamp Ghost Ride</option>
-                        <option value="ss2">Swamp Nature Reserve</option>
-
-                        <option value="gm1">Gemstone Cabins West</option>                        
-                        <option value="gm2">Gemstone Oasis West North</option>
-                        <option value="gm3">Gemstone Oasis West South</option>
-                        <option value="gm4">Gemstone Oasis East</option>
-                        <option value="gm5">Gemstone Peak Trail</option>
-                        <option value="gm6">Gemstone Mine Entrance Pond</option>
-                        <option value="gm7">Gemstone Mine Entrance Town</option>
-                        <option value="gm8">Gemstone Town Crafting Table</option>
-                        <option value="gm9">Gemstone Deadwood Forest</option>
-                        <option value="gm10">Gemstone Cabin 1 North</option>
-                        <option value="gm11">Gemstone Cabin 1 South</option>                        
-
-                        <option value="rr1">Reef Club South</option>
-                        <option value="rr2">Reef Club East</option>
-
-                        <option value="mh1">Hothead Cabin West</option>
-                        <option value="mh2">Hothead Ruins West</option>
-                        <option value="mh3">Hothead Cabin 3</option>
-                        <option value="mh4">Hothead Pizza Cliff Bottom</option>
-                        <option value="mh5">Hothead Pizza Cliff Top</option>
-                        <option value="mh6">Hothead Hot Springs Bridge</option>
-                        <option value="mh7">Hothead Caldera</option>
-
-                        <option value="mm1">Meadow Fields Mini</option>                        
-                        <option value="mm2">Meadow Fields West</option> <!-- Meadow Fields West -->
-                        <option value="mm3">Meadow Fields East</option> <!-- Meadow Fields East -->
-                        <option value="mm4">Meadow Overlook Greenhouse Front</option> <!-- Meadow Overlook Greenhouse Front -->
-                        <option value="mm5">Meadow Overlook Puzzle Front</option> <!-- Meadow Overlook Puzzle Front -->
-                        <option value="mm6">Meadow Plaza Garden</option> <!-- Meadow Plaza Garden -->  
-                        <option value="mm7">Meadow Temple Corner</option> <!-- Meadow Temple Corner -->
-                        <option value="mm8"> Meadow Gazebo North</option> <!-- Meadow Gazebo North -->
-                        <option value="mm9">Meadow Gazebo Path West</option> <!-- Meadow Gazebo Path West -->
-                        <option value="mm10">Meadow Gazebo Path East</option> <!-- Meadow Gazebo Path East -->                 
-                        <option value="mm11">Meadow Corral</option> <!-- Meadow Corral -->                 
-
-                        <option value="ci1">Cloud Outer Cabin</option>
-
-                        <option value="ip1">Icy Peak Summit</option>                        
-
-                        <option value="cc1">Crystal Caves</option>                        
-
-                        <!-- Add more options as needed -->
-                    </select>
-
-                </fieldset>
-       <!--   <div id="grid-form" class="popup-gridform popup-content"> -->
-
-        <!--        <fieldset> -->
-                   
-              <!--   </fieldset> -->
-
-    <!-- Horizontal Button Container-->
-     <br>
-    <div class="popup-horizontalbutton">
-    <img type="submit-grid" id="submit-gridButton" class="submit-Button popup-button2" src="assets/submitbutton.png" alt="Submit">
-    <!-- Add other buttons here -->
-   <!-- <br><br>-->
- 
-</div>  
-        </div>
-    </div>
-</div>
-      <!-- Settings Pop-up -->
-      <div class="popup" id="settingsPopup">
-        <img src="assets/settingsmenu.png" alt="settingsmenu" class="popup-image">
-        <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="settingsExitButton">
-   
-        <!-- Horizontal Button Container-->
-    <div class="popup-horizontalbutton3">
-    <img type="import-plot" src="assets/import.png" alt="Import" class="setting-button" id="importButton">
-    <img type="export-plot" id="exportButton" class="setting-button" src="assets/export.png" alt="Export">
-    <img type="soundconfig" id="soundconfig" class="setting-button" src="assets/sound-on.png" alt="Sound">
-    <img type="percentconfig" id="percentconfigButton" class="setting-button" src="assets/percent-greenhouse.png" alt="Percentage Config">
-    <!-- <img type="eventconfig" id="eventconfigButton" class="setting-button" src="assets/eventToggle-off.png" alt="Event Config"> -->
-    <img type="feedback-button" src="assets/feedbackbutton.png" alt="Feedback" class="setting-button" id="feedbackButton">
-  <!--  <img type="createflower-button" src="assets/createflowerbutton.png" alt="Create a Flower" class="setting-button" id="createflowerButton"> -->
-    
-  <!-- Add other buttons here -->
-    <!--  -->
+    <!-- Main Content -->
+    <main class="container-fluid py-4">
+        <!-- Control Panel -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="control-panel bg-white rounded-4 shadow-sm p-3">
+                    <div class="row g-3 align-items-center">
+                        <!-- Grid Controls -->
+                        <div class="col-12 col-md-6 col-lg-2">
+                            <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
+                                <button class="btn btn-outline-pink rounded-pill" id="clearGridButton">
+                                    <i class="fas fa-trash-alt me-1"></i>Clear Grid
+                                </button>
+                                <button class="btn btn-outline-pink rounded-pill" id="customizeButton">
+                                    <i class="fas fa-cog me-1"></i>Customize
+                                </button>
+                                <button class="btn btn-outline-pink rounded-pill" id="glossaryButton">
+                                    <i class="fas fa-book me-1"></i>Glossary
+                                </button>
                             </div>
+                        </div>
+
+                        <!-- Mode Controls -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center justify-content-md-start">
+                                <!-- Paint Mode Toggle -->
+                                <div class="paint-mode-switch-container d-flex justify-content-center justify-content-md-start">
+                                    <div class="paint-mode-switch">
+                                        <input class="form-check-input" type="checkbox" id="paintModeToggle">
+                                        <label class="form-check-label" for="paintModeToggle">
+                                            <span class="paint-mode-text paint-mode-off-text">
+                                                <i class="fas fa-paint-brush me-1"></i>Paint Mode Off
+                                            </span>
+                                            <span class="paint-mode-text paint-mode-on-text">
+                                                <i class="fas fa-paint-brush me-1"></i>Paint Mode On
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Paint Mode Indicators -->
+                                <div class="paint-mode-indicators" id="paintModeIndicators" style="display: none;">
+                                    <div class="paint-mode-indicator clickable" id="disableModeIndicator" title="Click to switch to disable mode">
+                                        <i class="fas fa-ban"></i>
+                                        <span>Disable</span>
+                                    </div>
+                                    <div class="paint-mode-indicator clickable" id="copyModeIndicator" title="Click to switch to copy mode">
+                                        <i class="fas fa-copy"></i>
+                                        <span>Copy</span>
+                                    </div>
+                                </div>
+
+                                <!-- Edit/View Mode Switch -->
+                                <div class="mode-switch-container d-flex justify-content-center justify-content-md-start">
+                                    <div class="mode-switch">
+                                        <input class="form-check-input" type="checkbox" id="viewModeToggle">
+                                        <label class="form-check-label" for="viewModeToggle">
+                                            <span class="mode-text edit-mode-text">
+                                                <i class="fas fa-edit me-1"></i>Edit Mode
+                                            </span>
+                                            <span class="mode-text view-mode-text">
+                                                <i class="fas fa-eye me-1"></i>View Mode
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analysis and Indicators -->
+                        <div class="col-12 col-lg-6">
+                            <div class="d-flex flex-column align-items-center">
+                                <!-- Percentage Mode Indicators -->
+                                <div class="percentage-indicators mb-3">
+                                    <div class="indicator-item clickable" id="greenhouseIndicator" title="Click to toggle Greenhouse Percentages">
+                                        <i class="fas fa-seedling"></i>
+                                    </div>
+
+                                    <div class="indicator-item clickable" id="eventIndicator" title="Click to toggle Event Mode">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                </div>
+                                
+                                <!-- Event Status Text -->
+                                <div class="event-status-text mb-3" id="eventStatusText" style="display: none;">
+                                    <div class="badge event-badge px-3 py-2 rounded-pill">
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        <span id="eventStatusTextContent">Event Active</span>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-pink rounded-pill w-100" id="analyzeButton">
+                                    <i class="fas fa-seedling me-1"></i>Analyze Flowers
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid Container -->
+        <div class="row">
+            <div class="col-12">
+                <div class="grid-container bg-white rounded-4 shadow-sm p-4">
+                    <div class="grid-header mb-3">
+                        <h5 class="text-center mb-0">
+                            <i class="fas fa-th me-2"></i>Flower Breeding Grid
+                            <small class="text-muted ms-2" id="gridSizeDisplay">5x5</small>
+                        </h5>
+                        
+                        <!-- Scroll indicator above controls -->
+                        <div class="scroll-indicator" id="scrollIndicator">
+                            <i class="fas fa-arrows-alt-h"></i>  Tap to scroll
+                            </div>
+                        
+                        <!-- Mobile scroll controls above grid -->
+                        <div class="scroll-controls-top">
+                            <button class="scroll-btn scroll-left" id="scrollLeftBtn" aria-label="Scroll left">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="scroll-btn scroll-right" id="scrollRightBtn" aria-label="Scroll right">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid-wrapper">
+                        <div class="grid" id="flowerGrid"></div>
                         </div>
                 </div>
             </div>
-
-    <!-- Export Alert -->
-    <div id="exportPopup" class="popup exportsettings-text">Copied to clipboard!</div>
-
-    <!-- Import Textbox -->
-    <div class="popup textbox-container" id="importPopup"> <!--popup textbox-container-->
-        <input type="text" id="importTextbox" class="import-textbox" placeholder="Enter Code">
-    <!-- Button Container -->
-          <br>
-    <img type="import-submit" id="import-submitButton" class="importsubmit-Button popup-button2" src="assets/submitbutton.png" alt="importSubmit">
-                                <!-- Add other buttons here -->
                                     </div>
+    </main>
+
+    <!-- Flower Details Modal -->
+    <div class="modal fade" id="flowerModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-seedling me-2"></i>Flower Details
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                                 </div>
-                      
-   <!-- Feedback Textbox -->
-   <div class="popup textbox-container" id="feedbackPopup"> <!--popup textbox-container-->
-    <input type="text" id="feedbackTextbox" class="feedback-textbox" placeholder="Enter Feedback">
-<!-- Button Container -->
-      <br>
-<img type="feedback-submit" id="feedback-submitButton" class="feedbacksubmit-Button popup-button2" src="assets/submitbutton.png" alt="feedbackSubmit">
-                            <!-- Add other buttons here -->
-                                </div>
-                            </div>
-
-<!-- Event InputBox -->
-<div class="popup textbox-container event-container" id="eventPopup">
-    <label for="eventSelect" class="event-label">Select an Event:</label>
-    <select id="eventSelect" class="event-box">
-        <option value="No Event" selected>No Event</option>
-        <option value="Colorblaze Carnival">Colorblaze Carnival</option>
-        <option value="Month of Meh">Month of Meh</option>
-        <option value="Jam Jamboree">Jam Jamboree</option>
-        <option value="50th Anniversary">50th Anniversary</option>
-        <option value="Give & Gather">Give & Gather</option>
-        <option value="Lighttime Jubilee">Lighttime Jubilee</option>
-        <option value="Hugs & Hearts">Hugs & Hearts</option>
-        <option value="Happy Haven Days">Happy Haven Days</option>
-        <option value="Paper Parade">Paper Parade</option>
-    </select>
-    <br>
-    <img id="event-submitButton" class="eventsubmit-Button popup-button2" src="assets/submitbutton.png" alt="Submit Event">
-</div>
-
-                         
-  
- <!-- Plant Flower Pop-up -->
-<div class="popup" id="popup-form">
-    
-    
-    <div class="popup-content">
-       <!-- <button id="close-popup" class="popup-button">
-            <img src="assets/exitbutton.png" alt="Exit">
-        </button> -->
-        <img src="assets/exitbutton.png" alt="Exit" class="popup-button flowerExitButton" id="close-popup">
-
-        <img src="assets/flowerdetailsmenu.png" alt="Flower" class="popup-image">
-        
-        <div id="popup-form" class="popup-form popup-content">
-            
-            <!-- <form id="flower-form" class="popup-content centered-menucontent"> -->
-            <form id="flower-form" class="popup-content">
-                <label for="flower-type">Flower Type:</label>
-                <select id="flower-type" required>
+                <div class="modal-body p-4">
+                    <form id="flowerForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="flowerType" class="form-label" id="plotTypeLabel">Flower Type</label>
+                                <select class="form-select" id="flowerType" required>
                     <option value="Bellbutton">Bellbutton</option>
                     <option value="Dandelily">Dandelily</option>
                     <option value="Penstemum">Penstemum</option>
@@ -302,12 +257,11 @@
                     <option value="Pinwheel">Pinwheel</option>
                     <option value="Wheatflower">Wheatflower</option>
                     <option value="Bubbaluna">Bubbaluna</option>
-                    <!-- <option value="Windspray">Windspray</option> -->
-                 
                 </select>
-                
-                <label for="flower-main-color">Flower Main Color:</label>
-                <select id="flower-main-color" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="mainColor" class="form-label">Main Color</label>
+                                <select class="form-select" id="mainColor" required>
                     <option value="Red">Red</option>
                     <option value="Coral">Coral</option>
                     <option value="Orange">Orange</option>
@@ -337,13 +291,11 @@
                     <option value="Pink">Pink</option>
                     <option value="Black">Black</option>
                     <option value="Gray">Gray</option>
-                    <!-- Add other options here -->
-                    <!--  -->
-                    <!--  -->      
                 </select>
-                
-                <label for="flower-pattern">Flower Pattern:</label>
-                <select id="flower-pattern" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="pattern" class="form-label">Pattern</label>
+                                <select class="form-select" id="pattern" required>
                     <option value="None">None</option>
                     <option value="Ombre">Ombre</option>
                     <option value="Trim">Trim</option>
@@ -358,14 +310,13 @@
                     <option value="Confetti">Confetti</option>
                     <option value="Crystal">Crystal</option>
                     <option value="Alternate">Alternate</option>
-                    <option value="Glitter">Glitter</option>
                     <option value="Cosmic">Cosmic</option>
-                    <!-- Add other options here -->
-
+                    <option value="Glitter">Glitter</option>
                 </select>
-                
-                <label for="flower-secondary-color">Flower Secondary Color:</label>
-                <select id="flower-secondary-color" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="secondaryColor" class="form-label">Secondary Color</label>
+                                <select class="form-select" id="secondaryColor" required>
                     <option value="None">None</option>
                     <option value="Red">Red</option>
                     <option value="Coral">Coral</option>
@@ -395,220 +346,982 @@
                     <option value="Cool Pink">Cool Pink</option>
                     <option value="Pink">Pink</option>
                     <option value="Black">Black</option>
-                    <option value="Gray">Gray</option> 
-                    <!-- Add other options here -->
-
-                    <!--  -->
-                    <!-- --> 
+                    <option value="Gray">Gray</option>
                 </select>
-         <!--    <br><br><br>-->
-
+                            </div>
+                        </div>
                 </form>
-
-            <!--  Separate form & buttons ??
-        </div> -->
-
-                        <!-- Horizontal Button Container-->
-        <div class="popup-horizontalbutton2">
-            <img type="reset" src="assets/clearbutton.png" alt="Clear" class="popup-button2" id="clearButton">
-                    
-            <img type="submit" id="submitButton" class="submit-Button popup-button2" src="assets/submitbutton.png" alt="Submit">
-            <!-- Add other buttons here -->
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger rounded-pill" id="removeFlowerButton" style="display: none;">
+                        <i class="fas fa-trash me-1"></i>Remove Flower
+                    </button>
+                    <button type="button" class="btn btn-pink rounded-pill" id="placeFlowerButton">
+                        <i class="fas fa-plus me-1"></i>Place Flower
+                    </button>
                 </div>
             </div>
     </div>
 </div>
 
- <!-- About Pop-up -->
- <div class="popup" id="aboutPopup">
-    <img src="assets/about.png" alt="About" class="popup-image">
-    <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="aboutExitButton">
+    <!-- Analysis Results Modal -->
+    <div class="modal fade" id="analysisModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-chart-pie me-2"></i>Breeding Analysis
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="analysis-summary bg-light-pink rounded-3 p-3 mb-4">
+                                <h6 class="mb-2">
+                                    <i class="fas fa-info-circle me-2"></i>Analysis Summary
+                                </h6>
+                                <p class="mb-0" id="analysisSummary">Click "Analyze Flowers" to see breeding possibilities!</p>
+                                <div class="form-text mt-2">
+                                    <i class="fas fa-info-circle me-1"></i>Shows the probability of getting at least one of each flower combination from all possible breeding locations (green cells) on your grid.<br>
+                                    <i class="fas fa-info-circle me-1"></i>Percentages are automatically calculated with Fertilizer use.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="results-container">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-seedling me-2"></i>Possible Flowers
+                                </h6>
+                                <div class="results-list" id="possibleFlowersList">
+                                    <!-- Results will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</div>
+            </div>
+        </div>
 </div>
 
-        <!-- Pop-up INDIVIDUAL Possible Flowers -->
-        <div id="possible-flowers-popup" class="popup">
-            <div class="popup-content">
-                <img src="assets/possibleflowersmenu.png" alt="possibleflowersmenu" class="popup-image">
-            <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="possibleflowerExitButton">
-                <ul id="possible-flowers-list"></ul>
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-cog me-2"></i>Settings
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+                        <!-- Grid Settings -->
+                        <div class="col-md-6">
+                            <div class="settings-section">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-th me-2"></i>Grid Settings
+                                </h6>
+                                <div class="mb-3">
+                                    <label for="gridSize" class="form-label">Grid Size</label>
+                                    <input type="number" class="form-control" id="gridSize" min="3" max="10" value="5">
+                                    <div class="form-text">
+                                        <i class="fas fa-mobile-alt me-1"></i>
+                                        <span id="mobileGridSuggestion">Recommended: 5x5 for mobile devices</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="plotLayout" class="form-label">Plot Layout</label>
+                                    <select class="form-select" id="plotLayout">
+                                        <option value="none">Custom Grid</option>
+                                        <option value="sr1">Resort Hopscotch Islands</option>
+                                        <option value="sr2">Resort Cozy Islands</option>
+                                        <option value="sr3">Resort Cabin</option>
+                                        <option value="sr4">Resort Cabin Pond</option>
+                                        <option value="sr5">Resort Lower West</option>
+                                        <option value="sr6">Resort Middle West</option>
+                                        <option value="sr7">Resort Gudetama Sign</option>
+                                        <option value="sr8">Resort Cliff Top</option>
+                                        <option value="sr9">Resort Cliff Bottom</option>
+                                        <option value="sr10">Resort Upper West</option>
+                                        <option value="sr11">Resort Topmost West</option>
+                                        <option value="sr12">Resort Gate</option>
+                                        <option value="ss1">Swamp Ghost Ride</option>
+                                        <option value="ss2">Swamp Nature Reserve</option>
+                                        <option value="gm1">Gemstone Cabins West</option>
+                                        <option value="gm2">Gemstone Oasis West North</option>
+                                        <option value="gm3">Gemstone Oasis West South</option>
+                                        <option value="gm4">Gemstone Oasis East</option>
+                                        <option value="gm5">Gemstone Peak Trail</option>
+                                        <option value="gm6">Gemstone Mine Entrance Pond</option>
+                                        <option value="gm7">Gemstone Mine Entrance Town</option>
+                                        <option value="gm8">Gemstone Town Crafting Table</option>
+                                        <option value="gm9">Gemstone Deadwood Forest</option>
+                                        <option value="gm10">Gemstone Cabin 1 North</option>
+                                        <option value="gm11">Gemstone Cabin 1 South</option>
+                                        <option value="rr1">Reef Club South</option>
+                                        <option value="rr2">Reef Club East</option>
+                                        <option value="mh1">Hothead Cabin West</option>
+                                        <option value="mh2">Hothead Ruins West</option>
+                                        <option value="mh3">Hothead Cabin 3</option>
+                                        <option value="mh4">Hothead Pizza Cliff Bottom</option>
+                                        <option value="mh5">Hothead Pizza Cliff Top</option>
+                                        <option value="mh6">Hothead Hot Springs Bridge</option>
+                                        <option value="mh7">Hothead Caldera</option>
+                                        <option value="mm1">Meadow Fields Mini</option>
+                                        <option value="mm2">Meadow Fields West</option>
+                                        <option value="mm3">Meadow Fields East</option>
+                                        <option value="mm4">Meadow Overlook Greenhouse Front</option>
+                                        <option value="mm5">Meadow Overlook Puzzle Front</option>
+                                        <option value="mm6">Meadow Plaza Garden</option>
+                                        <option value="mm7">Meadow Temple Corner</option>
+                                        <option value="mm8">Meadow Gazebo North</option>
+                                        <option value="mm9">Meadow Gazebo Path West</option>
+                                        <option value="mm10">Meadow Gazebo Path East</option>
+                                        <option value="mm11">Meadow Corral</option>
+                                        <option value="ci1">Cloud Outer Cabin</option>
+                                        <option value="ip1">Icy Peak Summit</option>
+                                        <option value="cc1">Crystal Caves</option>
+                                        <option value="tm1">The Moon</option>
+                                        <option value="ww1">Wheatflour Upper Left</option>
+                                        <option value="ww2">Wheatflour Upper Right</option>
+                                        <option value="ww3">Wheatflour Lower Left</option>
+                                        <option value="ww4">Wheatflour Lower Right</option>
+                                    </select>
+                                </div>
             </div>
         </div>
 
-    <!-- Pop-up ALL Possible Flowers -->
-    <div id="all-possible-flowers-popup" class="popup">
-        <div class="popup-content">
-            <img src="assets/allflowersmenu.png" alt="allflowersmenu" class="popup-image" id="allflowersPopup">
-        <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="allflowersExitButton">
-            <ul id="all-possible-flowers-list"></ul>
+                        <!-- Additional Settings -->
+                        <div class="col-md-6">
+                            <div class="settings-section">
+                                <div class="mb-3">
+                                    <button class="btn btn-outline-pink rounded-pill w-100" id="exportButton">
+                                        <i class="fas fa-download me-1"></i>Export Garden
+                                    </button>
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn btn-outline-pink rounded-pill w-100" id="importButton">
+                                        <i class="fas fa-upload me-1"></i>Import Garden
+                                    </button>
+                                </div>
+                                <h6 class="mb-3">
+                                    <i class="fas fa-sliders-h me-2"></i>Preferences
+                                </h6>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="greenhouseToggle" checked>
+                                    <label class="form-check-label" for="greenhouseToggle">
+                                        <i class="fas fa-seedling me-1"></i>Greenhouse Percentages
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="soundToggle" checked>
+                                    <label class="form-check-label" for="soundToggle">
+                                        <i class="fas fa-volume-up me-1"></i>Sound Effects
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                                    <label class="form-check-label" for="darkModeToggle">
+                                        <i class="fas fa-moon me-1"></i>Dark Mode
+                                    </label>
+                                </div>
+                                <div class="form-text mb-3">
+                                    <i class="fas fa-info-circle me-1"></i>Percentages are automatically calculated with Fertilizer use.
+                                </div>
+                                
+                                <!-- Other Preferences (Collapsed) -->
+                                <div class="mb-3">
+                                    <h6 class="text-pink mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#otherPreferencesCollapse" aria-expanded="false" aria-controls="otherPreferencesCollapse" style="cursor: pointer;">
+                                        <i class="fas fa-cog me-2"></i>Other
+                                        <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                    </h6>
+                                    
+                                    <div class="collapse" id="otherPreferencesCollapse">
+                                        <!-- Event Preferences -->
+                                        <div class="mb-4">
+                                            <h6 class="text-dark mb-3">
+                                                <i class="fas fa-calendar-alt me-2"></i>Event Preferences
+                                            </h6>
+                                            <div class="mb-3">
+                                                <label for="eventFlowerSelect" class="form-label">Simulate Event</label>
+                                                <select class="form-select" id="eventFlowerSelect">
+                                                    <option value="none">No Event (Default)</option>
+                                                    <option value="Month of Meh">Month of Meh (Eggworts)</option>
+                                                    <option value="Jam Jamboree">Jam Jamboree (Petunias)</option>
+                                                    <option value="Colorblaze Carnival">Colorblaze Carnival (Marigolds)</option>
+                                                    <option value="Paper Parade">Paper Parade (Pinwheels)</option>
+                                                    <option value="Interlude of Dreams">Interlude of Dreams (Bowblossoms)</option>
+                                                    <option value="Give and Gather">Give and Gather (Poinsettias)</option>
+                                                    <option value="Lighttime Jubilee">Lighttime Jubilee (Glowbals)</option>
+                                                    <option value="Hugs and Hearts">Hugs and Hearts (Roses)</option>
+                                                    <option value="Happy Haven">Happy Haven (Happadils)</option>
+                                                </select>
+                                                <div class="form-text">Select an event flower to simulate special breeding rates for that event.</div>
+                                            </div>
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" id="eventSimulationToggle" checked>
+                                                <label class="form-check-label" for="eventSimulationToggle">
+                                                    <i class="fas fa-calendar-alt me-2"></i>Automatic Event Spawns
+                                                </label>
+                                                <div class="form-text">When enabled, event flowers get automatic spawn rates. When disabled, only breeding outcomes are shown.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Close
+                    </button>
+                    <button type="button" class="btn btn-pink rounded-pill" id="applySettingsButton">
+                        <i class="fas fa-check me-1"></i>Apply Settings
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     
+    <!-- How to Use Modal -->
+    <div class="modal fade" id="howToModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-question-circle me-2"></i>How to Use
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+                        <!-- Getting Started -->
+                        <div class="col-md-6">
+                            <div class="tutorial-section">
+                                <h6 class="mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#gettingStartedCollapse" aria-expanded="false" aria-controls="gettingStartedCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-play-circle me-2"></i>Getting Started
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="gettingStartedCollapse">
+                                    <ol class="list-group list-group-numbered">
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Open Flower Panel:</strong> Click "Customize" to open the flower details panel
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Select Flower:</strong> Choose flower type, main color, pattern, and secondary color
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Place Flower:</strong> Click on any grid cell to place your flower
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Analyze Results:</strong> Use "Analyze Flowers" to see breeding possibilities and percentages
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>View Details:</strong> Click on any cell in View Mode to see detailed breeding information
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
 
-<!-- Pop-up Breedable Square Options -->
-<div id="breedable-popup" class="popup">
-    <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="breedableExitButton">
-    <div class="popup-content">
-        <img src="assets/breedablesquaremenu.png" alt="breedablesquaremenu" class="popup-image">
+                        <!-- Paint Mode -->
+                        <div class="col-md-6">
+                            <div class="tutorial-section">
+                                <h6 class="mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#paintModeCollapse" aria-expanded="false" aria-controls="paintModeCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-paint-brush me-2"></i>Paint Mode
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="paintModeCollapse">
+                                    <ul class="list-group">
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Enable Paint Mode:</strong> Toggle the switch to activate paint mode
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Disable Plots:</strong> Click empty cells to make them non-plantable
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Copy Flowers:</strong> Click a flower, then click another cell to copy it
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Create Patterns:</strong> Use paint mode to create symmetrical designs
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
-        <!-- Vertical Button Container-->
-        <div class="popup-verticalbutton">
-            <img src="assets/selectbutton2.png" alt="selectbutton" class="popup-button3" id="selectButton"> 
-            <img src="assets/percentbutton.png" alt="percentbutton" class="popup-button3" id="percentButton">
-           <!-- <img src="assets/plotenabled.png" alt="plotbutton" class="popup-button3" id="plotconfigButton"> -->
-            <!-- Add other buttons here -->
+                        <!-- Edit vs View Mode -->
+                        <div class="col-md-6">
+                            <div class="tutorial-section">
+                                <h6 class="mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#editViewModeCollapse" aria-expanded="false" aria-controls="editViewModeCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-edit me-2"></i>Edit vs View Mode
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="editViewModeCollapse">
+                                    <ul class="list-group">
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Edit Mode (Default):</strong> This is the main mode for designing your garden. You can place flowers, modify existing flowers, and use paint mode to create patterns.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>View Mode:</strong> Switch to this mode to analyze your garden. Click any cell to see detailed breeding information, percentages, and possible outcomes for that specific location.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Mode Toggle:</strong> Use the Edit/View toggle switch in the control panel to switch between modes. The switch shows which mode is currently active.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Cell Analysis:</strong> In View Mode, clicking any cell opens a detailed modal showing all possible breeding outcomes, percentages, and flower combinations for that specific plot.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Planning Strategy:</strong> Use Edit Mode to design your layout, then switch to View Mode to analyze breeding possibilities before finalizing your garden design.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analysis Features -->
+                        <div class="col-md-6">
+                            <div class="tutorial-section">
+                                <h6 class="mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#analysisCollapse" aria-expanded="false" aria-controls="analysisCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-chart-pie me-2"></i>Analysis Features
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="analysisCollapse">
+                                    <ul class="list-group">
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Breeding Analysis:</strong> See all possible flowers from your current setup
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Percentage Display:</strong> View exact breeding probabilities
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Greenhouse Mode:</strong> Toggle for greenhouse breeding percentages (cannot toggle "ON" for event flowers or preset plot layouts)
+                                        </li>
+
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Event Mode:</strong> Simulate special event flower breeding & toggle automatic 5% event flower spawning
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grid Customization -->
+                        <div class="col-md-6">
+                            <div class="tutorial-section">
+                                <h6 class="mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#gridCustomizationCollapse" aria-expanded="false" aria-controls="gridCustomizationCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-th me-2"></i>Grid Customization
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="gridCustomizationCollapse">
+                                    <ul class="list-group">
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Grid Size:</strong> Change from 1x1 to 10x10 in Settings
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Plot Layouts:</strong> Choose from real game plot layouts
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Custom Grid:</strong> Create your own custom layouts
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Clear Grid:</strong> Use "Clear Grid" to start fresh
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Mobile Optimization:</strong> Larger grids auto-adjust for mobile devices (use the arrows at the top of the grid to scroll left/right)
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Flower Types -->
+                        <div class="col-md-6">
+                            <div class="tutorial-section">
+                                <h6 class="mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#flowerTypesCollapse" aria-expanded="false" aria-controls="flowerTypesCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-seedling me-2"></i>Flower Types
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="flowerTypesCollapse">
+                                    <ul class="list-group">
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>General Flowers:</strong> Available year-round in specific locations
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Event Flowers:</strong> Only available during special events
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Extreme Flowers:</strong> Found in challenging locations (The Moon, Crystal Caves, etc.)
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Glossary:</strong> Use the Glossary to learn about all flower types and locations
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Features -->
+                        <div class="col-md-6">
+                            <div class="tutorial-section">
+                                <h6 class="mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#advancedFeaturesCollapse" aria-expanded="false" aria-controls="advancedFeaturesCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-cogs me-2"></i>Advanced Features
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="advancedFeaturesCollapse">
+                                    <ul class="list-group">
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Import/Export:</strong> Save and share your garden designs
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Dark Mode:</strong> Toggle dark theme in Settings
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Sound Effects:</strong> Enable/disable audio feedback
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Mobile Support:</strong> Optimized for touch devices
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Responsive Design:</strong> Works on all screen sizes
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Settings & Configuration -->
+                        <div class="col-md-6">
+                            <div class="tutorial-section">
+                                <h6 class="mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#settingsCollapse" aria-expanded="false" aria-controls="settingsCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-cog me-2"></i>Settings & Configuration
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="settingsCollapse">
+                                    <ul class="list-group">
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Settings Button:</strong> Located in the top navigation bar, opens the main settings panel where you can configure all aspects of the simulator.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Grid Settings:</strong> Change grid size (3x3 to 10x10), select real game plot layouts, or create custom layouts to match your in-game gardens.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Breeding Preferences:</strong> Toggle Greenhouse percentages and Event simulation for special breeding rates.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Event Simulation:</strong> Select specific events like "Month of Meh" or "Jam Jamboree" to simulate special breeding rates for event flowers like Eggworts or Petunias. Also toggle automatic 5% event flower spawning.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Appearance:</strong> Enable/disable sound effects, toggle dark mode, and customize the visual experience to your preference.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Data Management:</strong> Export your garden designs to share with others, or import designs from the community using the import/export features. Supports both code or shareable URL.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tips & Tricks -->
+                        <div class="col-md-6">
+                            <div class="tutorial-section">
+                                <h6 class="mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#tipsTricksCollapse" aria-expanded="false" aria-controls="tipsTricksCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-lightbulb me-2"></i>Tips & Tricks
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="tipsTricksCollapse">
+                                    <ul class="list-group">
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Adjacent Cells:</strong> Green tint shows breedable adjacent cells
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Pattern Recognition:</strong> Some patterns don't allow secondary colors (like, Glitter or Frost)
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Glossary:</strong> Read and view detailed information about each flower type, locations, and patterns
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Percentage Accuracy:</strong> All percentages include fertilizer calculations
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Plot Planning:</strong> Use real plot layouts to plan your in-game gardens
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Close
+                    </button>
+                    <button type="button" class="btn btn-pink rounded-pill" onclick="window.location.href='blog.html'">
+                        <i class="fas fa-newspaper me-1"></i>Visit Blog
+                    </button>
+                </div>
         </div> 
     </div>
 </div>
 
-<!-- Create a Flower Pop-up -->
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-info-circle me-2"></i>About
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="text-center mb-4">
+                        <img src="assets/logo.png" alt="HKIA Flower Simulator" class="mb-3" style="max-width: 200px;">
+                        <h4>Hello Kitty Island Adventure</h4>
+                        <h5 class="text-muted">Flower Breeding Simulator</h5>
+                    </div>
+                    <div class="about-content">
+                        <p class="mb-3">
+                            Welcome to the ultimate flower breeding simulator for Hello Kitty Island Adventure! 
+                            This tool helps you plan and optimize your flower gardens with precision.
+                        </p>
 
-<!--<div class="popup" id="CAF-popup-form"> -->
-    
-    
-   <!-- <div class="popup-content"> 
+                        <h6 class="mb-2">Features:</h6>
+                        <ul class="mb-3">
+                            <li>Customizable grid layouts</li>
+                            <li>All flower types, colors, and patterns from the game</li>
+                            <li>Real-time breeding analysis with percentages</li>
+                            <li>Paint mode for easy garden design</li>
+                            <li>Import/export functionality</li>
+                            <li>Mobile-friendly responsive design</li>
+                        </ul>
+                        <div class="text-center mb-3">
+                            <button class="btn btn-pink rounded-pill" id="feedbackButton">
+                                <i class="fas fa-comment-dots me-1"></i>Send Feedback / Report Bug
+                            </button>
+                        </div>
+                        <div class="text-center mb-3">
+                            <a href="blog.html" class="btn btn-outline-pink rounded-pill">
+                                <i class="fas fa-newspaper me-1"></i>Visit Developer Blog
+                            </a>
+                        </div>
+                        <p class="mb-0 text-center muted">
+                            <small>Made with ❤️ for the Hello Kitty Island Adventure community</small>
+                        </p>
+                        <p class="mb-0 text-center muted">
+                            <small>Created by @Auevi & contributors</small>
+                        </p>
+                        <p class="mb-0 text-center muted">
+                            <small><i>*This project is an unofficial, community-made project.</i></small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Feedback Modal -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-comment-dots me-2"></i>Send Feedback / Report Bug
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="feedbackForm">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="feedbackType" class="form-label">Type of Feedback</label>
+                                <select class="form-select" id="feedbackType" required>
+                                    <option value="">Select feedback type...</option>
+                                    <option value="bug">🐛 Bug Report</option>
+                                    <option value="feature">💡 Feature Request</option>
+                                    <option value="improvement">✨ Improvement Suggestion</option>
+                                    <option value="general">💬 General Feedback</option>
+                                    <option value="other">❓ Other</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="feedbackSubject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="feedbackSubject" placeholder="Brief description of your feedback..." required>
+                            </div>
+                            <div class="col-12">
+                                <label for="feedbackDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="feedbackDescription" rows="5" placeholder="Please provide detailed information about your feedback, bug report, or feature request..." required></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="feedbackEmail" class="form-label">Email or Discord (Optional)</label>
+                                <input type="text" class="form-control" id="feedbackEmail" placeholder="your.email@example.com or DiscordUsername#1234">
+                                <div class="form-text">If you'd like a response, please provide your email address or Discord username.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="feedbackBrowser" class="form-label">Browser & Device</label>
+                                <input type="text" class="form-control" id="feedbackBrowser" placeholder="e.g., Chrome on Windows, Safari on iPhone" readonly>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="feedbackIncludeData" checked>
+                                <label class="form-check-label" for="feedbackIncludeData">
+                                    Include technical information (browser, screen size, etc.) to help with debugging
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Cancel
+                    </button>
+                    <button type="button" class="btn btn-pink rounded-pill" id="submitFeedbackButton">
+                        <i class="fas fa-paper-plane me-1"></i>Send Feedback
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="CAFExitButton">
-
-        <img src="assets/createflowermenu.png" alt="Create Flower Menu" class="popup-image">
-        
-        <div id="CAF-popup-form" class="popup-form popup-content">
-            
-
-            <form id="CAF-flower-form" class="popup-content">
-                <label for="CAF-flower-type">Flower Type:</label>
-                <select id="CAF-flower-type" required>
-                    <option value="Bellbutton">Bellbutton</option>
-                    <option value="Dandelily">Dandelily</option>
-                    <option value="Penstemum">Penstemum</option>
-                    <option value="Tulias">Tulias</option>
-                  <option value="Hibiscus">Hibiscus</option>
-                  <option value="Ghostgleam">Ghostgleam</option>
-                  <option value="Anemone">Anemone</option>
-                  <option value="Thistle">Thistle</option>
-                  <option value="Heavy Nettle">Heavy Nettle</option>
-                   <option value="Marigold">Marigold</option>
-                   <option value="Eggwort">Eggwort</option> -->
-
-                   
-                    <!-- Add other options here -->
-                     <!--  Unknown Event Flowers
-                     <option value="Petunia">Petunia</option> 
-                      Rose
-                      Happadil
-                      Pinwheel
-                      -->
-
-          <!--      </select>
-                
-                <label for="CAF-flower-main-color">Flower Main Color:</label>
-                <select id="CAF-flower-main-color" required>
-                    <option value="Red">Red</option>
-                    <option value="Coral">Coral</option>
-                    <option value="Orange">Orange</option>
-                    <option value="Yellow">Yellow</option>
-                    <option value="Lime">Lime</option>
-                    <option value="Green">Green</option>
-                    <option value="Teal">Teal</option>
-                    <option value="Sky">Sky</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Indigo">Indigo</option>
-                    <option value="Violet">Violet</option>
-                    <option value="Hot Pink">Hot Pink</option>
-                    <option value="Magenta">Magenta</option>
-                    <option value="White">White</option>
-                    <option value="Warm Pink">Warm Pink</option>
-                    <option value="Blush">Blush</option>
-                    <option value="Peach">Peach</option>
-                    <option value="Cream">Cream</option>
-                    <option value="Pistachio">Pistachio</option>
-                    <option value="Mint">Mint</option>
-                    <option value="Seafoam">Seafoam</option>
-                    <option value="Cloud">Cloud</option> 
-                    <option value="Ice">Ice</option>                   
-                    <option value="Periwinkle">Periwinkle</option>
-                    <option value="Lilac">Lilac</option>
-                    <option value="Cool Pink">Cool Pink</option>
-                    <option value="Pink">Pink</option> -->
-
-                    <!-- Add other options here -->
-
-                <!--   </select>
-                
-                <label for="CAF-flower-pattern">Flower Pattern:</label>
-                <select id="CAF-flower-pattern" required>
-                    <option value="None">None</option>
-                    <option value="Ombre">Ombre</option>
-                    <option value="Speckled">Speckled</option>
-                   <option value="Trim">Trim</option> -->
-
-                    <!-- Add other options here -->
-                     <!-- Unknown Patterns
-                    <option value="Stripe">Stripe</option> 
-                      Alternate
-                      Confetti
-                      Ring
-                      Stripe
-                     -->
-
-              <!--   </select>
-                
-                <label for="CAF-flower-secondary-color">Flower Secondary Color:</label>
-                <select id="CAF-flower-secondary-color" required>
-                    <option value="None">None</option>
-                    <option value="Red">Red</option>
-                    <option value="Coral">Coral</option>
-                    <option value="Orange">Orange</option>
-                    <option value="Yellow">Yellow</option>
-                    <option value="Lime">Lime</option>
-                    <option value="Green">Green</option>
-                    <option value="Teal">Teal</option>
-                    <option value="Sky">Sky</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Indigo">Indigo</option>
-                    <option value="Violet">Violet</option>
-                    <option value="Hot Pink">Hot Pink</option>
-                    <option value="Magenta">Magenta</option>
-                    <option value="White">White</option>
-                    <option value="Warm Pink">Warm Pink</option>
-                    <option value="Blush">Blush</option>
-                    <option value="Peach">Peach</option>
-                    <option value="Cream">Cream</option>
-                    <option value="Pistachio">Pistachio</option>
-                    <option value="Mint">Mint</option>
-                    <option value="Seafoam">Seafoam</option>
-                    <option value="Cloud">Cloud</option> 
-                    <option value="Ice">Ice</option>                   
-                    <option value="Periwinkle">Periwinkle</option>
-                    <option value="Lilac">Lilac</option>
-                    <option value="Cool Pink">Cool Pink</option>
-                    <option value="Pink">Pink</option> -->
-
-                    <!-- Add other options here -->
-           
-             <!--      </select>
-      
-
-                </form> -->
-
-
-
-                        <!-- Horizontal Button Container-->
-
-     <!--   <div class="popup-horizontalbutton2">
-                    
-            <img type="submit-CAF" id="submit-CAFButton" class="submit-Button popup-button2" src="assets/submitbutton.png" alt="Submit CAF">
-
+    <!-- Import Modal -->
+    <div class="modal fade" id="importModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-upload me-2"></i>Import Garden
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label for="importCode" class="form-label">Paste your garden code (or URL) here:</label>
+                        <textarea class="form-control" id="importCode" rows="4" placeholder="Enter your garden code..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Cancel
+                    </button>
+                    <button type="button" class="btn btn-pink rounded-pill" id="importSubmitButton">
+                        <i class="fas fa-check me-1"></i>Import Garden
+                    </button>
+                </div>
                 </div>
             </div>
     </div>
-</div> -->
 
+    <!-- View Mode Info Modal -->
+    <div class="modal fade" id="viewInfoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-white rounded-4">
+                <div class="modal-header bg-pink-gradient text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-info-circle me-2"></i>Plot Information
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="viewInfoContent">
+                    <!-- Content will be populated dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-pink rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-check me-1"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<script src="layouts.js"></script>
-<script src="script.js"></script>
+    <!-- Glossary Modal -->
+    <div class="modal fade" id="glossaryModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-book me-2"></i>Flower Glossary
+                    </h5>
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-outline-light rounded-pill" id="glossaryListViewBtn" title="List View">
+                                <i class="fas fa-list me-1"></i>List
+                            </button>
+                            <button type="button" class="btn btn-outline-light rounded-pill" id="glossaryTableViewBtn" title="Table View">
+                                <i class="fas fa-table me-1"></i>Table
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-outline-light btn-sm rounded-pill" id="glossaryHelpButton" title="Help">
+                            <i class="fas fa-question-circle me-1"></i>Help
+                        </button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Search and Filter Controls -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <input type="text" class="form-control" id="glossarySearch" placeholder="Search flowers...">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="glossaryTypeFilter">
+                                <option value="">All Types</option>
+                                <option value="general">General</option>
+                                <option value="event">Event</option>
+                                <option value="extreme">Extreme</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="glossaryLocationFilter">
+                                <option value="">All Locations</option>
+                                <option value="G">Greenhouse (G)</option>
+                                <option value="SR">Resort (SR)</option>
+                                <option value="RR">Reef (RR)</option>
+                                <option value="SS">Swamp (SS)</option>
+                                <option value="MM">Meadow (MM)</option>
+                                <option value="GM">Gemstone (GM)</option>
+                                <option value="MH">Hothead (MH)</option>
+                                <option value="CI">Cloud Island (CI)</option>
+                                <option value="CC">Crystal Caves (CC)</option>
+                                <option value="IP">Icy Peak (IP)</option>
+                                <option value="TM">The Moon (TM)</option>
+                                <option value="C">Caldera (C)</option>
+                                <option value="WW">Wheatflour Wonderland (WW)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Table View Controls -->
+                    <div class="row g-3 mb-4" id="glossaryTableControls" style="display: none;">
+                        <div class="col-md-6">
+                            <div class="btn-group w-100" role="group">
+                                <button type="button" class="btn btn-outline-pink" id="glossaryPatternTableBtn">
+                                    <i class="fas fa-palette me-1"></i>Patterns Table
+                                </button>
+                                <button type="button" class="btn btn-outline-pink" id="glossaryLocationTableBtn">
+                                    <i class="fas fa-map-marker-alt me-1"></i>Locations Table
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="glossaryShowPrimaryOnly">
+                                <label class="form-check-label" for="glossaryShowPrimaryOnly">
+                                    Show default/native info ONLY
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Container -->
+                    <div class="glossary-results" id="glossaryResults">
+                        <!-- Results will be populated here -->
+                    </div>
+
+                    <!-- Table View Container -->
+                    <div class="glossary-table-container" id="glossaryTableContainer" style="display: none;">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover glossary-table" id="glossaryTable">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="sticky-column">Flower</th>
+                                        <!-- Dynamic headers will be added here -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic rows will be added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Glossary Help Modal -->
+    <div class="modal fade" id="glossaryHelpModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-question-circle me-2"></i>Glossary Help
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+                        <!-- Understanding the Glossary -->
+                        <div class="col-12">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#understandingCollapse" aria-expanded="false" aria-controls="understandingCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-lightbulb me-2"></i>Understanding the Glossary
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="understandingCollapse">
+                                    <p class="mb-3">The Flower Glossary shows detailed information about each flower type, including their locations, patterns, and native colors. Here's how to interpret the visual indicators:</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Location Tags -->
+                        <div class="col-md-6">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#locationTagsCollapse" aria-expanded="false" aria-controls="locationTagsCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-map-marker-alt me-2"></i>Location Tags
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="locationTagsCollapse">
+                                    <div class="mb-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="glossary-location-tag primary me-2">SR</span>
+                                            <span class="small">Primary/Native Location</span>
+                                        </div>
+                                        <p class="small text-muted mb-2">These are the locations where the flower naturally grows and spawns. They appear with a pink background and bold border.</p>
+                                        
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="glossary-location-tag compatible me-2">G</span>
+                                            <span class="small">Compatible Location</span>
+                                        </div>
+                                        <p class="small text-muted">These are locations where the flower can be grown through breeding or greenhouse cultivation, but doesn't naturally spawn.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pattern Tags -->
+                        <div class="col-md-6">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#patternTagsCollapse" aria-expanded="false" aria-controls="patternTagsCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-palette me-2"></i>Pattern Tags
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="patternTagsCollapse">
+                                    <div class="mb-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="glossary-pattern-tag primary me-2">Ombre</span>
+                                            <span class="small">Default Pattern</span>
+                                        </div>
+                                        <p class="small text-muted mb-2">The flower's natural pattern that appears by default. Shown with a pink background and bold border.</p>
+                                        
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="glossary-pattern-tag me-2">Striped</span>
+                                            <span class="small">Compatible Pattern</span>
+                                        </div>
+                                        <p class="small text-muted">Patterns that can be obtained through breeding or pattern transfer, but aren't the flower's natural pattern.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Flower Types -->
+                        <div class="col-12">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#flowerTypesCollapse" aria-expanded="false" aria-controls="flowerTypesCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-seedling me-2"></i>Flower Types
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="flowerTypesCollapse">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <span class="glossary-flower-type general me-2">General</span>
+                                            </div>
+                                            <p class="small text-muted">Available year-round in their native locations. Can be grown in greenhouses.</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <span class="glossary-flower-type event me-2">Event</span>
+                                            </div>
+                                            <p class="small text-muted">Only available during special events. Can be grown in greenhouses after obtaining.</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <span class="glossary-flower-type extreme me-2">Extreme</span>
+                                            </div>
+                                            <p class="small text-muted">Found in challenging locations like The Moon or Crystal Caves. Cannot be grown in greenhouses.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="modal fade" id="exportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-download me-2"></i>Export Garden
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label for="exportCode" class="form-label">Your garden code:</label>
+                        <textarea class="form-control" id="exportCode" rows="6" readonly placeholder="Garden code will appear here..."></textarea>
+                        <div class="form-text">Copy this code to share your garden with others!</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exportUrl" class="form-label">Shareable URL:</label>
+                        <textarea class="form-control" id="exportUrl" rows="3" readonly placeholder="Shareable URL will appear here..."></textarea>
+                        <div class="form-text">Copy this URL to share your garden with others!</div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Close
+                    </button>
+                    <button type="button" class="btn btn-outline-pink rounded-pill" id="copyUrlButton">
+                        <i class="fas fa-link me-1"></i>Copy URL
+                    </button>
+                    <button type="button" class="btn btn-pink rounded-pill" id="copyExportButton">
+                        <i class="fas fa-copy me-1"></i>Copy Code
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Grid Manager -->
+    <script src="custom-grid.js"></script>
+    <!-- Glossary Manager -->
+    <script src="glossary.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+    <!-- Compression Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script>
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b1a9fefceffe44b59c667f3b6bddec28"}'></script><!-- End Cloudflare Web Analytics -->
-
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b1a9fefceffe44b59c667f3b6bddec28"}'></script>
 </body>
 </html>

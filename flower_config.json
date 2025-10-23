@@ -1,0 +1,1103 @@
+{
+  "Flowers": {
+    "Anemone": {
+      "extreme": false,
+      "event": null,
+      "default_colors": [
+        "Lime",
+        "Magenta"
+      ],
+      "default_pattern": "Ombre",
+      "supported_patterns": [
+        "Ombre"
+      ],
+      "default_locations": [
+        "Reef"
+      ],
+      "supported_locations": [
+        "rr1",
+        "rr2",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "ci1",
+        "ci2"
+      ]
+    },
+    "Bellbutton": {
+      "extreme": false,
+      "event": null,
+      "default_colors": [
+        "Yellow",
+        "Blue",
+        "White"
+      ],
+      "default_pattern": "Ombre",
+      "supported_patterns": [
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Meadow"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "ci1",
+        "ci2",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Blazebulb": {
+      "extreme": true,
+      "event": null,
+      "default_colors": [
+        "Coral",
+        "Blush",
+        "Peach",
+        "Cream"
+      ],
+      "default_pattern": "Molten",
+      "supported_patterns": [
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Trim"
+      ],
+      "default_locations": [
+        "Hothead Caldera"
+      ],
+      "supported_locations": [
+        "hh8"
+      ]
+    },
+    "Bowblossom": {
+      "extreme": false,
+      "event": "Interlude of Dreams",
+      "default_colors": [
+        "Warm Pink",
+        "Seafoam",
+        "Lilac"
+      ],
+      "default_pattern": "Iridescent",
+      "supported_patterns": [
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped"
+      ],
+      "default_locations": [
+        "Resort", "Meadow"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "rr1",
+        "rr2",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "hh8",
+        "cc1",
+        "ci1",
+        "ci2",
+        "ip1",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Bubbaluna": {
+      "extreme": true,
+      "event": null,
+      "default_colors": [
+        "Indigo",
+        "Pink"
+      ],
+      "default_pattern": "Cosmic",
+      "supported_patterns": [
+        "Alternate",
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "The Moon"
+      ],
+      "supported_locations": [
+        "tm1"
+      ]
+    },
+    "Crystalia": {
+      "extreme": true,
+      "event": null,
+      "default_colors": [
+        "Teal",
+        "Pistachio",
+        "Pink"
+      ],
+      "default_pattern": "Iridescent",
+      "supported_patterns": [
+        "Ombre",
+        "Ring",
+        "Striped"
+      ],
+      "default_locations": [
+        "Crystal Caves"
+      ],
+      "supported_locations": [
+        "cc1"
+      ]
+    },
+    "Dandelily": {
+      "extreme": false,
+      "event": null,
+      "default_colors": [
+        "Red",
+        "Yellow",
+        "White"
+      ],
+      "default_pattern": "Ombre",
+      "supported_patterns": [
+        "Alternate",
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Meadow"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "ci1",
+        "ci2",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Dreampuff": {
+      "extreme": false,
+      "event": null,
+      "default_colors": [
+        "Mint",
+        "Cloud",
+        "Periwinkle",
+        "Cool Pink"
+      ],
+      "default_pattern": "Ombre",
+      "supported_patterns": [
+        "Ombre"
+      ],
+      "default_locations": [
+        "Cloud"
+      ],
+      "supported_locations": [
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "ci1",
+        "ci2"
+      ]
+    },
+    "Eggwort": {
+      "extreme": false,
+      "event": "Month of Meh",
+      "default_colors": [
+        "Sky",
+        "White"
+      ],
+      "default_pattern": "Speckled",
+      "supported_patterns": [
+        "Alternate",
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Resort", "Meadow", "Gemstone", "Hothead", "Swamp", "Reef"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "rr1",
+        "rr2",
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "hh1",
+        "hh2",
+        "hh3",
+        "hh4",
+        "hh5",
+        "hh6",
+        "hh7",
+        "cc1",
+        "hh8",
+        "tm1",
+        "ci1",
+        "ci2",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Frostfeather": {
+      "extreme": true,
+      "event": null,
+      "default_colors": [
+        "Ice"
+      ],
+      "default_pattern": "Frost",
+      "supported_patterns": [
+        "Ombre",
+        "Speckled",
+        "Trim"
+      ],
+      "default_locations": [
+        "Icy Peak Summit"
+      ],
+      "supported_locations": [
+        "ip1"
+      ]
+    },
+    "Ghostgleam": {
+      "extreme": false,
+      "default_colors": [
+        "White"
+      ],
+      "default_pattern": "Ombre",
+      "supported_patterns": [
+        "Ombre"
+      ],
+      "default_locations": [
+        "Swamp"
+      ],
+      "supported_locations": [
+        "ss1",
+        "ss2",
+        "rr1",
+        "rr2",
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "ci1",
+        "ci2"
+      ]
+    },
+    "Glowbal": {
+      "extreme": false,
+      "event": "Lighttime Jubilee",
+      "default_colors": [
+        "Yellow",
+        "Sky",
+        "Hot Pink"
+      ],
+      "default_pattern": "Glow",
+      "supported_patterns": [
+        "Ombre"
+      ],
+      "default_locations": [
+        "Resort", "Meadow", "Swamp"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "hh8",
+        "cc1",
+        "tm1",
+        "ci1",
+        "ci2",
+        "ip1",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Happadil": {
+      "extreme": false,
+      "event": "Happy Haven",
+      "default_colors": [
+        "Yellow",
+        "Hot Pink"
+      ],
+      "default_pattern": "Confetti",
+      "supported_patterns": [
+        "Alternate",
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Resort", "Meadow"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "hh1",
+        "hh2",
+        "hh3",
+        "hh4",
+        "hh5",
+        "hh6",
+        "hh7",
+        "cc1",
+        "tm1",
+        "ci1",
+        "ci2",
+        "ip1",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Heavy Nettle": {
+      "extreme": false,
+      "event": null,
+      "default_colors": [
+        "Orange"
+      ],
+      "default_pattern": "Ombre",
+      "supported_patterns": [
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Hothead"
+      ],
+      "supported_locations": [
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "hh1",
+        "hh2",
+        "hh3",
+        "hh4",
+        "hh5",
+        "hh6",
+        "hh7"
+      ]
+    },
+    "Hibiscus": {
+      "extreme": false,
+      "event": null,
+      "default_colors": [
+        "Hot Pink"
+      ],
+      "default_pattern": "Ombre",
+      "supported_patterns": [
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Resort"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "hh1",
+        "hh2",
+        "hh3",
+        "hh4",
+        "hh5",
+        "hh6",
+        "hh7",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Marigold": {
+      "extreme": false,
+      "event": "Colorblaze Carnival",
+      "default_colors": [
+        "Orange"
+      ],
+      "default_pattern": "Trim",
+      "supported_patterns": [
+        "Ombre",
+        "Trim"
+      ],
+      "default_locations": [
+        "Resort", "Meadow", "Gemstone", "Hothead"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "hh1",
+        "hh2",
+        "hh3",
+        "hh4",
+        "hh5",
+        "hh6",
+        "hh7",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Penstemum": {
+      "extreme": false,
+      "event": null,
+      "default_colors": [
+        "Green",
+        "Sky",
+        "White"
+      ],
+      "default_pattern": "Ombre",
+      "supported_patterns": [
+        "Alternate",
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Meadow"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "ci1",
+        "ci2",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Petunia": {
+      "extreme": false,
+      "event": "Jam Jamboree",
+      "default_colors": [
+        "Magenta"
+      ],
+      "default_pattern": "Striped",
+      "supported_patterns": [
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Meadow"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Pinwheel": {
+      "extreme": false,
+      "event": "Paper Parade",
+      "default_colors": [
+        "Coral",
+        "Lime",
+        "Indigo"
+      ],
+      "default_pattern": "Alternate",
+      "supported_patterns": [
+        "Alternate",
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Speckled",
+        "Trim"
+      ],
+      "default_locations": [
+        "Resort", "Meadow", "Gemstone", "Cloud"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "ci1",
+        "ci2",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Poinsettia": {
+      "extreme": false,
+      "event": "Give and Gather",
+      "default_colors": [
+        "Red",
+        "White"
+      ],
+      "default_pattern": "Patch",
+      "supported_patterns": [
+        "Alternate",
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Meadow"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Rose": {
+      "extreme": false,
+      "event": "Hugs and Hearts",
+      "default_colors": [
+        "Red",
+        "Yellow",
+        "White",
+        "Pink"
+      ],
+      "default_pattern": "Ring",
+      "supported_patterns": [
+        "Confetti",
+        "Ombre",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Resort", "Meadow"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "mm1",
+        "mm2",
+        "mm3",
+        "mm4",
+        "mm5",
+        "mm6",
+        "mm7",
+        "mm8",
+        "mm9",
+        "mm10",
+        "mm11"
+      ]
+    },
+    "Thistle": {
+      "extreme": false,
+      "event": null,
+      "default_colors": [
+        "Violet"
+      ],
+      "default_pattern": "Ombre",
+      "supported_patterns": [
+        "Ombre",
+        "Trim"
+      ],
+      "default_locations": [
+        "Gemstone"
+      ],
+      "supported_locations": [
+        "ss1",
+        "ss2",
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "hh1",
+        "hh2",
+        "hh3",
+        "hh4",
+        "hh5",
+        "hh6",
+        "hh7"
+      ]
+    },
+    "Tulias": {
+      "extreme": false,
+      "event": null,
+      "default_colors": [
+        "Red",
+        "Yellow",
+        "Violet"
+      ],
+      "default_pattern": "Ombre",
+      "supported_patterns": [
+        "Alternate",
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Meadow"
+      ],
+      "supported_locations": [
+        "sr1",
+        "sr2",
+        "sr3",
+        "sr4",
+        "sr5",
+        "sr6",
+        "sr7",
+        "sr8",
+        "sr9",
+        "sr10",
+        "sr11",
+        "sr12",
+        "ss1",
+        "ss2",
+        "gm1",
+        "gm2",
+        "gm3",
+        "gm4",
+        "gm5",
+        "gm6",
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4",
+        "ci1",
+        "ci2"
+      ]
+    },
+    "Wheatflower": {
+      "extreme": false,
+      "event": null,
+      "default_colors": [
+        "Cream"
+      ],
+      "default_pattern": "Glitter",
+      "supported_patterns": [
+        "Alternate",
+        "Confetti",
+        "Ombre",
+        "Patch",
+        "Ring",
+        "Speckled",
+        "Striped",
+        "Trim"
+      ],
+      "default_locations": [
+        "Wheatflour"
+      ],
+      "supported_locations": [
+        "ww1",
+        "ww2",
+        "ww3",
+        "ww4"
+      ]
+    }
+  },
+  "Effects": [
+    "Iridescent",
+    "Glow",
+    "Cosmic",
+    "Crystal",
+    "Molten",
+    "Frost",
+    "Glitter"
+  ]
+}

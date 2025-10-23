@@ -1,396 +1,601 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ <!-- Google tag (gtag.js) -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-M3V5W7VWCJ"></script>
+ <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+ 
+   gtag('config', 'G-M3V5W7VWCJ');
+ </script>
+     <!-- Google tag (gtag.js) -->
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M3V5W7VWCJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-M3V5W7VWCJ');
-</script>
-    <!-- Google tag (gtag.js) -->
-
+         <!--Embedding Stuff -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://flowerfulpowerful.github.io/hkiaflowergen/" />
+    <meta property="og:title" content="HKIA Flower Generator" />
+    <meta property="og:description" content="The HKIA Flower Generator is an interactive website that can be used to assist you with flower breeding, color/pattern transfers, and organizing flower plots with accurate calculations." />
+    <meta property="og:image" content="https://github.com/flowerfulpowerful/hkiaflowergen/raw/refs/heads/main/assets/embed1.png" />
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="theme-color" content="#b2e48f"/>
+    
+        <!--Embedding Stuff -->   
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HKIA Flower Generator - Developer Blog</title>
+    <title>HKIA Flower Breeding Simulator - Developer Blog</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap');
-        </style>
+    <!-- Blog-specific CSS -->
+    <link rel="stylesheet" href="blog-styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
 </head>
 <body>
-
+    <!-- Audio Elements -->
     <audio id="clickAudio" src="assets/audio/click.mp3"></audio>    
     <audio id="bloopAudio" src="assets/audio/bloop.mp3"></audio>
     <audio id="deepbloopAudio" src="assets/audio/deepbloop.mp3"></audio>
     <audio id="multipopAudio" src="assets/audio/multipop.mp3"></audio>
     <audio id="popAudio" src="assets/audio/pop.mp3"></audio>
 
-    <div class="container">
-        
-        <!-- Navigation Button -->
-        <div class="nav-container">
-            <div class="nav-sub-buttons" id="navSubButtons">
-                <img src="assets/pagenav-gen.png" alt="Generator" class="nav-sub-button" id="generatorButton">
+    <!-- Dark Mode Toggle Button -->
+    <button id="darkModeToggle" title="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+    </button>
 
-                <img src="assets/pagenav-blog.png" alt="Blog" class="nav-sub-button" id="blogButton">
+    <!-- Navigation Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-pink-gradient sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/logo.png" alt="HKIA Flower Simulator" class="logo-img me-2">
+                <span class="brand-text">Flower Simulator</span>
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars text-white"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-seedling me-1"></i>Simulator
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="blog.html">
+                            <i class="fas fa-newspaper me-1"></i>Blog
+                        </a>
+                    </li>
+                </ul>
+                
             </div>
-            <img src="assets/pagenav-idle.png" alt="Navigation" class="nav-button" id="navButton">
         </div>
-        
-        <!-- Title Image -->
-        <img src="assets/logo.png" alt="Title" class="title-image">
+    </nav>
 
-        <!-- Blog Content -->
-        <div class="blog-content">
-            <h1 class="blog-title">Developer Blog</h1>
-            
-            <!-- Category Menu -->
-            <div class="category-menu">
-                <img src="assets/blog-all.png" alt="All Posts" class="category-button active" id="allPostsButton">
-                <img src="assets/blog-updates.png" alt="Updates" class="category-button" id="updatesButton">
-                <img src="assets/blog-other.png" alt="Other" class="category-button" id="otherButton">
-                <img src="assets/blog-tips.png" alt="Tips" class="category-button" id="tipsButton">
+    <!-- Main Content -->
+    <main class="container-fluid py-4">
+        <!-- Blog Header -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="blog-header rounded-4 shadow-lg p-5 text-center position-relative overflow-hidden">
+                    <div class="position-relative">
+                        <h1 class="mb-3">
+                            <i class="fas fa-newspaper me-3"></i>Developer Blog
+                        </h1>
+                        <p class="mb-0 fs-5 opacity-90">Stay updated with the latest news, tips, and updates for the HKIA Flower Breeding Simulator</p>
+                        <div class="mt-3">
+                            <span class="badge bg-white bg-opacity-20 px-3 py-2 me-2">
+                                <i class="fas fa-newspaper me-1"></i>Latest Updates
+                            </span>
+                            <span class="badge bg-white bg-opacity-20 px-3 py-2 me-2">
+                                <i class="fas fa-lightbulb me-1"></i>Pro Tips
+                            </span>
+                            <span class="badge bg-white bg-opacity-20 px-3 py-2">
+                                <i class="fas fa-users me-1"></i>Community
+                            </span>
+                        </div>
+
+                    </div>
+                    <p class="mb-0 text-center muted">
+                        <small>Made with ❤️ for the Hello Kitty Island Adventure community</small>
+                    </p>
+                    <p class="mb-0 text-center muted">
+                        <small>Created by @Auevi & contributors</small>
+                    </p>
+                </div>
             </div>
+        </div>
+
+        <!-- Category Menu -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="category-menu rounded-4 shadow-sm p-4">
+                    <div class="text-center mb-3">
+                        <h5 class="text-muted mb-0">
+                            <i class="fas fa-filter me-2"></i>Filter Posts
+                        </h5>
+                    </div>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                        <button class="btn btn-outline-pink rounded-pill px-4 py-2 active" id="allPostsButton">
+                            <i class="fas fa-list me-2"></i>All Posts
+                        </button>
+                        <button class="btn btn-outline-pink rounded-pill px-4 py-2" id="updatesButton">
+                            <i class="fas fa-sync-alt me-2"></i>Updates
+                        </button>
+                        <button class="btn btn-outline-pink rounded-pill px-4 py-2" id="otherButton">
+                            <i class="fas fa-comments me-2"></i>Community
+                        </button>
+                        <button class="btn btn-outline-pink rounded-pill px-4 py-2" id="tipsButton">
+                            <i class="fas fa-lightbulb me-2"></i>Tips
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
             
-            <!-- Blog Posts -->
-            <div class="blog-posts">
-
-                                <article class="blog-post" data-category="other">
-                    <h2 class="post-title">A Future Redesign?</h2>
-                    <div class="post-meta">
-                        <span class="post-date">October 8, 2025</span>
-                        <span class="post-category">Community</span>
-                    </div>
-                    <div class="post-content">
-                        <p>We’re in the process of making our website more accessible—expect a brand new version of our site coming soon! Plot layouts for Wheatflour Wonderland & The Moon will be added in this update!</p>
-
-                    </div>
-                </article>
+        <!-- Blog Posts -->
+        <div class="row">
+            <div class="col-12">
+                <div class="blog-posts">
+                    <article class="blog-post card mb-4" data-category="updates">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-sync-alt me-2 text-pink"></i>Latest Updates - Version 2.0
+                            </h2>      
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>October 22, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Updates
+                                </span>
+                            </div>
+                        <div class="post-content">
+                            <p>Welcome to the latest (and greatest) update of the HKIA Flower Generator!  Version 2.0 brings a brand new look, along with new features and updates!</p>
+                            
+                            <h5>Major Updates:</h5>
+                            <ul>
+                                <li><strong>New Website Design:</strong> We've redesigned the website to be more user-friendly for mobile users and desktop users alike! The site is now fully responsive and works on all devices. Along with the new design, we've added a light/dark mode toggle, redesigned our layout for better user experience!</li>
+                                <li><strong>Paint Mode Revamped:</strong> Users can now select whether they want to use paint mode to disable plots, or to copy flowers to other plots!</li>
+                                <li><strong>View and Edit Mode:</strong> Users can now toggle between "View" and "Edit" mode. Edit mode is the default mode, and allows users to place flowers, modify existing flowers, and use paint mode to create patterns. View mode allows users to see the percentages of each flower in a plot and existing flowers in a plot.</li>
+                                <li><strong>Event Simulator:</strong> Users can now simulate events to see the chances of getting each flower in a plot while an event is active. Events can be selected from the "Settings" menu, within the "Other" section. While an event is selected, it will include naturally spawning flowers (unless toggled off), and simulate event breeding percentages.</li>
+                                <li><strong>Glossary:</strong> A new "Glossary" tab has been added to the website, containing a list of all flowers, locations, effects, and patterns in the game. There is both a "List" tab, along with a "Table" tab.</li>
+                            </ul>
+                            
+                            <h5>Minor Tweaks:</h5>
+                            <ul>
+                                <li><strong>Mobile Support:</strong> The website is now fully responsive and works on all smaller devices. For larger grids, the user can tab the scroll buttons to view the entire grid.</li>
+                                <li><strong>Greenhouse Toggle:</strong> Greenhouse toggle is only available for Custom plots. During events and for preset plot layouts, greenhouse toggle will be disabled.</li>
+                                <li><strong>New Feedback System:</strong> Users can submit more detailed Feedback via the "About" menu! Please be kind to us, since this is a voluntary project we created for the community!</li>
+                                <li><strong>New Blog layout:</strong> The blog has been redesigned and can be accessed via the "Blog" button in the "About" and "How-to" menus.</li>
+                            </ul>
+                            <p>We hope you enjoy the new features and updates! This took a lot of time and effort to create, and we hope you all enjoy using it!</p>
                 
-                <article class="blog-post" data-category="updates">
-                    <h2 class="post-title">Latest Updates - Version 1.6.0</h2>
-                    <div class="post-meta">
-                        <span class="post-date">October 8, 2025</span>
-                        <span class="post-category">Updates</span>
-                    </div>
-                    <div class="post-content">
-                        <p>Version 1.6.0 includes minor updates:</p>
-                        
-                        <h3>Minor Update:</h3>
-                        <ul>
-                            <li><strong>New Flower & Effect:</strong> The Bubbaluna and Cosmic effect have been added! Enjoy planning out your next flower projects!</li>
-                            <li><strong>Black & Gray Flowers:</strong> You will now be able to calculate percentages for Black & Gray flowers!</li>
-                        </ul>
-                        
-                    </div>
-                </article>
-                
-                <article class="blog-post" data-category="updates">
-                    <h2 class="post-title">Latest Updates - Version 1.5.9</h2>
-                    <div class="post-meta">
-                        <span class="post-date">September 25, 2025</span>
-                        <span class="post-category">Updates</span>
-                    </div>
-                    <div class="post-content">
-                        <p>Version 1.5.9 includes minor updates:</p>
-                        
-                        <h3>Minor Update:</h3>
-                        <ul>
-                            <li><strong>New Flower & Effect:</strong> The Wheatflower and Glitter effect have been added! Enjoy planning out your next flower projects!</li>
-                        </ul>
-                        
-                    </div>
-                </article>
-                
-                <article class="blog-post" data-category="updates">
-                    <h2 class="post-title">Latest Updates - Version 1.5.8</h2>
-                    <div class="post-meta">
-                        <span class="post-date">September 9, 2025</span>
-                        <span class="post-category">Updates</span>
-                    </div>
-                    <div class="post-content">
-                        <p>Version 1.5.8 includes minor updates and fixes:</p>
-                        
-                        <h3>Minor Bug Fixes:</h3>
-                        <ul>
-                            <li><strong>Probability Bug:</strong> Fixed a calculation error where weights for pattern transfers were incorrectly being calculated — <i>*some (not all)</i> flower outcomes (when greenhouse % was toggled off) were getting counted twice, causing breeding percentages to be slightly off (by about .005).</li>
-                        </ul>
-                        
+                        </div>
                     </div>
                 </article>
 
-                <article class="blog-post" data-category="other">
-                    <h2 class="post-title">Community Feedback & A Question for You!</h2>
-                    <div class="post-meta">
-                        <span class="post-date">August 6, 2025</span>
-                        <span class="post-category">Community</span>
-                    </div>
-                    <div class="post-content">
-                        <p>Thank you for your constant feedback for the HKIA Flower Generator. We want to let you know that we do read all of your feedback messages! That being said, due to this being a voluntary project, at times changes and updates can be slow. We appreciate your patience, along with your kind words and support!</p>
-                        
-                        <h3>Question for HKIA Flower Generator users:</h3>
-                        <p>Would you like us to implement a way to simulate events? Please let us know whether or not you'd like to see this feature added and your ideas on how we can make it happen. You can send a message via the "Feedback" button in the "Settings" menu.</p>
-                        
-                        <p>We value your input and want to make sure we're building features that the community actually wants and needs!</p>
+                        <article class="blog-post card mb-4" data-category="other">
+                            <div class="card-body">
+                                <h2 class="card-title h4">
+                                    <i class="fas fa-comments me-2 text-pink"></i>A Future Redesign?
+                                </h2>
+                                <div class="post-meta mb-3">
+                                    <span class="badge bg-pink me-2">
+                                        <i class="fas fa-calendar me-1"></i>October 8, 2025
+                                    </span>
+                                    <span class="badge bg-outline-pink">
+                                        <i class="fas fa-tag me-1"></i>Community
+                                    </span>
+                                </div>
+                                <div class="post-content">
+                                    <p>We're in the process of making our website more accessible—expect a brand new version of our site coming soon! Plot layouts for Wheatflour Wonderland & The Moon will be added in this update!</p>
+
+                                </div>
+                            </div>
+                        </article>
+
+                    <article class="blog-post card mb-4" data-category="updates">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-sync-alt me-2 text-pink"></i>Latest Updates - Version 1.6.0
+                            </h2>      
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>October 8, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Updates
+                                </span>
+                            </div>
+                        <div class="post-content">
+                            <p>Version 1.6.0 includes minor updates:</p>
+                            
+                            <h3>Minor Update:</h3>
+                            <ul>
+                                <li><strong>New Flower & Effect:</strong> The Bubbaluna and Cosmic effect have been added! Enjoy planning out your next flower projects!</li>
+                                <li><strong>Black & Gray Flowers:</strong> You will now be able to calculate percentages for Black & Gray flowers!</li>
+                            </ul>
+                        </div>
                     </div>
                 </article>
+
+                    <article class="blog-post card mb-4" data-category="updates">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-sync-alt me-2 text-pink"></i>Latest Updates - Version 1.5.9
+                            </h2>      
+                            
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>September 25, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Updates
+                                </span>
+                            </div>
+                        <div class="post-content">
+                            <p>Version 1.5.9 includes minor updates:</p>
+                            
+                            <h3>Minor Update:</h3>
+                            <ul>
+                                <li><strong>New Flower & Effect:</strong> The Wheatflower and Glitter effect have been added! Enjoy planning out your next flower projects!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+
+
+                    <article class="blog-post card mb-4" data-category="updates">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-sync-alt me-2 text-pink"></i>Latest Updates - Version 1.5.8
+                            </h2>
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>September 9, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Updates
+                                </span>
+                            </div>
+                            <div class="post-content">
+                                <p>Version 1.5.8 includes minor updates and fixes:</p>
+                                
+                                <h5>Minor Bug Fixes:</h5>
+                                <ul>
+                                    <li><strong>Probability Bug:</strong> Fixed a calculation error where weights for pattern transfers were incorrectly being calculated — <i>*some (not all)</i> flower outcomes (when greenhouse % was toggled off) were getting counted twice, causing breeding percentages to be slightly off (by about 0.5%).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post card mb-4" data-category="other">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-comments me-2 text-pink"></i>Community Feedback & A Question for You!
+                            </h2>
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>August 6, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Community
+                                </span>
+                            </div>
+                            <div class="post-content">
+                                <p>Thank you for your constant feedback for the HKIA Flower Generator. We want to let you know that we do read all of your feedback messages! That being said, due to this being a voluntary project, at times changes and updates can be slow. We appreciate your patience, along with your kind words and support!</p>
+                                
+                                <h5>Question for HKIA Flower Generator users:</h5>
+                                <p>Would you like us to implement a way to simulate events? Please let us know whether or not you'd like to see this feature added and your ideas on how we can make it happen. You can send a message via the "Feedback" button in the "Settings" menu.</p>
+                                
+                                <p>We value your input and want to make sure we're building features that the community actually wants and needs!</p>
+                            </div>
+                        </div>
+                    </article>
  
-                <article class="blog-post" data-category="updates">
-                    <h2 class="post-title">Latest Updates - Version 1.5.7</h2>
-                    <div class="post-meta">
-                        <span class="post-date">August 5, 2025</span>
-                        <span class="post-category">Updates</span>
-                    </div>
-                    <div class="post-content">
-                        <p>Welcome to the latest update of the HKIA Flower Generator! Version 1.5.7 brings several important improvements and new features:</p>
-                        
-                        <h3>Major Updates:</h3>
-                        <ul>
-                            <li><strong>Plot Generation:</strong> Fixed incorrectly labeled plot generation options and added new flower plots (including Crystal Caves plot)</li>
-                            <li><strong>New Flowers & Patterns/Effects:</strong> Added Crystalia and Pinwheel flowers, plus Crystal effect and Alternate pattern</li>
-                            <li><strong>Invalid Flowers:</strong> Invalid flowers will now have a red outline around their plot for better visibility</li>
-                            <li><strong>Color Jump/Transfer:</strong> Implemented in-game changes where Color jump/transfer couldn't be done to other flowers if it could be reached via their default colors. Color jump/transfer will now be possible in these cases</li>
-                        </ul>
-                        
-                        <h3>Minor Tweaks:</h3>
-                        <ul>
-                            <li><strong>Percentage List Changes:</strong> Removed the "None" text so that it's just empty if it's "None"</li>
-                            <li><strong>Percentage Accuracy:</strong> Fixed the percentages to be as accurate as possible (3 decimal points in specific plot % view)</li>
-                            <li><strong>Flower Effects:</strong> Fixed the Effect patterns (Molten wasn't an effect pattern for some reason)</li>
-                            <li><strong>Visual Improvements:</strong> Added a light gray horizontal bar for visual separation between flower percentages</li>
-                        </ul>
-                        
-                    </div>
-                </article>
+                    <article class="blog-post card mb-4" data-category="updates">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-sync-alt me-2 text-pink"></i>Latest Updates - Version 1.5.7
+                            </h2>
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>August 5, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Updates
+                                </span>
+                            </div>
+                            <div class="post-content">
+                                <p>Welcome to the latest update of the HKIA Flower Generator! Version 1.5.7 brings several important improvements and new features:</p>
+                                
+                                <h5>Major Updates:</h5>
+                                <ul>
+                                    <li><strong>Plot Generation:</strong> Fixed incorrectly labeled plot generation options and added new flower plots (including Crystal Caves plot)</li>
+                                    <li><strong>New Flowers & Patterns/Effects:</strong> Added Crystalia and Pinwheel flowers, plus Crystal effect and Alternate pattern</li>
+                                    <li><strong>Invalid Flowers:</strong> Invalid flowers will now have a red outline around their plot for better visibility</li>
+                                    <li><strong>Color Jump/Transfer:</strong> Implemented in-game changes where Color jump/transfer couldn't be done to other flowers if it could be reached via their default colors. Color jump/transfer will now be possible in these cases</li>
+                                </ul>
+                                
+                                <h5>Minor Tweaks:</h5>
+                                <ul>
+                                    <li><strong>Percentage List Changes:</strong> Removed the "None" text so that it's just empty if it's "None"</li>
+                                    <li><strong>Percentage Accuracy:</strong> Fixed the percentages to be as accurate as possible (3 decimal points in specific plot % view)</li>
+                                    <li><strong>Flower Effects:</strong> Fixed the Effect patterns (Molten wasn't an effect pattern for some reason)</li>
+                                    <li><strong>Visual Improvements:</strong> Added a light gray horizontal bar for visual separation between flower percentages</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
 
-                <article class="blog-post" data-category="tips">
-                    <h2 class="post-title">Percentage Toggle Guide - Understanding Flower Chances</h2>
-                    <div class="post-meta">
-                        <span class="post-date">August 7, 2025</span>
-                        <span class="post-category">Tips</span>
-                    </div>
-                    <div class="post-content">
-                        <p>Understanding flower percentages is key to successful breeding! The Percentage Toggle feature lets you switch between standard and greenhouse percentages to see your exact chances of getting each flower.</p>
-                        
-                        <img src="assets/percentagetoggle-guide.png" alt="Percentage Toggle Guide" style="max-width: 100%; height: auto; margin: 20px 0; border-radius: 10px;">
-                        
-                        <h3>How to Use the Percentage Toggle:</h3>
-                        <ul>
-                            <li>Look for the percentage (%) button in your generator interface</li>
-                            <li>Click the button to switch between different percentage modes</li>
-                            <li>The button's appearance will change to show which mode is active</li>
-                            <li>Greenhouse percentages are automatically enabled when you first visit the site</li>
-                        </ul>
-                        
-                        <h3>Standard Percentages (Pink Ring):</h3>
-                        <ul>
-                            <li>Shows percentages for regular flower growing in any plot</li>
-                            <li>These are the base chances for each flower type</li>
-                            <li>Useful for understanding fundamental breeding mechanics</li>
-                            <li>Good for learning how different plots affect flower chances</li>
-                        </ul>
-                        
-                        <h3>Greenhouse Percentages (Green Ring):</h3>
-                        <ul>
-                            <li>Shows percentages as if you're growing in the greenhouse</li>
-                            <li>These percentages reflect the enhanced chances from greenhouse growing</li>
-                            <li>More accurate for players who primarily use the greenhouse</li>
-                            <li>Often shows higher chances for rare flowers</li>
-                        </ul>
-                        
-                        <h3>When to Use Each Mode:</h3>
-                        <ul>
-                            <li><strong>Greenhouse Mode:</strong> Use when planning greenhouse gardens or if you mostly grow in the greenhouse</li>
-                            <li><strong>Standard Mode:</strong> Use when planning outdoor gardens or learning basic breeding mechanics</li>
-                            <li><strong>Comparison:</strong> Switch between modes to see how greenhouse affects your chances</li>
-                            <li><strong>Strategy Planning:</strong> Use both modes to plan the most efficient breeding strategy</li>
-                        </ul>
-                        
-                        <h3>Pro Tips:</h3>
-                        <ul>
-                            <li><strong>Start with Greenhouse:</strong> Since it's the default, use greenhouse percentages for most planning</li>
-                            <li><strong>Compare Modes:</strong> Switch between modes to see which gives you better chances for specific flowers</li>
-                            <li><strong>Plan Your Strategy:</strong> Use the mode that matches your actual growing method</li>
-                            <li><strong>Learn the Differences:</strong> Understanding both modes helps you make informed breeding decisions</li>
-                            <li><strong>Optimize Your Garden:</strong> Use the mode that gives you the best chances for your target flowers</li>
-                        </ul>
-                        
-                        <h3>Understanding the Percentages:</h3>
-                        <ul>
-                            <li><strong>Higher Percentages:</strong> Better chances of getting that flower</li>
-                            <li><strong>Lower Percentages:</strong> Rarer flowers that are harder to obtain</li>
-                            <li><strong>Zero Percentages:</strong> Flowers that aren't possible with your current setup</li>
-                            <li><strong>Mode Differences:</strong> Greenhouse often shows higher percentages for rare flowers</li>
-                        </ul>
-                        
-                        <p>The Percentage Toggle helps you make informed decisions about your flower breeding strategy. Whether you're growing in the greenhouse or outdoors, understanding your chances is the key to creating the perfect garden!</p>
-                    </div>
-                </article>
+                    <article class="blog-post card mb-4" data-category="tips">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-lightbulb me-2 text-pink"></i>Percentage Toggle Guide - Understanding Flower Chances
+                            </h2>
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>August 7, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Tips
+                                </span>
+                            </div>
+                            <div class="post-content">
+                                <p>Understanding flower percentages is key to successful breeding! The Percentage Toggle feature lets you switch between standard and greenhouse percentages to see your exact chances of getting each flower.</p>
+                                
+                                <img src="assets/percentagetoggle-guide.png" alt="Percentage Toggle Guide" class="img-fluid rounded mb-3">
+                                
+                                <h5>How to Use the Percentage Toggle:</h5>
+                                <ul>
+                                    <li>Look for the percentage (%) button in your generator interface</li>
+                                    <li>Click the button to switch between different percentage modes</li>
+                                    <li>The button's appearance will change to show which mode is active</li>
+                                    <li>Greenhouse percentages are automatically enabled when you first visit the site</li>
+                                </ul>
+                                
+                                <h5>Standard Percentages (Pink Ring):</h5>
+                                <ul>
+                                    <li>Shows percentages for regular flower growing in any plot</li>
+                                    <li>These are the base chances for each flower type</li>
+                                    <li>Useful for understanding fundamental breeding mechanics</li>
+                                    <li>Good for learning how different plots affect flower chances</li>
+                                </ul>
+                                
+                                <h5>Greenhouse Percentages (Green Ring):</h5>
+                                <ul>
+                                    <li>Shows percentages as if you're growing in the greenhouse</li>
+                                    <li>These percentages reflect the enhanced chances from greenhouse growing</li>
+                                    <li>More accurate for players who primarily use the greenhouse</li>
+                                    <li>Often shows higher chances for rare flowers</li>
+                                </ul>
+                                
+                                <h5>When to Use Each Mode:</h5>
+                                <ul>
+                                    <li><strong>Greenhouse Mode:</strong> Use when planning greenhouse gardens or if you mostly grow in the greenhouse</li>
+                                    <li><strong>Standard Mode:</strong> Use when planning outdoor gardens or learning basic breeding mechanics</li>
+                                    <li><strong>Comparison:</strong> Switch between modes to see how greenhouse affects your chances</li>
+                                    <li><strong>Strategy Planning:</strong> Use both modes to plan the most efficient breeding strategy</li>
+                                </ul>
+                                
+                                <h5>Pro Tips:</h5>
+                                <ul>
+                                    <li><strong>Start with Greenhouse:</strong> Since it's the default, use greenhouse percentages for most planning</li>
+                                    <li><strong>Compare Modes:</strong> Switch between modes to see which gives you better chances for specific flowers</li>
+                                    <li><strong>Plan Your Strategy:</strong> Use the mode that matches your actual growing method</li>
+                                    <li><strong>Learn the Differences:</strong> Understanding both modes helps you make informed breeding decisions</li>
+                                    <li><strong>Optimize Your Garden:</strong> Use the mode that gives you the best chances for your target flowers</li>
+                                </ul>
+                                
+                                <h5>Understanding the Percentages:</h5>
+                                <ul>
+                                    <li><strong>Higher Percentages:</strong> Better chances of getting that flower</li>
+                                    <li><strong>Lower Percentages:</strong> Rarer flowers that are harder to obtain</li>
+                                    <li><strong>Zero Percentages:</strong> Flowers that aren't possible with your current setup</li>
+                                    <li><strong>Mode Differences:</strong> Greenhouse often shows higher percentages for rare flowers</li>
+                                </ul>
+                                
+                                <p>The Percentage Toggle helps you make informed decisions about your flower breeding strategy. Whether you're growing in the greenhouse or outdoors, understanding your chances is the key to creating the perfect garden!</p>
+                            </div>
+                        </div>
+                    </article>
 
-                <article class="blog-post" data-category="tips">
-                    <h2 class="post-title">Import & Export Guide - Share Your Flower Gardens!</h2>
-                    <div class="post-meta">
-                        <span class="post-date">August 7, 2025</span>
-                        <span class="post-category">Tips</span>
-                    </div>
-                    <div class="post-content">
-                        <p>Want to share your beautiful flower garden with friends or save your favorite layouts? The Import & Export feature lets you save and share your flower grids with just a few clicks!</p>
-                        
-                        <img src="assets/exportimport-guide.png" alt="Import & Export Guide" style="max-width: 100%; height: auto; margin: 20px 0; border-radius: 10px;">
-                        
-                        <h3>How to Export Your Garden:</h3>
-                        <ul>
-                            <li>Create your perfect flower garden layout</li>
-                            <li>Open the "Settings" menu</li>
-                            <li>Click the "Export" button (look for the upward arrow icon)</li>
-                            <li>Your grid code will automatically be copied to your clipboard</li>
-                            <li>You can now paste this code anywhere to share with others</li>
-                        </ul>
-                        
-                        <h3>How to Import a Garden:</h3>
-                        <ul>
-                            <li>Open the "Settings" menu</li>
-                            <li>Click the "Import" button (look for the downward arrow icon)</li>
-                            <li>A text box will appear where you can paste a grid code</li>
-                            <li>Paste the code you received from a friend or saved previously</li>
-                            <li>Click the "Submit" button to load the garden</li>
-                            <li>Your flower garden will be instantly recreated!</li>
-                        </ul>
-                        
-                        <h3>What Gets Saved:</h3>
-                        <ul>
-                            <li><strong>Flower Types:</strong> All flower varieties and their exact positions</li>
-                            <li><strong>Colors:</strong> Every flower's color information</li>
-                            <li><strong>Effects & Patterns:</strong> Special effects and patterns on flowers</li>
-                            <li><strong>Plot Settings:</strong> Which plots are enabled or disabled</li>
-                            <li><strong>Garden Layout:</strong> Your complete garden design</li>
-                        </ul>
-                        
-                        <h3>Pro Tips:</h3>
-                        <ul>
-                            <li><strong>Backup Your Favorites:</strong> Export your best gardens to save them permanently</li>
-                            <li><strong>Share with Friends:</strong> Send grid codes to friends so they can recreate your gardens</li>
-                            <li><strong>Community Sharing:</strong> Share your codes on forums or social media to help other players</li>
-                            <li><strong>Experiment Safely:</strong> Export before making major changes so you can always go back</li>
-                            <li><strong>Collect Rare Gardens:</strong> Import codes from other players to discover new flower combinations</li>
-                        </ul>
-                        
-                        <h3>Example Grid Code:</h3>
-                        <p>Grid codes look like this: <code style="background: #f0f0f0; padding: 5px; border-radius: 5px; font-family: monospace;">H4sIAAAAAAAAA10qjlFKL8pMCc6sS...</code></p>
-                        <p>These codes contain all the information needed to recreate your exact garden layout!</p>
-                        
-                        <p>The Import & Export feature makes it easy to share your creativity with the Hello Kitty Island Adventure community. Save your favorite gardens, share them with friends, and discover amazing flower combinations from other players!</p>
-                    </div>
-                </article>
+                    <article class="blog-post card mb-4" data-category="tips">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-lightbulb me-2 text-pink"></i>Import & Export Guide - Share Your Flower Gardens!
+                            </h2>
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>August 7, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Tips
+                                </span>
+                            </div>
+                            <div class="post-content">
+                                <p>Want to share your beautiful flower garden with friends or save your favorite layouts? The Import & Export feature lets you save and share your flower grids with just a few clicks!</p>
+                                
+                                <img src="assets/exportimport-guide.png" alt="Import & Export Guide" class="img-fluid rounded mb-3">
+                                
+                                <h5>How to Export Your Garden:</h5>
+                                <ul>
+                                    <li>Create your perfect flower garden layout</li>
+                                    <li>Open the "Settings" menu</li>
+                                    <li>Click the "Export" button (look for the upward arrow icon)</li>
+                                    <li>Your grid code will automatically be copied to your clipboard</li>
+                                    <li>You can now paste this code anywhere to share with others</li>
+                                </ul>
+                                
+                                <h5>How to Import a Garden:</h5>
+                                <ul>
+                                    <li>Open the "Settings" menu</li>
+                                    <li>Click the "Import" button (look for the downward arrow icon)</li>
+                                    <li>A text box will appear where you can paste a grid code</li>
+                                    <li>Paste the code you received from a friend or saved previously</li>
+                                    <li>Click the "Submit" button to load the garden</li>
+                                    <li>Your flower garden will be instantly recreated!</li>
+                                </ul>
+                                
+                                <h5>What Gets Saved:</h5>
+                                <ul>
+                                    <li><strong>Flower Types:</strong> All flower varieties and their exact positions</li>
+                                    <li><strong>Colors:</strong> Every flower's color information</li>
+                                    <li><strong>Effects & Patterns:</strong> Special effects and patterns on flowers</li>
+                                    <li><strong>Plot Settings:</strong> Which plots are enabled or disabled</li>
+                                    <li><strong>Garden Layout:</strong> Your complete garden design</li>
+                                </ul>
+                                
+                                <h5>Pro Tips:</h5>
+                                <ul>
+                                    <li><strong>Backup Your Favorites:</strong> Export your best gardens to save them permanently</li>
+                                    <li><strong>Share with Friends:</strong> Send grid codes to friends so they can recreate your gardens</li>
+                                    <li><strong>Community Sharing:</strong> Share your codes on forums or social media to help other players</li>
+                                    <li><strong>Experiment Safely:</strong> Export before making major changes so you can always go back</li>
+                                    <li><strong>Collect Rare Gardens:</strong> Import codes from other players to discover new flower combinations</li>
+                                </ul>
+                                
+                                <h5>Example Grid Code:</h5>
+                                <p>Grid codes look like this: <code class="bg-light p-2 rounded d-inline-block">H4sIAAAAAAAAA10qjlFKL8pMCc6sS...</code></p>
+                                <p>These codes contain all the information needed to recreate your exact garden layout!</p>
+                                
+                                <p>The Import & Export feature makes it easy to share your creativity with the Hello Kitty Island Adventure community. Save your favorite gardens, share them with friends, and discover amazing flower combinations from other players!</p>
+                            </div>
+                        </div>
+                    </article>
 
-                <article class="blog-post" data-category="tips">
-                    <h2 class="post-title">How to Use the Paint Tool - Complete Guide</h2>
-                    <div class="post-meta">
-                        <span class="post-date">August 7, 2025</span>
-                        <span class="post-category">Tips</span>
-                    </div>
-                    <div class="post-content">
-                        <p>The Paint Tool is one of the most powerful features in the HKIA Flower Generator! Use it to disable plots and copy/paste flowers to create your perfect garden layout.</p>
-                        
-                        <img src="assets/paintmode-guide.png" alt="Paint Mode Guide" style="max-width: 100%; height: auto; margin: 20px 0; border-radius: 10px;">
-                        
-                        <h3>How to Enable Paint Mode:</h3>
-                        <ul>
-                            <li>Look for the "Paint Mode" button in your generator interface</li>
-                            <li>When the button is green, paint mode is enabled and ready to use</li>
-                            <li>You can toggle paint mode on and off as needed</li>
-                        </ul>
-                        
-                        <h3>Disabling Plots:</h3>
-                        <ul>
-                            <li>With paint mode enabled, click on any empty plot</li>
-                            <li>The plot will turn dark gray, indicating it's now disabled</li>
-                            <li>Disabled plots won't generate flowers and won't be included in calculations</li>
-                            <li>This is perfect for creating custom garden layouts or focusing on specific areas</li>
-                        </ul>
-                        
-                        <h3>Copy/Paste Flowers:</h3>
-                        <ul>
-                            <li>Click on a plot that contains an existing flower</li>
-                            <li>Then click on an empty plot to copy the flower there</li>
-                            <li>The flower will be duplicated with all its properties (type, color, effects, etc.)</li>
-                            <li>This is great for creating symmetrical gardens or duplicating rare flowers</li>
-                        </ul>
-                        
-                        <h3>Pro Tips:</h3>
-                        <ul>
-                            <li><strong>Plan Your Layout:</strong> Use paint mode to sketch out your garden design before generating</li>
-                            <li><strong>Create Patterns:</strong> Copy/paste flowers to create beautiful symmetrical patterns</li>
-                            <li><strong>Focus Breeding:</strong> Disable unwanted plots to concentrate on specific flower combinations</li>
-                            <li><strong>Experiment Freely:</strong> Paint mode lets you try different layouts without losing your work</li>
-                        </ul>
-                        
-                        <p>The Paint Tool gives you complete control over your flower garden. Use it to create unique layouts, duplicate your favorite flowers, and design the perfect garden for your Hello Kitty Island Adventure!</p>
-                    </div>
-                </article>
+                    <article class="blog-post card mb-4" data-category="tips">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-lightbulb me-2 text-pink"></i>How to Use the Paint Tool - Complete Guide
+                            </h2>
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>August 7, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Tips
+                                </span>
+                            </div>
+                            <div class="post-content">
+                                <p>The Paint Tool is one of the most powerful features in the HKIA Flower Generator! Use it to disable plots and copy/paste flowers to create your perfect garden layout.</p>
+                                
+                                <img src="assets/paintmode-guide.png" alt="Paint Mode Guide" class="img-fluid rounded mb-3">
+                                
+                                <h5>How to Enable Paint Mode:</h5>
+                                <ul>
+                                    <li>Look for the "Paint Mode" button in your generator interface</li>
+                                    <li>When the button is green, paint mode is enabled and ready to use</li>
+                                    <li>You can toggle paint mode on and off as needed</li>
+                                </ul>
+                                
+                                <h5>Disabling Plots:</h5>
+                                <ul>
+                                    <li>With paint mode enabled, click on any empty plot</li>
+                                    <li>The plot will turn dark gray, indicating it's now disabled</li>
+                                    <li>Disabled plots won't generate flowers and won't be included in calculations</li>
+                                    <li>This is perfect for creating custom garden layouts or focusing on specific areas</li>
+                                </ul>
+                                
+                                <h5>Copy/Paste Flowers:</h5>
+                                <ul>
+                                    <li>Click on a plot that contains an existing flower</li>
+                                    <li>Then click on an empty plot to copy the flower there</li>
+                                    <li>The flower will be duplicated with all its properties (type, color, effects, etc.)</li>
+                                    <li>This is great for creating symmetrical gardens or duplicating rare flowers</li>
+                                </ul>
+                                
+                                <h5>Pro Tips:</h5>
+                                <ul>
+                                    <li><strong>Plan Your Layout:</strong> Use paint mode to sketch out your garden design before generating</li>
+                                    <li><strong>Create Patterns:</strong> Copy/paste flowers to create beautiful symmetrical patterns</li>
+                                    <li><strong>Focus Breeding:</strong> Disable unwanted plots to concentrate on specific flower combinations</li>
+                                    <li><strong>Experiment Freely:</strong> Paint mode lets you try different layouts without losing your work</li>
+                                </ul>
+                                
+                                <p>The Paint Tool gives you complete control over your flower garden. Use it to create unique layouts, duplicate your favorite flowers, and design the perfect garden for your Hello Kitty Island Adventure!</p>
+                            </div>
+                        </div>
+                    </article>
 
-                <article class="blog-post" data-category="tips">
-                    <h2 class="post-title">Flower Breeding Tips & Tricks</h2>
-                    <div class="post-meta">
-                        <span class="post-date">August 4, 2025</span>
-                        <span class="post-category">Tips</span>
-                    </div>
-                    <div class="post-content">
-                        <p>Welcome to our tips section! Here you'll find helpful advice for getting the most out of the HKIA Flower Generator.</p>
-                        
-                        <h3>Getting Started Tips:</h3>
-                        <ul>
-                            <li><strong>Use the Plot Generator:</strong> Start with the plot generator to see what flowers are possible in your chosen plot</li>
-                            <li><strong>Check Percentages:</strong> Always check the percentage view to see your chances of getting specific flowers</li>
-                            <li><strong>Experiment with Colors:</strong> Try different color combinations to discover new flower varieties</li>
-                            <li><strong>Save Your Favorites:</strong> Use the export feature to save your favorite flower combinations</li>
-                        </ul>
-                        
-                        <p>More tips coming soon! Check back regularly for new advice and strategies.</p>
-                    </div>
-                </article>
+                    <article class="blog-post card mb-4" data-category="tips">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-lightbulb me-2 text-pink"></i>Flower Breeding Tips & Tricks
+                            </h2>
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>August 4, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Tips
+                                </span>
+                            </div>
+                            <div class="post-content">
+                                <p>Welcome to our tips section! Here you'll find helpful advice for getting the most out of the HKIA Flower Generator.</p>
+                                
+                                <h5>Getting Started Tips:</h5>
+                                <ul>
+                                    <li><strong>Use the Plot Generator:</strong> Start with the plot generator to see what flowers are possible in your chosen plot</li>
+                                    <li><strong>Check Percentages:</strong> Always check the percentage view to see your chances of getting specific flowers</li>
+                                    <li><strong>Experiment with Colors:</strong> Try different color combinations to discover new flower varieties</li>
+                                    <li><strong>Save Your Favorites:</strong> Use the export feature to save your favorite flower combinations</li>
+                                </ul>
+                                
+                                <p>More tips coming soon! Check back regularly for new advice and strategies.</p>
+                            </div>
+                        </div>
+                    </article>
 
-                <article class="blog-post" data-category="other">
-                    <h2 class="post-title">Welcome to our Blog!</h2>
-                    <div class="post-meta">
-                        <span class="post-date">August 2, 2025</span>
-                        <span class="post-category">Note</span>
-                    </div>
-                    <div class="post-content">
-                        <p>We're excited to have our new blog page!</p>
-                        <p>This is the place where we will share updates, news, and other information about the HKIA Flower Generator.</p>
-                        <p>Stay tuned for more details as we continue development!</p>
-                    </div>
-                </article>
-
-
+                    <article class="blog-post card mb-4" data-category="other">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <i class="fas fa-comments me-2 text-pink"></i>Welcome to our Blog!
+                            </h2>
+                            <div class="post-meta mb-3">
+                                <span class="badge bg-pink me-2">
+                                    <i class="fas fa-calendar me-1"></i>August 2, 2025
+                                </span>
+                                <span class="badge bg-outline-pink">
+                                    <i class="fas fa-tag me-1"></i>Note
+                                </span>
+                            </div>
+                            <div class="post-content">
+                                <p>We're excited to have our new blog page!</p>
+                                <p>This is the place where we will share updates, news, and other information about the HKIA Flower Generator.</p>
+                                <p>Stay tuned for more details as we continue development!</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
         </div>
-        
-    </div>
+    </main>
 
-    <!-- Navigation Popup -->
-    <div class="popup" id="navigationPopup">
-        <img src="assets/longmenu.png" alt="Navigation Menu" class="popup-image">
-        <img src="assets/exitbutton.png" alt="Exit" class="popup-button" id="navigationExitButton">
-        
-        <div class="popup-content">
-            <div class="nav-menu-buttons">
-                <img src="assets/pagenav-gen.png" alt="Generator" class="nav-menu-button" id="goToGenerator">
-                <img src="assets/pagenav-blog.png" alt="Blog" class="nav-menu-button" id="goToBlog">
-            </div>
-        </div>
-    </div>
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Blog JS -->
     <script src="blog.js"></script>
+    <!-- Compression Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script>
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b1a9fefceffe44b59c667f3b6bddec28"}'></script><!-- End Cloudflare Web Analytics -->
-
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b1a9fefceffe44b59c667f3b6bddec28"}'></script>
 </body>
 </html> 
