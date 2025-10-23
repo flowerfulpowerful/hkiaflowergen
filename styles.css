@@ -1985,7 +1985,7 @@ body {
 }
 
 /* Hide scroll buttons on desktop by default */
-@media (min-width: 769px) {
+@media (min-width: 1367px) {
     .scroll-controls-top {
         display: none;
     }
@@ -2015,6 +2015,105 @@ body {
     }
     60% {
         transform: translateY(-3px);
+    }
+}
+
+/* Tablet Portrait (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .grid-cell {
+        min-width: 35px;
+        min-height: 35px;
+        touch-action: manipulation;
+    }
+    
+    .grid-cell:hover {
+        transform: scale(1.08);
+    }
+    
+    /* Improve touch targets for tablets */
+    .btn {
+        min-height: 48px;
+        min-width: 48px;
+    }
+    
+    .form-check-input {
+        width: 22px;
+        height: 22px;
+    }
+    
+    /* Show scroll buttons and indicators on tablets when needed */
+    .scroll-controls-top {
+        display: flex;
+    }
+    
+    .scroll-indicator {
+        display: block;
+    }
+    
+    /* Tablet-optimized scroll buttons */
+    .scroll-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    /* Tablet-specific grid sizing */
+    .grid[data-size="8"] .grid-cell,
+    .grid[data-size="9"] .grid-cell,
+    .grid[data-size="10"] .grid-cell {
+        width: 45px;
+        height: 45px;
+        font-size: 0.7rem;
+    }
+    
+    .grid[data-size="8"],
+    .grid[data-size="9"],
+    .grid[data-size="10"] {
+        gap: 3px;
+        padding: 0.2rem;
+    }
+}
+
+/* Tablet Landscape (1025px - 1366px) */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .grid-cell {
+        min-width: 40px;
+        min-height: 40px;
+        touch-action: manipulation;
+    }
+    
+    .grid-cell:hover {
+        transform: scale(1.1);
+    }
+    
+    /* Show scroll buttons and indicators on large tablets when needed */
+    .scroll-controls-top {
+        display: flex;
+    }
+    
+    .scroll-indicator {
+        display: block;
+    }
+    
+    /* Large tablet scroll buttons */
+    .scroll-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 1.1rem;
+    }
+    
+    /* Large tablet grid sizing */
+    .grid[data-size="9"] .grid-cell,
+    .grid[data-size="10"] .grid-cell {
+        width: 50px;
+        height: 50px;
+        font-size: 0.75rem;
+    }
+    
+    .grid[data-size="9"],
+    .grid[data-size="10"] {
+        gap: 4px;
+        padding: 0.3rem;
     }
 }
 
