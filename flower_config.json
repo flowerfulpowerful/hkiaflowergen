@@ -392,6 +392,7 @@
     },
     "Ghostgleam": {
       "extreme": false,
+      "event": null,
       "default_colors": [
         "White"
       ],
