@@ -697,6 +697,20 @@ class GlossaryManager {
         const table = document.getElementById('glossaryTable');
         if (!table) return;
 
+        // If search is cleared and no other filters are active, regenerate the table
+        if (!searchTerm && !typeFilter && !locationFilter) {
+            // Regenerate the current table type
+            const patternBtn = document.getElementById('glossaryPatternTableBtn');
+            const locationBtn = document.getElementById('glossaryLocationTableBtn');
+            
+            if (patternBtn.classList.contains('active')) {
+                this.generatePatternTable();
+            } else if (locationBtn.classList.contains('active')) {
+                this.generateLocationTable();
+            }
+            return;
+        }
+
         const tbody = table.querySelector('tbody');
         if (!tbody) return;
 
