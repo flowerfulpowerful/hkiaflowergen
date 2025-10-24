@@ -2041,6 +2041,83 @@ body {
         height: 22px;
     }
     
+    /* Smaller glossary table buttons on tablets */
+    #glossaryPatternTableBtn,
+    #glossaryLocationTableBtn {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        min-height: 40px;
+    }
+    
+    #glossaryPatternTableBtn i,
+    #glossaryLocationTableBtn i {
+        font-size: 0.8rem;
+    }
+    
+    /* Table View Controls layout for tablets - single row */
+    #glossaryTableControls {
+        flex-direction: row !important;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    #glossaryTableControls .col-md-6 {
+        flex: 0 0 auto !important;
+        max-width: none !important;
+        margin-bottom: 0 !important;
+    }
+    
+    #glossaryTableControls .col-md-6:first-child {
+        margin-right: 1rem !important;
+    }
+    
+    #glossaryTableControls .btn-group {
+        width: auto !important;
+    }
+    
+    #glossaryTableControls .form-check {
+        margin-bottom: 0 !important;
+    }
+    
+    #glossaryTableControls .form-check-label {
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+    
+    #glossaryTableControls .row {
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+        margin: 0 !important;
+    }
+    
+    #glossaryTableControls .col-md-6 {
+        flex: none !important;
+        max-width: none !important;
+        width: auto !important;
+        padding: 0 !important;
+    }
+    
+    #glossaryTableControls .col-md-6:first-child {
+        margin-right: 1rem !important;
+    }
+    
+    #glossaryTableControls .btn-group {
+        width: auto !important;
+        margin: 0 !important;
+    }
+    
+    #glossaryTableControls .form-check {
+        margin-bottom: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    #glossaryTableControls .form-check-label {
+        font-size: 0.85rem !important;
+        white-space: nowrap !important;
+        margin-left: 0.5rem !important;
+    }
+    
     /* Show scroll buttons and indicators on tablets when needed */
     .scroll-controls-top {
         display: flex;
@@ -2084,6 +2161,74 @@ body {
     
     .grid-cell:hover {
         transform: scale(1.1);
+    }
+    
+    /* Table View Controls layout for large tablets - single row */
+    #glossaryTableControls .row {
+        display: flex !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        margin: 0 !important;
+    }
+    
+    #glossaryTableControls .col-md-6 {
+        flex: none !important;
+        max-width: none !important;
+        width: auto !important;
+        padding: 0 !important;
+    }
+    
+    #glossaryTableControls .col-md-6:first-child {
+        margin-right: 1.5rem !important;
+    }
+    
+    #glossaryTableControls .btn-group {
+        width: auto !important;
+        margin: 0 !important;
+    }
+    
+    #glossaryTableControls .form-check {
+        margin-bottom: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    #glossaryTableControls .form-check-label {
+        font-size: 0.9rem !important;
+        white-space: nowrap !important;
+        margin-left: 0.5rem !important;
+    }
+    
+    #glossaryTableControls .row {
+        display: flex !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        margin: 0 !important;
+    }
+    
+    #glossaryTableControls .col-md-6 {
+        flex: none !important;
+        max-width: none !important;
+        width: auto !important;
+        padding: 0 !important;
+    }
+    
+    #glossaryTableControls .col-md-6:first-child {
+        margin-right: 1.5rem !important;
+    }
+    
+    #glossaryTableControls .btn-group {
+        width: auto !important;
+        margin: 0 !important;
+    }
+    
+    #glossaryTableControls .form-check {
+        margin-bottom: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    #glossaryTableControls .form-check-label {
+        white-space: nowrap !important;
+        margin-left: 0.5rem !important;
     }
     
     /* Show scroll buttons and indicators on large tablets when needed */
@@ -2133,6 +2278,19 @@ body {
     .btn {
         min-height: 44px; /* iOS recommended touch target size */
         min-width: 44px;
+    }
+    
+    /* Glossary table buttons on mobile */
+    #glossaryPatternTableBtn,
+    #glossaryLocationTableBtn {
+        font-size: 0.8rem;
+        padding: 0.35rem 0.7rem;
+        min-height: 44px;
+    }
+    
+    #glossaryPatternTableBtn i,
+    #glossaryLocationTableBtn i {
+        font-size: 0.75rem;
     }
     
     .form-check-input {
@@ -2774,6 +2932,10 @@ body {
     background: var(--white);
 }
 
+.glossary-table-container .table-responsive {
+    overflow: visible;
+}
+
 .glossary-table {
     margin-bottom: 0;
     font-size: 0.9rem;
@@ -2793,10 +2955,12 @@ body {
 
 .glossary-table th.sticky-column {
     position: sticky;
+    top: 0;
     left: 0;
     z-index: 11;
     background: var(--primary-pink) !important;
     min-width: 150px;
+    border-right: 2px solid var(--primary-pink);
 }
 
 .glossary-table td {
@@ -2844,6 +3008,7 @@ body {
 
 [data-theme="dark"] .glossary-table th.sticky-column {
     background: var(--primary-pink) !important;
+    border-right: 2px solid var(--primary-pink);
 }
 
 [data-theme="dark"] .glossary-table td {

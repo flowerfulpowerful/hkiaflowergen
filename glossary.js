@@ -46,8 +46,8 @@ class GlossaryManager {
             'rr1': 'RR', 'rr2': 'RR',
             'gm1': 'GM', 'gm2': 'GM', 'gm3': 'GM', 'gm4': 'GM', 'gm5': 'GM', 'gm6': 'GM',
             'ww1': 'WW', 'ww2': 'WW', 'ww3': 'WW', 'ww4': 'WW',
-            'hh1': 'MH', 'hh2': 'MH', 'hh3': 'MH', 'hh4': 'MH', 'hh5': 'MH', 'hh6': 'MH', 'hh7': 'MH',
-            'hh8': 'C', // Hothead Caldera
+            'mh1': 'MH', 'mh2': 'MH', 'mh3': 'MH', 'mh4': 'MH', 'mh5': 'MH', 'mh6': 'MH',
+            'mh7': 'C', // Hothead Caldera
             'cc1': 'CC', // Crystal Caves
             'tm1': 'TM', // The Moon
             'ci1': 'CI', 'ci2': 'CI',
@@ -343,13 +343,16 @@ class GlossaryManager {
         thead.innerHTML = '<th class="sticky-column">Flower</th>';
         tbody.innerHTML = '';
         
-        // Get all unique patterns
+        // Get filtered flowers based on current search/filter state
+        const filteredFlowers = this.getFilteredFlowers();
+        
+        // Get all unique patterns from filtered flowers
         const allPatterns = new Set();
-        Object.values(this.flowerData).forEach(flower => {
+        filteredFlowers.forEach(([flowerName, flowerData]) => {
             if (showPrimaryOnly) {
-                allPatterns.add(flower.defaultPattern);
+                allPatterns.add(flowerData.defaultPattern);
             } else {
-                flower.compatiblePatterns.forEach(pattern => allPatterns.add(pattern));
+                flowerData.compatiblePatterns.forEach(pattern => allPatterns.add(pattern));
             }
         });
         
@@ -363,8 +366,8 @@ class GlossaryManager {
             thead.appendChild(th);
         });
         
-        // Create rows
-        Object.entries(this.flowerData).forEach(([flowerName, flowerData]) => {
+        // Create rows for filtered flowers only
+        filteredFlowers.forEach(([flowerName, flowerData]) => {
             const row = document.createElement('tr');
             
             // Flower name cell
@@ -403,6 +406,13 @@ class GlossaryManager {
             
             tbody.appendChild(row);
         });
+        
+        // Show no results message if no flowers match
+        if (filteredFlowers.length === 0) {
+            this.showNoResultsMessage();
+        } else {
+            this.hideNoResultsMessage();
+        }
     }
 
     generateLocationTable() {
@@ -421,13 +431,16 @@ class GlossaryManager {
         thead.innerHTML = '<th class="sticky-column">Flower</th>';
         tbody.innerHTML = '';
         
-        // Get all unique locations
+        // Get filtered flowers based on current search/filter state
+        const filteredFlowers = this.getFilteredFlowers();
+        
+        // Get all unique locations from filtered flowers
         const allLocations = new Set();
-        Object.values(this.flowerData).forEach(flower => {
+        filteredFlowers.forEach(([flowerName, flowerData]) => {
             if (showPrimaryOnly) {
-                flower.locations.forEach(location => allLocations.add(location));
+                flowerData.locations.forEach(location => allLocations.add(location));
             } else {
-                [...flower.locations, ...flower.compatibleLocations].forEach(location => allLocations.add(location));
+                [...flowerData.locations, ...flowerData.compatibleLocations].forEach(location => allLocations.add(location));
             }
         });
         
@@ -441,8 +454,8 @@ class GlossaryManager {
             thead.appendChild(th);
         });
         
-        // Create rows
-        Object.entries(this.flowerData).forEach(([flowerName, flowerData]) => {
+        // Create rows for filtered flowers only
+        filteredFlowers.forEach(([flowerName, flowerData]) => {
             const row = document.createElement('tr');
             
             // Flower name cell
@@ -481,6 +494,13 @@ class GlossaryManager {
             
             tbody.appendChild(row);
         });
+        
+        // Show no results message if no flowers match
+        if (filteredFlowers.length === 0) {
+            this.showNoResultsMessage();
+        } else {
+            this.hideNoResultsMessage();
+        }
     }
 
     refreshCurrentTable() {
@@ -627,6 +647,20 @@ class GlossaryManager {
         const typeFilter = document.getElementById('glossaryTypeFilter')?.value || '';
         const locationFilter = document.getElementById('glossaryLocationFilter')?.value || '';
 
+        // Check if we're in list view or table view
+        const resultsContainer = document.getElementById('glossaryResults');
+        const tableContainer = document.getElementById('glossaryTableContainer');
+        
+        if (resultsContainer && resultsContainer.style.display !== 'none') {
+            // Filter list view
+            this.filterListView(searchTerm, typeFilter, locationFilter);
+        } else if (tableContainer && tableContainer.style.display !== 'none') {
+            // Filter table view
+            this.filterTableView(searchTerm, typeFilter, locationFilter);
+        }
+    }
+
+    filterListView(searchTerm, typeFilter, locationFilter) {
         const resultsContainer = document.getElementById('glossaryResults');
         if (!resultsContainer) return;
 
@@ -641,30 +675,9 @@ class GlossaryManager {
             const defaultPattern = card.dataset.defaultPattern;
             const compatiblePatterns = card.dataset.compatiblePatterns;
 
-            // Search functionality - search in flower name, locations, and patterns
-            const matchesSearch = !searchTerm ||
-                flowerName.includes(searchTerm) ||
-                flowerLocations.toLowerCase().includes(searchTerm) ||
-                compatibleLocations.toLowerCase().includes(searchTerm) ||
-                defaultPattern.toLowerCase().includes(searchTerm) ||
-                compatiblePatterns.toLowerCase().includes(searchTerm);
+            const matches = this.checkFilters(flowerName, flowerType, flowerLocations, compatibleLocations, defaultPattern, compatiblePatterns, searchTerm, typeFilter, locationFilter);
 
-            const matchesType = !typeFilter || flowerType === typeFilter;
-
-            // Location filter - check both primary and compatible locations with exact matches
-            const primaryLocations = flowerLocations.toLowerCase().split(',').map(loc => loc.trim());
-            const compatibleLocationsList = compatibleLocations.toLowerCase().split(',').map(loc => loc.trim());
-
-            const matchesLocation = !locationFilter ||
-                primaryLocations.includes(locationFilter.toLowerCase()) ||
-                compatibleLocationsList.includes(locationFilter.toLowerCase());
-
-            // Debug logging for location filtering
-            if (locationFilter && (flowerName === 'Blazebulb' || flowerName === 'Frostfeather' || flowerName === 'Bubbaluna' || flowerName === 'Crystalia')) {
-                console.log(`${flowerName}: Primary locations: [${primaryLocations.join(', ')}], Compatible locations: [${compatibleLocationsList.join(', ')}], Looking for: ${locationFilter.toLowerCase()}, Match: ${matchesLocation}`);
-            }
-
-            if (matchesSearch && matchesType && matchesLocation) {
+            if (matches) {
                 card.style.display = 'block';
                 visibleCount++;
             } else {
@@ -680,11 +693,113 @@ class GlossaryManager {
         }
     }
 
-    showNoResultsMessage() {
-        const resultsContainer = document.getElementById('glossaryResults');
-        if (!resultsContainer) return;
+    filterTableView(searchTerm, typeFilter, locationFilter) {
+        const table = document.getElementById('glossaryTable');
+        if (!table) return;
 
-        let noResultsMsg = resultsContainer.querySelector('.glossary-no-results');
+        const tbody = table.querySelector('tbody');
+        if (!tbody) return;
+
+        const rows = tbody.querySelectorAll('tr');
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+            const nameCell = row.querySelector('.flower-name-cell');
+            if (!nameCell) return;
+
+            const flowerNameElement = nameCell.querySelector('strong');
+            if (!flowerNameElement) return;
+
+            const flowerName = flowerNameElement.textContent.toLowerCase();
+            const flowerData = this.flowerData[flowerNameElement.textContent];
+            
+            if (!flowerData) return;
+
+            const flowerType = flowerData.type;
+            const flowerLocations = flowerData.locations.join(',');
+            const compatibleLocations = flowerData.compatibleLocations.join(',');
+            const defaultPattern = flowerData.defaultPattern;
+            const compatiblePatterns = flowerData.compatiblePatterns.join(',');
+
+            const matches = this.checkFilters(flowerName, flowerType, flowerLocations, compatibleLocations, defaultPattern, compatiblePatterns, searchTerm, typeFilter, locationFilter);
+
+            if (matches) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Show no results message if no flowers match
+        if (visibleCount === 0) {
+            this.showNoResultsMessage();
+        } else {
+            this.hideNoResultsMessage();
+        }
+    }
+
+    getFilteredFlowers() {
+        const searchTerm = document.getElementById('glossarySearch')?.value.toLowerCase() || '';
+        const typeFilter = document.getElementById('glossaryTypeFilter')?.value || '';
+        const locationFilter = document.getElementById('glossaryLocationFilter')?.value || '';
+
+        return Object.entries(this.flowerData).filter(([flowerName, flowerData]) => {
+            const flowerLocations = flowerData.locations.join(',');
+            const compatibleLocations = flowerData.compatibleLocations.join(',');
+            const compatiblePatterns = flowerData.compatiblePatterns.join(',');
+
+            return this.checkFilters(
+                flowerName.toLowerCase(),
+                flowerData.type,
+                flowerLocations,
+                compatibleLocations,
+                flowerData.defaultPattern,
+                compatiblePatterns,
+                searchTerm,
+                typeFilter,
+                locationFilter
+            );
+        });
+    }
+
+    checkFilters(flowerName, flowerType, flowerLocations, compatibleLocations, defaultPattern, compatiblePatterns, searchTerm, typeFilter, locationFilter) {
+        // Search functionality - search in flower name, locations, and patterns
+        const matchesSearch = !searchTerm ||
+            flowerName.includes(searchTerm) ||
+            flowerLocations.toLowerCase().includes(searchTerm) ||
+            compatibleLocations.toLowerCase().includes(searchTerm) ||
+            defaultPattern.toLowerCase().includes(searchTerm) ||
+            compatiblePatterns.toLowerCase().includes(searchTerm);
+
+        const matchesType = !typeFilter || flowerType === typeFilter;
+
+        // Location filter - check both primary and compatible locations with exact matches
+        const primaryLocations = flowerLocations.toLowerCase().split(',').map(loc => loc.trim());
+        const compatibleLocationsList = compatibleLocations.toLowerCase().split(',').map(loc => loc.trim());
+
+        const matchesLocation = !locationFilter ||
+            primaryLocations.includes(locationFilter.toLowerCase()) ||
+            compatibleLocationsList.includes(locationFilter.toLowerCase());
+
+        return matchesSearch && matchesType && matchesLocation;
+    }
+
+    showNoResultsMessage() {
+        // Check if we're in list view or table view
+        const resultsContainer = document.getElementById('glossaryResults');
+        const tableContainer = document.getElementById('glossaryTableContainer');
+        
+        let container = null;
+        if (resultsContainer && resultsContainer.style.display !== 'none') {
+            container = resultsContainer;
+        } else if (tableContainer && tableContainer.style.display !== 'none') {
+            container = tableContainer;
+        }
+        
+        if (!container) return;
+
+        let noResultsMsg = container.querySelector('.glossary-no-results');
         if (!noResultsMsg) {
             noResultsMsg = document.createElement('div');
             noResultsMsg.className = 'glossary-no-results';
@@ -693,16 +808,24 @@ class GlossaryManager {
                 <h5>No flowers found</h5>
                 <p>Try adjusting your search terms or filters</p>
             `;
-            resultsContainer.appendChild(noResultsMsg);
+            container.appendChild(noResultsMsg);
         }
         noResultsMsg.style.display = 'block';
     }
 
     hideNoResultsMessage() {
-        const noResultsMsg = document.querySelector('.glossary-no-results');
-        if (noResultsMsg) {
-            noResultsMsg.style.display = 'none';
-        }
+        // Hide no results message from both list and table views
+        const resultsContainer = document.getElementById('glossaryResults');
+        const tableContainer = document.getElementById('glossaryTableContainer');
+        
+        [resultsContainer, tableContainer].forEach(container => {
+            if (container) {
+                const noResultsMsg = container.querySelector('.glossary-no-results');
+                if (noResultsMsg) {
+                    noResultsMsg.style.display = 'none';
+                }
+            }
+        });
     }
 }
 
