@@ -629,13 +629,11 @@ class CustomGridManager {
 
                     (row === 3 && col === 0) ||
                     (row === 3 && col === 1) ||
-                    (row === 3 && col === 2) ||
                     (row === 3 && col === 3) ||
                     (row === 3 && col === 7) ||
                     (row === 3 && col === 8) ||
 
                     (row === 4 && col === 0) ||
-                    (row === 4 && col === 1) ||
                     (row === 4 && col === 7) ||
                     (row === 4 && col === 8) ||
 
