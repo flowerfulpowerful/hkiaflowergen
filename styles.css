@@ -3196,6 +3196,81 @@ body {
     color: var(--primary-pink);
 }
 
+/* Dark Mode Icon Legend Modal */
+[data-theme="dark"] #iconLegendModal .modal-content {
+    background-color: var(--light-gray) !important;
+    color: var(--dark-gray);
+}
+
+[data-theme="dark"] #iconLegendModal .modal-body {
+    background-color: var(--light-gray) !important;
+    color: var(--dark-gray) !important;
+}
+
+[data-theme="dark"] #iconLegendModal .modal-body p {
+    color: var(--dark-gray) !important;
+}
+
+[data-theme="dark"] #iconLegendModal .modal-body div {
+    color: var(--dark-gray);
+}
+
+[data-theme="dark"] #iconLegendModal .modal-footer {
+    background-color: var(--light-gray) !important;
+    border-top-color: var(--medium-gray);
+}
+
+[data-theme="dark"] #iconLegendModal .bg-light {
+    background-color: var(--white) !important;
+    color: var(--dark-gray) !important;
+}
+
+[data-theme="dark"] #iconLegendModal .bg-light-pink {
+    background-color: rgba(255, 105, 180, 0.15) !important;
+    color: var(--dark-gray) !important;
+}
+
+[data-theme="dark"] #iconLegendModal .text-pink {
+    color: var(--primary-pink) !important;
+}
+
+[data-theme="dark"] #iconLegendModal .text-muted {
+    color: var(--medium-gray) !important;
+}
+
+[data-theme="dark"] #iconLegendModal strong {
+    color: var(--dark-gray) !important;
+}
+
+[data-theme="dark"] #iconLegendModal h6 {
+    color: var(--primary-pink) !important;
+}
+
+[data-theme="dark"] #iconLegendModal .alert-info {
+    background-color: rgba(255, 105, 180, 0.15) !important;
+    border-color: var(--primary-pink);
+    color: var(--dark-gray) !important;
+}
+
+[data-theme="dark"] #iconLegendModal .alert-info strong {
+    color: var(--primary-pink) !important;
+}
+
+[data-theme="dark"] #iconLegendModal .alert-info i {
+    color: var(--primary-pink) !important;
+}
+
+[data-theme="dark"] #iconLegendModal .collapsible-header {
+    color: var(--primary-pink) !important;
+}
+
+[data-theme="dark"] #iconLegendModal .collapsible-header:hover {
+    background-color: rgba(255, 105, 180, 0.1);
+    border-radius: var(--border-radius-sm);
+    padding: 0.5rem;
+    margin: -0.5rem;
+}
+
 /* Mobile Glossary Styles */
 @media (max-width: 768px) {
     .glossary-flower-info {
@@ -3277,4 +3352,54 @@ body {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
+}
+
+/* flower srcs */
+.source-icon {
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+    position: relative;
+    display: inline-block;
+    padding: 2px 4px;
+}
+
+.source-icon .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    white-space: nowrap;
+    margin-bottom: 5px;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+    .source-icon:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    .source-icon:hover {
+        color: #333;
+    }
+}
+
+.source-icon.active .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.source-icon.active {
+    color: #333;
 }

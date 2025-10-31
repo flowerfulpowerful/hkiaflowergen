@@ -381,7 +381,12 @@
                     <h5 class="modal-title">
                         <i class="fas fa-chart-pie me-2"></i>Breeding Analysis
                     </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <div class="d-flex align-items-center gap-2">
+                        <button type="button" class="btn btn-sm btn-light rounded-pill" id="breedingAnalysisHelpButton" title="Icon Legend">
+                            <i class="fas fa-question-circle me-1"></i>Help
+                        </button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
                 </div>
                 <div class="modal-body p-4">
                     <div class="row">
@@ -1035,7 +1040,12 @@
                     <h5 class="modal-title">
                         <i class="fas fa-info-circle me-2"></i>Plot Information
                     </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <div class="d-flex align-items-center gap-2">
+                        <button type="button" class="btn btn-sm btn-light rounded-pill" id="plotInfoHelpButton" title="Icon Legend">
+                            <i class="fas fa-question-circle me-1"></i>Help
+                        </button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
                 </div>
                 <div class="modal-body" id="viewInfoContent">
                     <!-- Content will be populated dynamically -->
@@ -1313,6 +1323,172 @@
                     </button>
                     <button type="button" class="btn btn-pink rounded-pill" id="copyExportButton">
                         <i class="fas fa-copy me-1"></i>Copy Code
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Icon Legend Help Modal -->
+    <div class="modal fade" id="iconLegendModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-white rounded-4">
+                <div class="modal-header bg-pink-gradient text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-key me-2"></i>Icon Legend
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Flower Type Icons -->
+                    <div class="mb-4">
+                        <h6 class="text-pink mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#flowerTypeIconsCollapse" aria-expanded="true" aria-controls="flowerTypeIconsCollapse" style="cursor: pointer;">
+                            <i class="fas fa-seedling me-2"></i>Flower Type Icons
+                            <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                        </h6>
+                        <div class="collapse show" id="flowerTypeIconsCollapse">
+                            <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                    <span class="me-3" style="font-size: 1.5rem;">
+                                        <i class="fas fa-seedling" style="color: #28a745;"></i>
+                                    </span>
+                                    <div>
+                                        <strong>General Flower</strong>
+                                        <br><small class="text-muted">Regular flowers available in normal gameplay</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                    <span class="me-3" style="font-size: 1.5rem;">
+                                        <i class="fas fa-calendar-alt" style="color: #00D4FE;"></i>
+                                    </span>
+                                    <div>
+                                        <strong>Event Flower</strong>
+                                        <br><small class="text-muted">Special flowers available during limited-time events</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                    <span class="me-3" style="font-size: 1.5rem;">
+                                        <i class="fas fa-fire" style="color: #ff6b6b;"></i>
+                                    </span>
+                                    <div>
+                                        <strong>Extreme Flower</strong>
+                                        <br><small class="text-muted">Rare flowers that can only be found in extreme locations</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                    <span class="me-3" style="font-size: 1.5rem;">
+                                        <i class="fas fa-palette" style="color: #a44ed6;"></i>
+                                    </span>
+                                    <div>
+                                        <strong>Patterned Flower</strong>
+                                        <br><small class="text-muted">Flower has a special pattern or effect applied</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Breeding Category Icons (for Plot Information) -->
+                    <div class="mb-4">
+                        <h6 class="text-pink mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#breedingCategoryIconsCollapse" aria-expanded="true" aria-controls="breedingCategoryIconsCollapse" style="cursor: pointer;">
+                            <i class="fas fa-share-nodes me-2"></i>Breeding Category Icons
+                            <small class="text-muted">(shown in "View Mode" for individual plot)</small>
+                            <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                        </h6>
+                        <div class="collapse show" id="breedingCategoryIconsCollapse">
+                            <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                    <span class="me-3" style="font-size: 1.5rem;">
+                                        <i class="fa-solid fa-share-nodes" style="color: #e74c3c;"></i>
+                                    </span>
+                                    <div>
+                                        <strong>Color Mix</strong>
+                                        <br><small class="text-muted">Colors from parent flowers mix to create a new color</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                    <span class="me-3" style="font-size: 1.5rem;">
+                                        <i class="fa-solid fa-arrows-turn-to-dots" style="color: #9b59b6;"></i>
+                                    </span>
+                                    <div>
+                                        <strong>Pattern Transfer</strong>
+                                        <br><small class="text-muted">Pattern from parent flower is inherited</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                    <span class="me-3" style="font-size: 1.5rem;">
+                                        <i class="fa-solid fa-droplet" style="color: #3498db;"></i>
+                                    </span>
+                                    <div>
+                                        <strong>Color Transfer</strong>
+                                        <br><small class="text-muted">Color from parent flower is directly inherited</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                    <span class="me-3" style="font-size: 1.5rem;">
+                                        <i class="fas fa-copy" style="color: #2ecc71;"></i>
+                                    </span>
+                                    <div>
+                                        <strong>Simple Clone</strong>
+                                        <br><small class="text-muted">Flower is an exact clone of one parent</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                    <span class="me-3" style="font-size: 1.5rem;">
+                                        <i class="fas fa-question" style="color: #95a5a6;"></i>
+                                    </span>
+                                    <div>
+                                        <strong>Unknown</strong>
+                                        <br><small class="text-muted">Breeding source category couldn't be determined</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="alert alert-info mt-3 mb-0">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Tip:</strong> Click on category icons in Plot Information to highlight them and see their percentages!
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Info -->
+                    <div class="bg-light-pink rounded-3 p-3">
+                        <h6 class="text-pink mb-2 collapsible-header" data-bs-toggle="collapse" data-bs-target="#understandingIconsCollapse" aria-expanded="true" aria-controls="understandingIconsCollapse" style="cursor: pointer;">
+                            <i class="fas fa-info-circle me-2"></i>Understanding Icons
+                            <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                        </h6>
+                        <div class="collapse show" id="understandingIconsCollapse">
+                            <p class="mb-2">
+                                Icons appear next to flower names to quickly identify their type, patterns, and breeding sources. 
+                                Multiple icons may appear together to give you complete information about each flower.
+                            </p>
+                            <p class="mb-0">
+                                <strong>Plot Information</strong> shows breeding possibilities for individual plots and includes category icons showing how each flower can be obtained.
+                                <strong>Breeding Analysis</strong> shows an overview of all possible flowers from your entire grid.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-pink rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-check me-1"></i>Got it!
                     </button>
                 </div>
             </div>
