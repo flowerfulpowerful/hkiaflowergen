@@ -504,6 +504,7 @@
                                     </select>
                                 </div>
             </div>
+
         </div>
 
                         <!-- Additional Settings -->
@@ -584,6 +585,25 @@
                                     </div>
                                 </div>
                                 
+                            </div>
+                        </div>
+                        
+                        <!-- Community & Support -->
+                        <div class="col-12">
+                            <div class="settings-section">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-users me-2"></i>Community & Support
+                                </h6>
+                                <div class="mb-3">
+                                    <a href="blog.html" class="btn btn-outline-pink rounded-pill w-100">
+                                        <i class="fas fa-newspaper me-1"></i>Visit Developer Blog
+                                    </a>
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn btn-outline-pink rounded-pill w-100" id="feedbackButton">
+                                        <i class="fas fa-comment-dots me-1"></i>Send Feedback / Bug Report
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         
@@ -897,7 +917,7 @@
                         <img src="assets/logo.png" alt="HKIA Flower Simulator" class="mb-3" style="max-width: 200px;">
                         <h4>Hello Kitty Island Adventure</h4>
                         <h5 class="text-muted">Flower Breeding Simulator</h5>
-                        <p class="text-muted mb-0"><small>Version 2.0.5</small></p>
+                        <p class="text-muted mb-0"><small>Version 2.0.3</small></p>
                     </div>
                     <div class="about-content">
                         <p class="mb-3">
@@ -915,7 +935,7 @@
                             <li>Mobile-friendly responsive design</li>
                         </ul>
                         <div class="text-center mb-3">
-                            <button class="btn btn-pink rounded-pill" id="feedbackButton">
+                            <button class="btn btn-pink rounded-pill" id="feedbackButtonAbout">
                                 <i class="fas fa-comment-dots me-1"></i>Send Feedback / Report Bug
                             </button>
                         </div>
@@ -970,6 +990,8 @@
                             <div class="col-12">
                                 <label for="feedbackDescription" class="form-label">Description</label>
                                 <textarea class="form-control" id="feedbackDescription" rows="5" placeholder="Please provide an exported grid code (if applicable) and detailed information about your feedback, bug report, or feature request..." required></textarea>
+                                <div class="form-text">When reporting a bug, be sure to include a grid code so we can reproduce the issue!</div>
+                            
                             </div>
                             <div class="col-md-6">
                                 <label for="feedbackEmail" class="form-label">Email or Discord (Optional)</label>
@@ -1479,11 +1501,10 @@
                                 Icons appear next to flower names to quickly identify their type, patterns, and breeding sources. 
                                 Multiple icons may appear together to give you complete information about each flower.
                             </p>
-<p class="mb-0">
-  <strong>% = Contribution Share</strong><br>
-  Each percentage shows <strong>how much of the final spawn chance</strong> for that flower comes from a specific breeding type or parent.<br>
-  <em>Example: Pattern Transfer: 51.6%</em> → 51.6% of the chance comes from nearby flowers transferring their pattern.
-</p>
+                            <p class="mb-0">
+                                <strong>Plot Information</strong> shows breeding possibilities for individual plots and includes category icons showing how each flower can be obtained.
+                                <strong>Breeding Analysis</strong> shows an overview of all possible flowers from your entire grid.
+                            </p>
                         </div>
                     </div>
                 </div>
