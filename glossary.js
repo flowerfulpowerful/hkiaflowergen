@@ -559,6 +559,11 @@ class GlossaryManager {
     }
 
     playSound(soundType) {
+        const soundOff = window.flowerSimulator
+            ? !window.flowerSimulator.soundEnabled
+            : localStorage.getItem('hkia-sound-enabled') === 'false';
+        if (soundOff) return;
+
         const audioElement = document.getElementById(`${soundType}Audio`);
         if (audioElement) {
             audioElement.currentTime = 0;

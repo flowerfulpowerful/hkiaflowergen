@@ -1,5 +1,5 @@
-// Reference the audio elements
-let soundEnabled = true; // Default to sound being on
+// Reference the audio elements (shared key with generator sound-prefs.js)
+let soundEnabled = localStorage.getItem('hkia-sound-enabled') !== 'false';
 
 // Reference the audio elements
 const clickAudio = document.getElementById("clickAudio");
