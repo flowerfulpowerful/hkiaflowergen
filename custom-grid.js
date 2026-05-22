@@ -393,7 +393,14 @@ class CustomGridManager {
             cols: 12,
             disabledCells: this.generateWheatflourLowerRightLayout()
         });
-        
+ 
+        this.addCustomLayout('ct1', {
+            name: 'City West Park',
+            rows: 6,
+            cols: 10,
+            disabledCells: this.generateCityWestParkLayout()
+        });
+
         // Custom grid option
         this.addCustomLayout('custom', {
             name: 'Custom Grid',
@@ -1989,6 +1996,28 @@ class CustomGridManager {
         return disabledCells;
     }
 
+        // Other Layout Generators
+        generateCityWestParkLayout() {
+            const disabledCells = [];
+            for (let row = 0; row < 6; row++) {
+                for (let col = 0; col < 10; col++) {
+                    const isDisabled = (
+                        (row === 0 && col === 0) ||
+                        (row === 0 && col === 1) ||
+                        (row === 0 && col === 2) ||
+                        (row === 0 && col === 9) ||
+                        (row === 1 && col === 0) ||
+                        (row === 5 && col === 0) ||
+                        (row === 4 && col === 9) ||
+                        (row === 5 && col === 9) ||
+                        (row === 5 && col === 8) ||
+                        (row === 5 && col === 7) 
+                    );
+                    if (isDisabled) disabledCells.push({row, col});
+                }
+            }
+            return disabledCells;
+        }
     /**
      * Add a custom layout
      */

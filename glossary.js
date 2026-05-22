@@ -3,6 +3,7 @@ class GlossaryManager {
     constructor() {
         this.flowerData = {};
         this.flowerConfig = null;
+        this._glossaryReady = null;
     }
 
     initializeGlossary() {
@@ -10,10 +11,24 @@ class GlossaryManager {
         this.flowerData = {};
 
         // Load flower config first, then populate glossary
-        this.loadFlowerConfigForGlossary().then(() => {
+        this._glossaryReady = this.loadFlowerConfigForGlossary().then(() => {
             this.populateGlossaryFromConfig();
             this.setupGlossaryEventListeners();
+            // Refresh list if glossary was opened before config finished loading
+            const modal = document.getElementById('glossaryModal');
+            if (modal?.classList.contains('show')) {
+                this.displayGlossaryResults();
+            }
         });
+    }
+
+    async ensureGlossaryReady() {
+        if (!this._glossaryReady) {
+            this._glossaryReady = this.loadFlowerConfigForGlossary().then(() => {
+                this.populateGlossaryFromConfig();
+            });
+        }
+        await this._glossaryReady;
     }
 
     // Load flower configuration for glossary
@@ -46,12 +61,12 @@ class GlossaryManager {
             'rr1': 'RR', 'rr2': 'RR',
             'gm1': 'GM', 'gm2': 'GM', 'gm3': 'GM', 'gm4': 'GM', 'gm5': 'GM', 'gm6': 'GM',
             'ww1': 'WW', 'ww2': 'WW', 'ww3': 'WW', 'ww4': 'WW',
+            'ct1': 'CT',
             'mh1': 'MH', 'mh2': 'MH', 'mh3': 'MH', 'mh4': 'MH', 'mh5': 'MH', 'mh6': 'MH',
             'mh7': 'C', // Hothead Caldera
             'cc1': 'CC', // Crystal Caves
             'tm1': 'TM', // The Moon
             'ci1': 'CI', 'ci2': 'CI',
-            'ct1': 'CT',
             'ip1': 'IP', // Icy Peak Summit
             'mm1': 'MM', 'mm2': 'MM', 'mm3': 'MM', 'mm4': 'MM', 'mm5': 'MM', 'mm6': 'MM',
             'mm7': 'MM', 'mm8': 'MM', 'mm9': 'MM', 'mm10': 'MM', 'mm11': 'MM' // Meadow layouts
@@ -525,10 +540,11 @@ class GlossaryManager {
         }
     }
 
-    showGlossary() {
+    async showGlossary() {
+        await this.ensureGlossaryReady();
         this.showModal('glossaryModal');
         this.displayGlossaryResults();
-        
+
         // Set default view mode
         this.switchToListView();
         this.playSound('click');
