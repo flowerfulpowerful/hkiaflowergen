@@ -51,6 +51,7 @@ class GlossaryManager {
             'cc1': 'CC', // Crystal Caves
             'tm1': 'TM', // The Moon
             'ci1': 'CI', 'ci2': 'CI',
+            'ct1': 'CT',
             'ip1': 'IP', // Icy Peak Summit
             'mm1': 'MM', 'mm2': 'MM', 'mm3': 'MM', 'mm4': 'MM', 'mm5': 'MM', 'mm6': 'MM',
             'mm7': 'MM', 'mm8': 'MM', 'mm9': 'MM', 'mm10': 'MM', 'mm11': 'MM' // Meadow layouts
@@ -63,6 +64,7 @@ class GlossaryManager {
             'Reef': 'RR',
             'Gemstone': 'GM',
             'Wheatflour': 'WW',
+            'City': 'CT',
             'Hothead': 'MH',
             'Hothead Caldera': 'C',
             'Crystal Caves': 'CC',
@@ -217,6 +219,13 @@ class GlossaryManager {
                 'Wheatflower + Marigold', 'Wheatflower + Eggwort', 'Wheatflower + Petunia', 'Wheatflower + Dreampuff',
                 'Wheatflower + Poinsettia', 'Wheatflower + Glowbal', 'Wheatflower + Bowblossom', 'Wheatflower + Rose',
                 'Wheatflower + Pinwheel'
+            ],
+            'Sunburst': [
+                'Sunburst + Sunburst', 'Sunburst + Dandelily', 'Sunburst + Penstemum', 'Sunburst + Hibiscus',
+                'Sunburst + Ghostgleam', 'Sunburst + Anemone', 'Sunburst + Thistle', 'Sunburst + Heavy Nettle',
+                'Sunburst + Marigold', 'Sunburst + Eggwort', 'Sunburst + Petunia', 'Sunburst + Dreampuff',
+                'Sunburst + Poinsettia', 'Sunburst + Glowbal', 'Sunburst + Bowblossom', 'Sunburst + Rose',
+                'Sunburst + Pinwheel'                
             ],
             'Rose': [
                 'Rose + Rose', 'Rose + Dandelily', 'Rose + Penstemum', 'Rose + Hibiscus', 'Rose + Ghostgleam',

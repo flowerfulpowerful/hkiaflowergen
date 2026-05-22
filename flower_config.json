@@ -369,7 +369,8 @@
         "mm8",
         "mm9",
         "mm10",
-        "mm11"
+        "mm11",
+        "ct1"
       ]
     },
     "Frostfeather": {
@@ -1103,15 +1104,42 @@
         "ww3",
         "ww4"
       ]
-    }
+  
   },
-  "Effects": [
-    "Iridescent",
-    "Glow",
-    "Cosmic",
-    "Crystal",
-    "Molten",
-    "Frost",
-    "Glitter"
-  ]
+  "Sunburst": {
+    "extreme": false,
+    "event": null,
+    "default_colors": [
+      "Orange"
+    ],
+    "default_pattern": "Sunbeam",
+    "supported_patterns": [
+      "Alternate",
+      "Confetti",
+      "Ombre",
+      "Patch",
+      "Ring",
+      "Speckled",
+      "Striped",
+      "Trim"
+    ],
+    "default_locations": [
+      "City"
+    ],
+    "supported_locations": [
+      "ct1"
+    ]
+  }
+},
+"Effects": [
+  "Iridescent",
+  "Glow",
+  "Cosmic",
+  "Crystal",
+  "Molten",
+  "Frost",
+  "Glitter",
+  "Sunbeam"
+]
 }
+
