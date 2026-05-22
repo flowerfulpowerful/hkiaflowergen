@@ -35,6 +35,7 @@
       ],
       "default_pattern": "Ombre",
       "supported_patterns": [
+        "Confetti",
         "Ombre",
         "Patch",
         "Ring",
@@ -199,7 +200,7 @@
         "Pistachio",
         "Pink"
       ],
-      "default_pattern": "Iridescent",
+      "default_pattern": "Crystal",
       "supported_patterns": [
         "Ombre",
         "Ring",
