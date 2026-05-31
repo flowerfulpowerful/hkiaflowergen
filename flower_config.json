@@ -1128,7 +1128,11 @@
       "City"
     ],
     "supported_locations": [
-      "ct1"
+      "ct1",
+      "ww1",
+      "ww2",
+      "ww3",
+      "ww4"
     ]
   }
 },
