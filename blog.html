@@ -179,7 +179,8 @@
                         <h5>Breeding Accuracy (Live Game Data)</h5>
                         <ul>
                             <li>Breeding weights were slightly updated from data loaded and sourced from game v2.17.1 (clone, color mix, pattern transfer, color transfer, grow rates, and event chance).</li>
-                            <li><strong>Single-parent patterned clones</strong> used to apply a fallback chance (20%) to single-parent patterned clones, which inflated rare outcomes like <em>Anemone, Red, Ombre, White</em> by roughly 20×. We confirm single-parent breeding uses the actual weight (1%) — a much smaller weight — instead of the fallback chance (20%).</li>
+                            <li><strong>Single-parent patterned breeding</strong> now distinguishes greenhouse vs outdoor: in the <strong>greenhouse</strong>, one patterned neighbor gives <strong>80% solid / 20% patterned</strong> (<code>FallbackPatternCloneChance</code>); outdoors it stays <strong>99% / 1%</strong> within the breeding roll (<code>UnpatternedClone</code> / <code>PatternedClone</code>).</li>
+                            <li><strong>Two patterned parents + color mix</strong> (e.g. Red/White Ombre + Orange/White Ombre) now uses the <code>CrossBlend*</code> weight family from live data — parent patterned clones at <strong>4.44%</strong> each vs cross-secondary hybrids at <strong>1.11%</strong> each (not equal 1.06% lines from the wrong <code>Crossbreed*</code> fields).</li>
                             <li><strong>Live weight values (game v2.17.1) use the game's actual weights for breeding, grow rates, and event chance.</strong></li>
                         </ul>
 
