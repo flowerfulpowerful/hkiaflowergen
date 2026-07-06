@@ -1,4 +1,4 @@
-// Reference the audio elements (shared key with generator sound-prefs.js)
+// Reference the audio elements (shared key with generator script.js)
 let soundEnabled = localStorage.getItem('hkia-sound-enabled') !== 'false';
 
 // Reference the audio elements

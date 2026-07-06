@@ -163,7 +163,52 @@
                  <article class="blog-post card mb-4" data-category="updates">
                     <div class="card-body">
                         <h2 class="card-title h4">
-                            <i class="fas fa-sync-alt me-2 text-pink"></i>Latest Updates - Version 2.0.8
+                            <i class="fas fa-sync-alt me-2 text-pink"></i>Latest Updates - Version 2.0.9
+                        </h2>      
+                        <div class="post-meta mb-3">
+                            <span class="badge bg-pink me-2">
+                                <i class="fas fa-calendar me-1"></i>July 5, 2026
+                            </span>
+                            <span class="badge bg-outline-pink">
+                                <i class="fas fa-tag me-1"></i>Updates
+                            </span>
+                        </div>
+                    <div class="post-content">
+                        <p>This update focuses on breeding accuracy — aligning the simulator with live game data (v2.17.1) and fixing how event flowers interact with normal breeding percentages. Thank you to everyone who reported numbers that looked off! ❤️</p>
+
+                        <h5>Breeding Accuracy (Live Game Data)</h5>
+                        <ul>
+                            <li>Breeding weights were slightly updated from data loaded and sourced from game v2.17.1 (clone, color mix, pattern transfer, color transfer, grow rates, and event chance).</li>
+                            <li><strong>Single-parent patterned clones</strong> used to apply a fallback chance (20%) to single-parent patterned clones, which inflated rare outcomes like <em>Anemone, Red, Ombre, White</em> by roughly 20×. The live dump confirms single-parent breeding uses the actual weight (1%) — a much smaller weight — instead of the fallback chance (20%).</li>
+                            <li><strong>Live weight values (game v2.17.1) use the game's actual weights for breeding, grow rates, and event chance.</strong></li>
+                        </ul>
+
+                        <h5>Event Flower Simulation</h5>
+                        <ul>
+                            <li>Event flower spawning now follows the game's <strong>three-way roulette</strong>: each plot rolls between <em>Nothing</em>, <em>Breeding</em>, and <em>Event</em> — not a separate stack of percentages on top of breeding.</li>
+                            <li><strong>Event flowers use a flat 5% spawn slot</strong> during their event — not <code>neighbors × 10% × 5%</code>. On an empty plot during an event, each default color is split 5% across all default colors.</li>
+                            <li>There is no <strong>95% breeding penalty</strong> when an event is active. Breeding outcomes keep their full weight; the 5% event chance comes out of the "nothing" slice instead of reducing breeding percentages.</li>
+                            <li><strong>No Spawn</strong> is now shown in per-plot View mode when the combined breed + event chance is below 100%.</li>
+                        </ul>
+                       
+                        <h5>Bug Fixes</h5>
+                        <ul>
+                            <li>Fixed inconsistent event dilution where some setups appeared affected by events and others were not, due to incorrect multiplicative event math.</li>
+                            <li>Rare patterned clones now reset the secondary color to the default (<strong>White</strong>) instead of copying the parent's secondary (e.g. Ombre, White — not Ombre, Black).</li>
+                        </ul>
+
+                        <p>We're still working on confirming the exact rules for certain game mechanics. <strong>This update is backed by live game logic.</strong> If you have any questions or feedback, please feel free to submit a report on our site under the "Feedback" button in the About menu.</p>
+                        <p>Thank you for your continued support! ❤️</p>
+
+
+                    </div>
+                </div>
+                </article>
+
+                 <article class="blog-post card mb-4" data-category="updates">
+                    <div class="card-body">
+                        <h2 class="card-title h4">
+                            <i class="fas fa-sync-alt me-2 text-pink"></i>Version 2.0.8
                         </h2>      
                         <div class="post-meta mb-3">
                             <span class="badge bg-pink me-2">
