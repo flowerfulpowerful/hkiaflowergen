@@ -29,7 +29,7 @@ class FlowerPlanSolver {
         } finally {
             this.sim.greenhouseMode = prevGreenhouse;
             this.sim.selectedEvent = prevEvent;
-            if (prevEffects) this.sim.patternNoSecondaries = prevEffects;
+            this.sim.patternNoSecondaries = prevEffects;
             console.log = originalLog;
         }
     }
@@ -47,7 +47,7 @@ class FlowerPlanSolver {
         try {
             return fn();
         } finally {
-            if (prevEffects) this.sim.patternNoSecondaries = prevEffects;
+            this.sim.patternNoSecondaries = prevEffects;
             console.log = originalLog;
         }
     }
@@ -458,6 +458,12 @@ class FlowerPlanSolver {
     prioritizeCandidates(candidates, target = null) {
         const terminals = this._terminals;
         const tKey = target ? this.flowerKey(target) : null;
+        const tgtPat = target ? (target.pattern || 'None') : 'None';
+        const tgtSec = target ? (target.secondaryColor || 'None') : 'None';
+        const tgtColor = target ? target.mainColor : null;
+        const tgtType = target ? target.type : null;
+        const isEffect = target && tgtPat !== 'None' && this.sim.getIsEffectPattern(tgtPat);
+        const isPatterned = tgtPat !== 'None';
 
         return [...candidates].sort((a, b) => {
             const scorePair = (pair) => {
@@ -474,8 +480,47 @@ class FlowerPlanSolver {
                 if (tKey) {
                     if (this.flowerKey(pair[0]) === tKey || this.flowerKey(pair[1]) === tKey) s -= 5;
                     if (pair[0].type !== pair[1].type) s += 2;
-                    if (target && pair[0].pattern === target.pattern && pair[0].type !== target.type) s += 2;
-                    if (target && pair[1].pattern === target.pattern && pair[1].type !== target.type) s += 2;
+                    if (target && pair[0].pattern === tgtPat && pair[0].type !== tgtType) s += 2;
+                    if (target && pair[1].pattern === tgtPat && pair[1].type !== tgtType) s += 2;
+                }
+
+                // Patterned non-effect targets (e.g. Bellbutton Blush Ombre Ice):
+                // classic pattern transfer is donor(same color+pattern+sec) + solid(same type+color).
+                // Without this boost, owned default-color solids (Yellow/Blue/White) outrank the
+                // real Blush solid partner and burn the verify budget before any hit.
+                if (isPatterned && !isEffect && tgtColor && tgtType) {
+                    const solidSameColor = (p) =>
+                        (p.pattern || 'None') === 'None'
+                        && p.type === tgtType
+                        && p.mainColor === tgtColor;
+                    const patternedDonor = (p) =>
+                        (p.pattern || 'None') === tgtPat
+                        && p.mainColor === tgtColor
+                        && p.type !== tgtType;
+                    const matchingSec = (p) =>
+                        (p.pattern || 'None') !== 'None'
+                        && (p.secondaryColor || 'None') === tgtSec;
+
+                    if (solidSameColor(pair[0]) || solidSameColor(pair[1])) s += 14;
+                    if (
+                        (patternedDonor(pair[0]) && solidSameColor(pair[1]))
+                        || (patternedDonor(pair[1]) && solidSameColor(pair[0]))
+                    ) {
+                        s += 18;
+                    }
+                    if (tgtSec !== 'None' && (matchingSec(pair[0]) || matchingSec(pair[1]))) {
+                        s += 16;
+                    }
+                    // Soft-penalize White/Warm Pink stand-ins when seeking a custom secondary
+                    if (tgtSec !== 'None' && tgtSec !== 'White' && tgtSec !== 'Warm Pink') {
+                        const wrongSec = (p) => {
+                            const sec = p.secondaryColor || 'None';
+                            return (p.pattern || 'None') !== 'None'
+                                && (sec === 'White' || sec === 'Warm Pink')
+                                && sec !== tgtSec;
+                        };
+                        if (wrongSec(pair[0]) || wrongSec(pair[1])) s -= 10;
+                    }
                 }
                 return s;
             };
@@ -605,7 +650,10 @@ class FlowerPlanSolver {
         const candidates = this.generateCandidateParents(target);
         const verified = [];
         const seenKeys = new Set();
-        const verifyCap = this.maxPairsPerFlower * 3;
+        // Stop once we have enough unique parents — overshooting (*3) forced the
+        // search to keep verifying after all valid pattern-transfer donors were
+        // found (e.g. ~25 Ombre/Ice donors) and burned the global verify budget.
+        const verifyCap = this.maxPairsPerFlower;
 
         for (const [p1, p2] of candidates) {
             if (this._verifyCount >= this.maxVerifyBudget) break;
@@ -794,26 +842,37 @@ class FlowerPlanSolver {
             return plans;
         }
 
-        const pairs = this.findVerifiedParents(flower);
-        for (const pair of pairs) {
-            // Only keep hops that use at least one known inventory flower
-            const p1Owned = this.isKnownOwned(pair.parent1, terminals);
-            const p2Owned = this.isKnownOwned(pair.parent2, terminals);
-            if (!p1Owned && !p2Owned) continue;
-            // Prefer patterned donor + default solid (typical color transfer)
-            if ((pair.parent1.pattern || 'None') === 'None' && (pair.parent2.pattern || 'None') === 'None') {
-                if (!p1Owned || !p2Owned) continue;
-            }
+        // Cap verifies for optional solid acquisition so root pattern-transfer
+        // pairs (e.g. many Ombre/Ice donors) are not starved of budget.
+        const verifyBefore = this._verifyCount;
+        const solidVerifyAllowance = 48;
+        const savedBudget = this.maxVerifyBudget;
+        this.maxVerifyBudget = Math.min(savedBudget, verifyBefore + solidVerifyAllowance);
 
-            plans.push([{
-                parent1: pair.parent1,
-                parent2: pair.parent2,
-                result: this.cloneFlower(flower),
-                percentage: pair.percentage,
-                kind: 'breed',
-                sources: pair.sources ? { ...pair.sources } : null
-            }]);
-            if (plans.length >= 8) break;
+        try {
+            const pairs = this.findVerifiedParents(flower);
+            for (const pair of pairs) {
+                // Only keep hops that use at least one known inventory flower
+                const p1Owned = this.isKnownOwned(pair.parent1, terminals);
+                const p2Owned = this.isKnownOwned(pair.parent2, terminals);
+                if (!p1Owned && !p2Owned) continue;
+                // Prefer patterned donor + default solid (typical color transfer)
+                if ((pair.parent1.pattern || 'None') === 'None' && (pair.parent2.pattern || 'None') === 'None') {
+                    if (!p1Owned || !p2Owned) continue;
+                }
+
+                plans.push([{
+                    parent1: pair.parent1,
+                    parent2: pair.parent2,
+                    result: this.cloneFlower(flower),
+                    percentage: pair.percentage,
+                    kind: 'breed',
+                    sources: pair.sources ? { ...pair.sources } : null
+                }]);
+                if (plans.length >= 8) break;
+            }
+        } finally {
+            this.maxVerifyBudget = savedBudget;
         }
 
         this.memo.set(key, plans);
@@ -866,6 +925,43 @@ class FlowerPlanSolver {
             return shallow;
         }
 
+        // Non-root patterned/effect parents: assume obtained (omit acquisition), same
+        // idea as color-transfer donors. Deep-solving e.g. Anemone Blush Ombre Ice
+        // while planning Bellbutton Blush Ombre Ice burns the verify budget before
+        // the final on-plot pattern-transfer step can be assembled.
+        if (!isRoot && !seekingSolid) {
+            plans.push([]);
+            const fertSolid = this.getFertilizeSource(flower);
+            if (fertSolid) {
+                const solidPlans = this.solveSolidOneHop(fertSolid, terminals);
+                const fertPct = this.getFertilizePatternChance() * 100;
+                for (const c1 of solidPlans) {
+                    if (!this.isCleanSolidAcquisition(c1)) continue;
+                    const step = {
+                        parent1: this.cloneFlower(fertSolid),
+                        parent2: null,
+                        result: this.cloneFlower(flower),
+                        percentage: fertPct,
+                        kind: 'fertilize',
+                        sources: { Fertilize: 1 }
+                    };
+                    const full = [...c1, step];
+                    if (full.length > 0 && full.length <= maxSteps) {
+                        plans.push(full);
+                    }
+                    if (plans.length >= this.maxPlans) break;
+                }
+            }
+            plans.sort((a, b) => this.scorePlan(b, terminals) - this.scorePlan(a, terminals));
+            const trimmed = plans.slice(0, this.maxPlans);
+            if (!trimmed.some(p => p.length === 0)) {
+                trimmed[trimmed.length - 1] = [];
+            }
+            visiting.delete(key);
+            this.memo.set(memoKey, trimmed);
+            return trimmed;
+        }
+
         // Fertilize solid → default pattern/effect (e.g. Bubbaluna Coral → Cosmic)
         const fertSolid = this.getFertilizeSource(flower);
         if (fertSolid) {
@@ -897,8 +993,6 @@ class FlowerPlanSolver {
         if (!skipBreedForNativeDefault) {
             const pairs = this.findVerifiedParents(flower);
             for (const pair of pairs) {
-                if (this._verifyCount >= this.maxVerifyBudget && plans.length > 0) break;
-
                 // Patterned parents: recurse. Solids: one-hop only (no deep tree).
                 let plans1 = ((pair.parent1.pattern || 'None') === 'None')
                     ? this.solveSolidOneHop(pair.parent1, terminals)
