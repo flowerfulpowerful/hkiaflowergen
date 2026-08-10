@@ -278,17 +278,22 @@ class FlowerPlanSolver {
                 defaultPattern.add(type);
             }
         });
+        const eventTypes = new Set(Object.values(this.sim.eventFlowers || {}));
 
         return [...types].sort((a, b) => {
-            const sa =
-                (defaultColor.has(a) ? 2 : 0) +
-                (defaultPattern.has(a) ? 4 : 0) +
-                (this.canUseType(a) ? 6 : 0);
-            const sb =
-                (defaultColor.has(b) ? 2 : 0) +
-                (defaultPattern.has(b) ? 4 : 0) +
-                (this.canUseType(b) ? 6 : 0);
-            return sb - sa;
+            const score = (type) => {
+                let s =
+                    (defaultColor.has(type) ? 2 : 0) +
+                    (defaultPattern.has(type) ? 4 : 0) +
+                    (this.canUseType(type) ? 6 : 0);
+                // Prefer everyday on-plot bridges over event flowers for effect transfers
+                if (eventTypes.has(type)) s -= 2;
+                if (this.sim.extremeFlowers?.includes(type) && this.getDefaultPatternForType(type) !== pattern) {
+                    s -= 1;
+                }
+                return s;
+            };
+            return score(b) - score(a);
         });
     }
 
@@ -309,18 +314,72 @@ class FlowerPlanSolver {
         // Prefer native donors that already spawn in the target color (e.g. Heavy Nettle Orange Ombre)
         let donorTypes = this.sortTypesForDonor(types.filter(t => t !== type), color, pattern);
 
-        // Effects (Glow/Cosmic/…): only donors that naturally get that effect — full cross-type
-        // search freezes the browser verifying hundreds of useless pairs.
+        // Effects (Glow/Cosmic/Molten/…): always keep native donors (e.g. Blazebulb→Molten).
+        // Also keep on-plot bridge types so the *final* breed can use two plantable parents
+        // (Blazebulb can't plant on Meadow, but Dandelily Coral Molten + Bellbutton Coral can).
+        // Full unrestricted cross-type search still freezes — cap bridges.
         if (isEffect) {
             const nativeEffectDonors = donorTypes.filter(
                 t => this.getDefaultPatternForType(t) === pattern
             );
-            donorTypes = nativeEffectDonors.length
-                ? nativeEffectDonors
-                : donorTypes.slice(0, 4);
+            const onPlotBridges = donorTypes.filter(
+                t => this.canUseType(t) && this.getDefaultPatternForType(t) !== pattern
+            );
+            const bridgeCap = 14;
+            donorTypes = [...new Set([
+                ...onPlotBridges.slice(0, bridgeCap),
+                ...nativeEffectDonors
+            ])];
+            if (!donorTypes.length) {
+                donorTypes = this.sortTypesForDonor(
+                    types.filter(t => t !== type),
+                    color,
+                    pattern
+                ).slice(0, 4);
+            }
         }
 
-        // Pattern transfer / mutation first — avoid filling the verify budget with chicken-egg self pairs
+        // Hybridization first (before cross-type pattern-transfer donors): same type + same
+        // pattern; child keeps one parent's main/pattern, secondary = other parent's main.
+        // Example: Tulias Blue Ombre White + Tulias Orange Ombre White
+        //       → Tulias Blue Ombre Orange (or Orange Ombre Blue).
+        if (isPatterned && !isEffect && secondary !== 'None' && secondary !== color) {
+            const defSec = (main) => (main === 'White' ? 'Warm Pink' : 'White');
+            this.addCandidate(
+                candidates,
+                seen,
+                this.patterned(type, color, pattern, defSec(color)),
+                this.patterned(type, secondary, pattern, defSec(secondary))
+            );
+            this.addCandidate(
+                candidates,
+                seen,
+                this.patterned(type, color, pattern, 'White'),
+                this.patterned(type, secondary, pattern, 'White')
+            );
+            // One-patterned secondary-swap path (engine only when colors are mixable)
+            this.addCandidate(
+                candidates,
+                seen,
+                this.patterned(type, color, pattern, defSec(color)),
+                this.solid(type, secondary)
+            );
+            // Once you already have hybrids, these help farm / continue chains
+            this.addCandidate(
+                candidates,
+                seen,
+                this.patterned(type, color, pattern, secondary),
+                this.patterned(type, secondary, pattern, color)
+            );
+            this.addCandidate(
+                candidates,
+                seen,
+                this.patterned(type, color, pattern, secondary),
+                this.solid(type, secondary)
+            );
+        }
+
+        // Pattern transfer / mutation — avoid filling the verify budget with chicken-egg self pairs
         if (isPatterned) {
             const secOptions = isEffect
                 ? ['None']
@@ -423,17 +482,6 @@ class FlowerPlanSolver {
             }
         });
 
-        // Patterned color-mix residual paths
-        if (isPatterned && !isEffect) {
-            this.addCandidate(candidates, seen, this.patterned(type, color, pattern, secondary), this.solid(type, secondary));
-            this.addCandidate(
-                candidates,
-                seen,
-                this.patterned(type, color, pattern, secondary),
-                this.patterned(type, secondary, pattern, color)
-            );
-        }
-
         // Default-color partners for same-type mixes
         defaults.forEach(d1 => {
             defaults.forEach(d2 => {
@@ -512,7 +560,18 @@ class FlowerPlanSolver {
                         s += 16;
                     }
                     // Soft-penalize White/Warm Pink stand-ins when seeking a custom secondary
-                    if (tgtSec !== 'None' && tgtSec !== 'White' && tgtSec !== 'Warm Pink') {
+                    // (but not for hybridization pairs — those intentionally use default secs).
+                    const hybrid = this.isHybridizationPair(pair[0], pair[1], target);
+                    if (hybrid) {
+                        // Prefer hybrid acquisition over pattern-transferring a donor that
+                        // already has the custom secondary (harder chicken-egg).
+                        s += 55;
+                        const defaultish = (p) => {
+                            const sec = p.secondaryColor || 'None';
+                            return sec === 'White' || sec === 'Warm Pink';
+                        };
+                        if (defaultish(pair[0]) && defaultish(pair[1])) s += 10;
+                    } else if (tgtSec !== 'None' && tgtSec !== 'White' && tgtSec !== 'Warm Pink') {
                         const wrongSec = (p) => {
                             const sec = p.secondaryColor || 'None';
                             return (p.pattern || 'None') !== 'None'
@@ -520,6 +579,9 @@ class FlowerPlanSolver {
                                 && sec !== tgtSec;
                         };
                         if (wrongSec(pair[0]) || wrongSec(pair[1])) s -= 10;
+                        // Cross-type donors that already have the custom secondary are a
+                        // later-step transfer, not the usual first way to unlock it.
+                        if (matchingSec(pair[0]) || matchingSec(pair[1])) s -= 20;
                     }
                 }
                 return s;
@@ -528,8 +590,24 @@ class FlowerPlanSolver {
         });
     }
 
+    /**
+     * Same-type patterned pair whose mains are the target's main + secondary colors.
+     * Used for hybridization (Color Mix Residual) acquisition.
+     */
+    isHybridizationPair(parent1, parent2, target) {
+        if (!parent1 || !parent2 || !target) return false;
+        const tgtPat = target.pattern || 'None';
+        const tgtSec = target.secondaryColor || 'None';
+        if (tgtPat === 'None' || tgtSec === 'None') return false;
+        if (this.sim.getIsEffectPattern(tgtPat)) return false;
+        if (parent1.type !== target.type || parent2.type !== target.type) return false;
+        if ((parent1.pattern || 'None') !== tgtPat || (parent2.pattern || 'None') !== tgtPat) return false;
+        const mains = new Set([parent1.mainColor, parent2.mainColor]);
+        return mains.has(target.mainColor) && mains.has(tgtSec);
+    }
+
     isChickenEggPair(parent1, parent2, target, terminals) {
-        if (!target || this.isKnownOwned(target, terminals)) return false;
+        if (!target || !terminals || this.isKnownOwned(target, terminals)) return false;
         const tKey = this.flowerKey(target);
         return this.flowerKey(parent1) === tKey || this.flowerKey(parent2) === tKey;
     }
@@ -684,9 +762,19 @@ class FlowerPlanSolver {
                 // Prefer parents that can actually be planted on the current plot
                 if (this.canUseType(pair.parent1.type)) s += 4;
                 if (this.canUseType(pair.parent2.type)) s += 4;
-                if (pair.parent1.type !== pair.parent2.type) s += 1;
-                if (pair.parent1.type !== target.type && pair.parent1.pattern === (target.pattern || 'None')) s += 2;
-                if (pair.parent2.type !== target.type && pair.parent2.pattern === (target.pattern || 'None')) s += 2;
+                // Hybridization unlocks custom secondaries without needing that secondary elsewhere
+                if (this.isHybridizationPair(pair.parent1, pair.parent2, target)) {
+                    s += 20;
+                    const defaultish = (p) => {
+                        const sec = p.secondaryColor || 'None';
+                        return sec === 'White' || sec === 'Warm Pink';
+                    };
+                    if (defaultish(pair.parent1) && defaultish(pair.parent2)) s += 8;
+                } else {
+                    if (pair.parent1.type !== pair.parent2.type) s += 1;
+                    if (pair.parent1.type !== target.type && pair.parent1.pattern === (target.pattern || 'None')) s += 2;
+                    if (pair.parent2.type !== target.type && pair.parent2.pattern === (target.pattern || 'None')) s += 2;
+                }
                 return s;
             };
             const ud = usefulScore(b) - usefulScore(a);
@@ -762,10 +850,48 @@ class FlowerPlanSolver {
             }
         }
 
-        // Prefer native fertilize, on-plot finals, fewer steps, higher odds
+        let hybridBonus = 0;
+        if (finalStep?.parent1 && finalStep?.parent2 && finalStep?.result) {
+            const tgtSec = finalStep.result.secondaryColor || 'None';
+            if (
+                tgtSec !== 'None' && tgtSec !== 'White' && tgtSec !== 'Warm Pink'
+                && this.isHybridizationPair(finalStep.parent1, finalStep.parent2, finalStep.result)
+            ) {
+                hybridBonus = 7000;
+                const defaultish = (p) => {
+                    const sec = p.secondaryColor || 'None';
+                    return sec === 'White' || sec === 'Warm Pink';
+                };
+                if (defaultish(finalStep.parent1) && defaultish(finalStep.parent2)) {
+                    hybridBonus += 1500;
+                }
+            }
+        }
+
+        // Prefer recipes that show how to get an on-plot effect carrier from a native
+        // donor (Blazebulb Molten → Dandelily Molten → Bellbutton Molten on Meadow).
+        let effectBridgeBonus = 0;
+        for (const step of steps) {
+            if (!step?.parent1 || !step?.parent2 || !step?.result) continue;
+            const resPat = step.result.pattern || 'None';
+            if (!this.sim.getIsEffectPattern(resPat)) continue;
+            if (this.getDefaultPatternForType(step.result.type) === resPat) continue;
+            const nativeDonor =
+                (this.getDefaultPatternForType(step.parent1.type) === resPat
+                    && (step.parent1.pattern || 'None') === resPat)
+                || (this.getDefaultPatternForType(step.parent2.type) === resPat
+                    && (step.parent2.pattern || 'None') === resPat);
+            if (nativeDonor && this.canUseType(step.result.type)) {
+                effectBridgeBonus += 3500;
+            }
+        }
+
+        // Prefer native fertilize, on-plot finals, hybridization unlocks, fewer steps, higher odds
         return (
             defaultFertilizeBonus +
             onPlotFinalBonus +
+            hybridBonus +
+            effectBridgeBonus +
             (8 - stepCount) * 1000 +
             product * 100 +
             ownedBonus -
@@ -929,6 +1055,8 @@ class FlowerPlanSolver {
         // idea as color-transfer donors. Deep-solving e.g. Anemone Blush Ombre Ice
         // while planning Bellbutton Blush Ombre Ice burns the verify budget before
         // the final on-plot pattern-transfer step can be assembled.
+        // Exception: on-plot effect bridges (Dandelily Coral Molten) may one-hop from a
+        // native effect donor (Blazebulb) so CAF can show how to get a plantable carrier.
         if (!isRoot && !seekingSolid) {
             plans.push([]);
             const fertSolid = this.getFertilizeSource(flower);
@@ -952,6 +1080,39 @@ class FlowerPlanSolver {
                     if (plans.length >= this.maxPlans) break;
                 }
             }
+
+            const pat = flower.pattern || 'None';
+            if (
+                this.sim.getIsEffectPattern(pat)
+                && this.canUseType(flower.type)
+                && this.getDefaultPatternForType(flower.type) !== pat
+                && depthRemaining > 0
+            ) {
+                const natives = (this.sim.allFlowerTypes || []).filter(
+                    t => this.getDefaultPatternForType(t) === pat
+                );
+                for (const nativeType of natives) {
+                    if (this._verifyCount >= this.maxVerifyBudget) break;
+                    const donor = this.patterned(nativeType, flower.mainColor, pat, 'None');
+                    const solidPartner = this.solid(flower.type, flower.mainColor);
+                    if (!this.isValidFlower(donor) || !this.isValidFlower(solidPartner)) continue;
+                    if (this.isChickenEggPair(donor, solidPartner, flower, terminals)) continue;
+                    const hit = this.verifyPair(donor, solidPartner, flower);
+                    if (!hit) continue;
+                    const step = {
+                        parent1: hit.parent1,
+                        parent2: hit.parent2,
+                        result: this.cloneFlower(flower),
+                        percentage: hit.percentage,
+                        kind: 'breed',
+                        sources: hit.sources ? { ...hit.sources } : null
+                    };
+                    if (step && 1 <= maxSteps) {
+                        plans.push([step]);
+                    }
+                }
+            }
+
             plans.sort((a, b) => this.scorePlan(b, terminals) - this.scorePlan(a, terminals));
             const trimmed = plans.slice(0, this.maxPlans);
             if (!trimmed.some(p => p.length === 0)) {
@@ -1005,16 +1166,22 @@ class FlowerPlanSolver {
                 if ((pair.parent1.pattern || 'None') !== 'None' && seekingSolid) plans1 = [[]];
                 if ((pair.parent2.pattern || 'None') !== 'None' && seekingSolid) plans2 = [[]];
 
-                // Shortest parent chains first so 1-step finals aren't crowded out of maxPlans
-                plans1 = [...plans1].sort((a, b) => a.length - b.length);
-                plans2 = [...plans2].sort((a, b) => a.length - b.length);
+                // Shortest parent chains first so 1-step finals aren't crowded out of maxPlans.
+                // Also keep one non-empty chain per side so effect-bridge steps
+                // (native Molten donor → on-plot carrier) aren't dropped by the [] shortcut.
+                const pickChainVariants = (list) => {
+                    const sorted = [...list].sort((a, b) => a.length - b.length);
+                    const out = [];
+                    if (sorted[0]) out.push(sorted[0]);
+                    const withSteps = sorted.find(p => p.length > 0);
+                    if (withSteps && withSteps !== out[0]) out.push(withSteps);
+                    return out.slice(0, 2);
+                };
+                plans1 = pickChainVariants(plans1);
+                plans2 = pickChainVariants(plans2);
 
-                // Limit combinations per pair
-                const limit1 = Math.min(plans1.length, 4);
-                const limit2 = Math.min(plans2.length, 4);
-
-                for (let i = 0; i < limit1; i++) {
-                    for (let j = 0; j < limit2; j++) {
+                for (let i = 0; i < plans1.length; i++) {
+                    for (let j = 0; j < plans2.length; j++) {
                         const merged = this.mergeUniqueSteps(plans1[i], plans2[j]);
                         if (seekingSolid && !this.isCleanSolidAcquisition(merged)) continue;
                         const step = {
@@ -1168,23 +1335,31 @@ class FlowerPlanSolver {
             }
         }
 
-        // Collapse near-duplicate fertilize recipes (same solid, different assumed donors)
+        // Collapse near-duplicates: same fertilize solid / same final breed pair.
+        // Hybridization especially used to fill maxPlans with identical White+White finals
+        // that only differed by omitted parent-acquisition fluff.
         const deduped = [];
         const seenFert = new Set();
+        const seenBreedPair = new Set();
         for (const plan of plans) {
-            if (!plan.endsWithFertilize) {
+            if (plan.endsWithFertilize) {
+                const solidKey = plan.steps[plan.steps.length - 1].parent1
+                    ? this.flowerKey(plan.steps[plan.steps.length - 1].parent1)
+                    : '';
+                const pre = plan.steps.slice(0, -1);
+                const sig = pre.length === 0
+                    ? `fert-only|${solidKey}`
+                    : `fert|${solidKey}|${pre.map(s => this.flowerKey(s.result)).join('>')}`;
+                if (seenFert.has(sig)) continue;
+                seenFert.add(sig);
                 deduped.push(plan);
                 continue;
             }
-            const solidKey = plan.steps[plan.steps.length - 1].parent1
-                ? this.flowerKey(plan.steps[plan.steps.length - 1].parent1)
-                : '';
-            const pre = plan.steps.slice(0, -1);
-            const sig = pre.length === 0
-                ? `fert-only|${solidKey}`
-                : `fert|${solidKey}|${pre.map(s => this.flowerKey(s.result)).join('>')}`;
-            if (seenFert.has(sig)) continue;
-            seenFert.add(sig);
+            if (plan.parent1 && plan.parent2 && !plan.isClonePlan) {
+                const pairSig = this.pairLayoutKey(plan.parent1, plan.parent2);
+                if (seenBreedPair.has(pairSig)) continue;
+                seenBreedPair.add(pairSig);
+            }
             deduped.push(plan);
         }
 
@@ -1210,6 +1385,53 @@ class FlowerPlanSolver {
 
     pairLayoutKey(parent1, parent2) {
         return [this.flowerKey(parent1), this.flowerKey(parent2)].sort().join('|');
+    }
+
+    /** Fingerprint breeding LUT so equivalent pairs (e.g. any Blue Ring + Bellbutton Blue) share one layout solve. */
+    fingerprintLut(lut, same) {
+        let out = same ? '1' : '0';
+        for (let i = 0; i <= 8; i++) {
+            for (let j = 0; j <= 8; j++) {
+                const v = lut[i][j] || 0;
+                out += v > 0 ? `,${v.toFixed(8)}` : ',0';
+            }
+        }
+        return out;
+    }
+
+    toAbstractLayouts(layouts) {
+        return (layouts || []).map((layout) => ({
+            signature: layout.signature,
+            score: layout.score,
+            expectedCount: layout.expectedCount,
+            breedableCells: layout.breedableCells,
+            exact: !!layout.exact,
+            isCloneLayout: !!layout.isCloneLayout
+        })).filter((layout) => typeof layout.signature === 'string');
+    }
+
+    materializeAbstractLayouts(abstracts, parent1, parent2, cells) {
+        return (abstracts || []).map((abs, i) => {
+            const state = new Uint8Array(abs.signature.length);
+            for (let k = 0; k < abs.signature.length; k++) {
+                state[k] = abs.signature.charCodeAt(k) - 48; // '0'/'1'/'2'
+            }
+            const layout = this.stateToLayout(
+                state,
+                cells,
+                parent1,
+                parent2,
+                {
+                    score: abs.score,
+                    expectedCount: abs.expectedCount,
+                    breedableCells: abs.breedableCells
+                },
+                abs.exact
+            );
+            layout.name = this.layoutOptionName(i, { isClone: !!abs.isCloneLayout });
+            if (abs.isCloneLayout) layout.isCloneLayout = true;
+            return layout;
+        });
     }
 
     /** Friendly display names for ranked layout suggestions. */
@@ -1252,6 +1474,12 @@ class FlowerPlanSolver {
         const isCancelled = options.isCancelled || null;
         const layoutCache = new Map();
         const uniquePairs = [];
+        // Equivalent breeding LUTs (same odds shape) share one expensive geometry solve.
+        this._layoutAbstractCache = new Map();
+        this._layoutExpensiveSolves = 0;
+        // Large plots: only fully solve a couple of distinct odds-shapes (best plans first).
+        const plantableCount = this.getPlantableCells().length;
+        this._layoutMaxExpensiveSolves = plantableCount > 40 ? 2 : (plantableCount > 24 ? 4 : 12);
         const cloneEligible = this.isGreenhouseEnabled()
             && this.canCloneFlowerToTarget(target, target)
             && this.canUseType(target.type);
@@ -1306,6 +1534,10 @@ class FlowerPlanSolver {
                 throw err;
             }
             throw err;
+        } finally {
+            this._layoutAbstractCache = null;
+            this._layoutExpensiveSolves = 0;
+            this._layoutMaxExpensiveSolves = null;
         }
 
         const sharedCloneLayouts = cloneEligible
@@ -1733,12 +1965,12 @@ class FlowerPlanSolver {
      * Exact global optimum for P(≥1 target). Uses row DP on typical grids (incl. 5×5);
      * falls back to branch-and-bound with tight bounds. Seeds only tighten the incumbent.
      */
-    async findExactOptimalLayoutsAsync(parent1, parent2, target, cells, isCancelled = null) {
+    async findExactOptimalLayoutsAsync(parent1, parent2, target, cells, isCancelled = null, precomputed = null) {
         const n = cells.length;
         if (n < 2) return [];
         this.throwIfCancelled(isCancelled);
 
-        const { lut, same, maxP } = this.buildTargetProbabilityLut(parent1, parent2, target);
+        const { lut, same, maxP } = precomputed || this.buildTargetProbabilityLut(parent1, parent2, target);
         if (maxP <= 0) return [];
 
         const parentsDifferent = !same;
@@ -1762,24 +1994,39 @@ class FlowerPlanSolver {
         const n = cells.length;
         const base = parentsDifferent ? 3 : 2;
 
-        const rowMap = new Map();
-        for (let i = 0; i < n; i++) {
-            const { row, col } = cells[i];
-            if (!rowMap.has(row)) rowMap.set(row, []);
-            rowMap.get(row).push({ col, idx: i });
-        }
-        const rowNums = [...rowMap.keys()].sort((a, b) => a - b);
+        // Build both row-major and column-major line decompositions; pick the narrower
+        // axis so more plots stay in DP (e.g. wide rows / skinny columns).
+        const buildAxis = (useCols) => {
+            const axisMap = new Map();
+            for (let i = 0; i < n; i++) {
+                const axis = useCols ? cells[i].col : cells[i].row;
+                const cross = useCols ? cells[i].row : cells[i].col;
+                if (!axisMap.has(axis)) axisMap.set(axis, []);
+                axisMap.get(axis).push({ col: cross, idx: i });
+            }
+            const axisNums = [...axisMap.keys()].sort((a, b) => a - b);
+            const slots = axisNums.map((r) => {
+                const arr = axisMap.get(r);
+                arr.sort((a, b) => a.col - b.col);
+                return arr;
+            });
+            const widths = slots.map((s) => s.length);
+            const maxW = widths.length ? Math.max(...widths) : 0;
+            return { axisNums, slots, widths, maxW };
+        };
+
+        const byRow = buildAxis(false);
+        const byCol = buildAxis(true);
+        const chosen = (byCol.maxW < byRow.maxW) ? byCol : byRow;
+        const { axisNums: rowNums, slots, widths, maxW } = chosen;
         if (!rowNums.length) return [];
 
-        const slots = rowNums.map((r) => {
-            const arr = rowMap.get(r);
-            arr.sort((a, b) => a.col - b.col);
-            return arr;
-        });
-        const widths = slots.map((s) => s.length);
-        const maxW = Math.max(...widths);
-        // 3^5=243 keeps DP responsive; wider rows fall back to B&B
-        if (base ** maxW > 243) return null;
+        // Per-line configs: base^maxW. DP state is ~configs² and each layer does
+        // ~configs³ transitions — so 3^6 (=729) is NOT interactive (mm9 is 6-wide
+        // on the row axis ≈ 387M transitions/layer). Cap so ternary lines stay ≤4
+        // wide (81) and binary (same-parent) can still use up to width 6 (64).
+        const lineConfigs = base ** maxW;
+        if (lineConfigs > 100) return null;
 
         const colPos = slots.map((s) => {
             const m = new Map();
@@ -1815,8 +2062,8 @@ class FlowerPlanSolver {
         };
 
         /**
-         * Score empty cells in row ri. `valsByRowIdx` maps row-index → decoded values
-         * for any plantable rows that may neighbor this row.
+         * Score empty cells in line ri. `valsByRowIdx` maps line-index → decoded values
+         * for any plantable lines that may neighbor this line.
          */
         const scoreRow = (ri, valsByRowIdx) => {
             let factor = 1;
@@ -1855,14 +2102,23 @@ class FlowerPlanSolver {
             return { factor, expected, breedable };
         };
 
-        // Pack key: prevCfg in high bits may be -1 → use (prev+1)
-        // key = ((prev+1) << 20) | (curr << 8) | flags  — curr fits in 8 bits for ≤243
-        const packKey = (prev, curr, flags) => ((prev + 1) << 20) | (curr << 8) | flags;
-        const unpackPrev = (key) => ((key >>> 20) - 1);
-        const unpackCurr = (key) => (key >>> 8) & 0xfff;
-        const unpackFlags = (key) => key & 0xff;
+        // String keys support up to 3^7 configs (bit-packing was limited to ≤243).
+        const packKey = (prev, curr, flags) => `${prev}|${curr}|${flags}`;
+        const unpackPrev = (key) => {
+            const a = key.indexOf('|');
+            return parseInt(key.slice(0, a), 10);
+        };
+        const unpackCurr = (key) => {
+            const a = key.indexOf('|');
+            const b = key.indexOf('|', a + 1);
+            return parseInt(key.slice(a + 1, b), 10);
+        };
+        const unpackFlags = (key) => {
+            const b = key.lastIndexOf('|');
+            return parseInt(key.slice(b + 1), 10);
+        };
 
-        // DP after assigning rows 0..i: minimize probNone for finalized rows.
+        // DP after assigning lines 0..i: minimize probNone for finalized lines.
         // Store parent pointers instead of full paths (huge win on 5×5).
         let dp = new Map();
         const n0 = decoded[0].length;
@@ -2030,19 +2286,26 @@ class FlowerPlanSolver {
                 true
             );
             layout.name = this.layoutOptionName(i);
-            const { signature, ...rest } = layout;
-            return rest;
+            return layout;
         });
     }
 
     /**
      * Exact B&B fallback when row DP can't apply. Seeds only for pruning.
+     * On large plots, a node/time budget returns the best incumbent found so far
+     * (still usually strong) instead of hanging for minutes.
      */
     async findExactOptimalLayoutsBandB(parent1, parent2, cells, lut, maxP, parentsDifferent, keepTop, isCancelled = null) {
         const n = cells.length;
         const neighborIdx = this.buildPlantableGraph(cells);
         const maxLutFree = this.buildMaxLutGivenFree(lut);
         const top = [];
+        const startedAt = (typeof performance !== 'undefined' && performance.now)
+            ? performance.now()
+            : Date.now();
+        // ~3s / 250k nodes keeps large plots usable; small plots usually finish earlier.
+        const maxNodes = n <= 20 ? Infinity : (n <= 36 ? 400000 : 250000);
+        const maxMs = n <= 20 ? Infinity : (n <= 36 ? 4000 : 2500);
 
         const considerState = (state) => {
             const metrics = this.scoreStateExact(state, neighborIdx, lut, parentsDifferent);
@@ -2061,6 +2324,7 @@ class FlowerPlanSolver {
         const stack = [{ depth: 0, choiceIdx: 0, has1: false, has2: false }];
         let nodes = 0;
         const chunkNodes = 12000;
+        let finished = true;
 
         const pruneThreshold = () => {
             if (!top.length) return -1;
@@ -2068,9 +2332,27 @@ class FlowerPlanSolver {
             return top.length >= keepTop ? top[keepTop - 1].score : -1;
         };
 
+        const timedOut = () => {
+            const now = (typeof performance !== 'undefined' && performance.now)
+                ? performance.now()
+                : Date.now();
+            return (now - startedAt) >= maxMs || nodes >= maxNodes;
+        };
+
         while (stack.length) {
+            if (timedOut()) {
+                finished = false;
+                break;
+            }
+
             const chunkStart = nodes;
             while (stack.length && nodes - chunkStart < chunkNodes) {
+                if (nodes >= maxNodes) {
+                    finished = false;
+                    stack.length = 0;
+                    break;
+                }
+
                 const frame = stack[stack.length - 1];
 
                 if (frame.depth === n) {
@@ -2140,10 +2422,10 @@ class FlowerPlanSolver {
 
         top.forEach((layout, i) => {
             layout.name = this.layoutOptionName(i);
-            layout.exact = true;
+            layout.exact = finished;
         });
 
-        return top.map(({ signature, ...rest }) => rest);
+        return top;
     }
 
     /**
@@ -2189,6 +2471,34 @@ class FlowerPlanSolver {
         return prodBound < sumBound ? prodBound : sumBound;
     }
 
+    /**
+     * Canonical parent order for layout solving/caching: patterned first when mixed,
+     * otherwise stable flowerKey order. Keeps LUTs comparable across plan variants.
+     */
+    canonicalizeLayoutParents(parent1, parent2) {
+        const p1Pat = (parent1.pattern || 'None') !== 'None';
+        const p2Pat = (parent2.pattern || 'None') !== 'None';
+        if (p1Pat !== p2Pat) {
+            return p1Pat
+                ? { p1: parent1, p2: parent2, swapped: false }
+                : { p1: parent2, p2: parent1, swapped: true };
+        }
+        if (this.flowerKey(parent1) <= this.flowerKey(parent2)) {
+            return { p1: parent1, p2: parent2, swapped: false };
+        }
+        return { p1: parent2, p2: parent1, swapped: true };
+    }
+
+    swapLayoutSignatureRoles(signature) {
+        if (!signature) return signature;
+        let out = '';
+        for (let i = 0; i < signature.length; i++) {
+            const ch = signature[i];
+            out += ch === '1' ? '2' : (ch === '2' ? '1' : ch);
+        }
+        return out;
+    }
+
     async generateLayoutsAsync(parent1, parent2, target, isCancelled = null) {
         const cells = this.getPlantableCells();
         if (cells.length < 2) return [];
@@ -2200,8 +2510,37 @@ class FlowerPlanSolver {
             : null;
 
         try {
+            // Canonicalize so Rose Ring+BB and BB+Rose Ring share one LUT/geometry solve.
+            const { p1, p2, swapped } = this.canonicalizeLayoutParents(parent1, parent2);
+
+            // Shared across attachExactLayouts: identical LUTs reuse geometry.
+            const precomputed = this.buildTargetProbabilityLut(p1, p2, target);
+            if (precomputed.maxP <= 0) return [];
+            const lutKey = this.fingerprintLut(precomputed.lut, precomputed.same);
+            if (this._layoutAbstractCache && this._layoutAbstractCache.has(lutKey)) {
+                const abstracts = this._layoutAbstractCache.get(lutKey).map((abs) => (
+                    swapped
+                        ? { ...abs, signature: this.swapLayoutSignatureRoles(abs.signature) }
+                        : abs
+                ));
+                return this.materializeAbstractLayouts(abstracts, parent1, parent2, cells);
+            }
+
+            if (
+                this._layoutAbstractCache
+                && this._layoutMaxExpensiveSolves != null
+                && (this._layoutExpensiveSolves || 0) >= this._layoutMaxExpensiveSolves
+            ) {
+                // Skip additional distinct LUT solves on huge plots — recipes still show.
+                return [];
+            }
+            if (this._layoutAbstractCache && this._layoutMaxExpensiveSolves != null) {
+                this._layoutExpensiveSolves = (this._layoutExpensiveSolves || 0) + 1;
+            }
+
             const neighborIdx = this.buildPlantableGraph(cells);
             const components = this.getConnectedComponents(cells.length, neighborIdx);
+            let layouts;
 
             // Disconnected plantable regions are independent — union of per-component optima
             if (components.length > 1) {
@@ -2209,36 +2548,75 @@ class FlowerPlanSolver {
                 let probNone = 1;
                 let expectedCount = 0;
                 let breedableCells = 0;
+                let allExact = true;
 
                 for (const compIdxs of components) {
                     this.throwIfCancelled(isCancelled);
                     if (compIdxs.length < 2) continue;
                     const subCells = compIdxs.map(i => cells[i]);
-                    const layouts = await this.findExactOptimalLayoutsAsync(
-                        parent1, parent2, target, subCells, isCancelled
+                    const compLayouts = await this.findExactOptimalLayoutsAsync(
+                        p1, p2, target, subCells, isCancelled, precomputed
                     );
-                    if (!layouts.length) continue;
-                    const best = layouts[0];
+                    if (!compLayouts.length) continue;
+                    const best = compLayouts[0];
                     mergedPlacements.push(...best.placements);
                     probNone *= (1 - (best.score || 0));
                     expectedCount += best.expectedCount || 0;
                     breedableCells += best.breedableCells || 0;
+                    if (!best.exact) allExact = false;
                     await this.yieldCancelled(isCancelled);
                 }
 
                 if (!mergedPlacements.length) return [];
 
-                return [{
+                // Rebuild a full-grid signature for LUT caching / rematerialization
+                const fullState = new Uint8Array(cells.length);
+                const indexOf = new Map(cells.map((c, i) => [`${c.row},${c.col}`, i]));
+                for (const p of mergedPlacements) {
+                    const idx = indexOf.get(`${p.row},${p.col}`);
+                    if (idx === undefined) continue;
+                    if (this.flowerKey(p.flower) === this.flowerKey(p1)) fullState[idx] = 1;
+                    else if (this.flowerKey(p.flower) === this.flowerKey(p2)) fullState[idx] = 2;
+                }
+
+                layouts = [{
                     name: this.layoutOptionName(0),
                     placements: mergedPlacements,
                     score: 1 - probNone,
                     expectedCount,
                     breedableCells,
-                    exact: true
+                    exact: allExact,
+                    signature: Array.from(fullState).join('')
                 }];
+            } else {
+                layouts = await this.findExactOptimalLayoutsAsync(
+                    p1, p2, target, cells, isCancelled, precomputed
+                );
             }
 
-            return this.findExactOptimalLayoutsAsync(parent1, parent2, target, cells, isCancelled);
+            if (this._layoutAbstractCache) {
+                const abstracts = this.toAbstractLayouts(layouts);
+                if (abstracts.length) this._layoutAbstractCache.set(lutKey, abstracts);
+            }
+
+            if (swapped) {
+                // Rematerialize into the caller's parent1/parent2 roles
+                const abstracts = this.toAbstractLayouts(layouts).map((abs) => ({
+                    ...abs,
+                    signature: this.swapLayoutSignatureRoles(abs.signature)
+                }));
+                return this.materializeAbstractLayouts(abstracts, parent1, parent2, cells);
+            }
+            // Ensure returned layouts use the original parent objects when not swapped
+            if (p1 !== parent1 || p2 !== parent2) {
+                return this.materializeAbstractLayouts(
+                    this.toAbstractLayouts(layouts),
+                    parent1,
+                    parent2,
+                    cells
+                );
+            }
+            return layouts;
         } finally {
             if (savedEffects) this.sim.patternNoSecondaries = savedEffects;
         }

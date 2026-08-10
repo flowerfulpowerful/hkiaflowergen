@@ -980,7 +980,7 @@
                                             <strong>Generate Plans:</strong> CAF searches for ranked breeding recipes (including fertilize-to-default patterns and multi-step chains), then solves exact layouts for the final parents when both can be planted here.
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
-                                            <strong>Flower Recipes:</strong> Each plan shows steps with method icons (Color Transfer, Pattern Transfer, Fertilize, Clone, etc.). Off-plot parent steps may be hidden.
+                                            <strong>Flower Recipes:</strong> Each plan shows steps with method icons (Color Transfer, Pattern Transfer, Color Mix, Fertilize, Clone, etc.). Off-plot parent steps may be hidden.
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
                                             <strong>Plot Layouts:</strong> “Recommended Layout” maximizes chance of ≥1 target on your plantable cells. Use Apply Layout to place the parents in your grid.
@@ -1575,7 +1575,11 @@
                                         </li>
                                         <li class="mb-2">
                                             <strong>Method icons</strong>
-                                            <p class="small text-muted mb-0">Color Transfer, Pattern Transfer, Fertilize, Clone, etc. match the Analyze Flowers legend.</p>
+                                            <p class="small text-muted mb-0">Color Transfer, Pattern Transfer, Color Mix, Fertilize, Clone, etc. match the Analyze Flowers legend.</p>
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Hybridization</strong>
+                                            <p class="small text-muted mb-0">For a non-default secondary, CAF often suggests breeding two same-type patterned parents (same pattern). Child = one parent’s main + pattern, with secondary from the other parent’s main color (shown as Color Mix).</p>
                                         </li>
                                         <li class="mb-2">
                                             <strong>Final-pair %</strong>
@@ -1634,6 +1638,14 @@
                                         <li class="mb-2">
                                             <strong>Greenhouse toggle</strong>
                                             <p class="small text-muted mb-0">Affects whether clone farming plans and layouts are offered.</p>
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Custom secondaries</strong>
+                                            <p class="small text-muted mb-0">Unlock a secondary via hybridization first (same type/pattern, mains = desired main + secondary). Pattern-transferring a flower that already has that secondary is a later option.</p>
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Effects on this plot</strong>
+                                            <p class="small text-muted mb-0">If the native effect flower can’t be planted here (e.g. Blazebulb/Molten), CAF bridges through an on-plot carrier first — then pattern-transfers onto your target so both final parents are plantable.</p>
                                         </li>
                                         <li>
                                             <strong>Large grids</strong>
