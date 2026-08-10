@@ -180,9 +180,14 @@
                                     </div>
                                 </div>
                                 
-                                <button class="btn btn-pink rounded-pill w-100" id="analyzeButton">
-                                    <i class="fas fa-seedling me-1"></i>Analyze Flowers
-                                </button>
+                                <div class="analyze-actions-row d-flex align-items-center justify-content-center gap-2 w-100">
+                                    <button type="button" class="create-flower-circle-btn" id="createFlowerButton" title="Create a Flower" aria-label="Create a Flower">
+                                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-pink rounded-pill" id="analyzeButton">
+                                        <i class="fas fa-seedling me-1"></i>Analyze Flowers
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -377,6 +382,242 @@
     </div>
 </div>
 
+    <!-- Create a Flower Modal -->
+    <div class="modal fade" id="createFlowerModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable modal-fullscreen-sm-down">
+            <div class="modal-content border-0 rounded-4 create-flower-modal-content">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-magic me-2"></i>Create a Flower
+                    </h5>
+                    <div class="d-flex align-items-center gap-2">
+                        <button type="button" class="btn btn-sm btn-light rounded-pill" id="createFlowerHelpButton" title="Help">
+                            <i class="fas fa-question-circle me-1"></i>Help
+                        </button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                </div>
+                <div class="modal-body p-4 create-flower-modal-body">
+                    <div class="analysis-summary bg-light-pink rounded-3 p-3 mb-4 create-flower-intro">
+                        <h6 class="mb-2">
+                            <i class="fas fa-info-circle me-2"></i>Achieve your Target Flower!
+                        </h6>
+                        <p class="mb-0 create-flower-intro-lead">
+                            Choose a flower allowed on your current plot, then generate ranked breeding recipes (including fertilize-to-default-pattern and multi-step chains) plus layouts for the final breed step.
+                        </p>
+                        <div class="form-text mt-2" id="createFlowerContextNote">
+                            <i class="fas fa-info-circle me-1"></i>Target flowers are limited to this plot. Recipe parents may include flowers from other regions when needed for color/pattern transfer.
+                        </div>
+                        <div class="form-text mt-1 create-flower-intro-extra">
+                            <i class="fas fa-trophy me-1"></i>Layouts are solved exactly: every Empty / Parent A / Parent B assignment on your plantable cells is considered (branch-and-bound on large plots), maximizing chance of at least one target flower.
+                        </div>
+                    </div>
+
+                    <form id="createFlowerForm">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="createFlowerType" class="form-label">Flower Type</label>
+                                <select class="form-select" id="createFlowerType" required>
+                                    <option value="Anemone">Anemone</option>
+                                    <option value="Bellbutton">Bellbutton</option>
+                                    <option value="Bowblossom">Bowblossom</option>
+                                    <option value="Blazebulb">Blazebulb</option>
+                                    <option value="Bubbaluna">Bubbaluna</option>
+                                    <option value="Crystalia">Crystalia</option>
+                                    <option value="Dandelily">Dandelily</option>
+                                    <option value="Dreampuff">Dreampuff</option>
+                                    <option value="Eggwort">Eggwort</option>
+                                    <option value="Frostfeather">Frostfeather</option>
+                                    <option value="Ghostgleam">Ghostgleam</option>
+                                    <option value="Glowbal">Glowbal</option>
+                                    <option value="Happadil">Happadil</option>
+                                    <option value="Heavy Nettle">Heavy Nettle</option>
+                                    <option value="Hibiscus">Hibiscus</option>
+                                    <option value="Marigold">Marigold</option>
+                                    <option value="Penstemum">Penstemum</option>
+                                    <option value="Petunia">Petunia</option>
+                                    <option value="Pinwheel">Pinwheel</option>
+                                    <option value="Poinsettia">Poinsettia</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Sunburst">Sunburst</option>
+                                    <option value="Thistle">Thistle</option>
+                                    <option value="Tulias">Tulias</option>
+                                    <option value="Wheatflower">Wheatflower</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="createMainColor" class="form-label">Main Color</label>
+                                <select class="form-select" id="createMainColor" required>
+                                    <option value="Red">Red</option>
+                                    <option value="Coral">Coral</option>
+                                    <option value="Orange">Orange</option>
+                                    <option value="Yellow">Yellow</option>
+                                    <option value="Lime">Lime</option>
+                                    <option value="Green">Green</option>
+                                    <option value="Teal">Teal</option>
+                                    <option value="Sky">Sky</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Indigo">Indigo</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Hot Pink">Hot Pink</option>
+                                    <option value="Magenta">Magenta</option>
+                                    <option value="Warm Pink">Warm Pink</option>
+                                    <option value="Blush">Blush</option>
+                                    <option value="Peach">Peach</option>
+                                    <option value="Cream">Cream</option>
+                                    <option value="Pistachio">Pistachio</option>
+                                    <option value="Mint">Mint</option>
+                                    <option value="Seafoam">Seafoam</option>
+                                    <option value="Cloud">Cloud</option>
+                                    <option value="Ice">Ice</option>
+                                    <option value="Periwinkle">Periwinkle</option>
+                                    <option value="Lilac">Lilac</option>
+                                    <option value="Cool Pink">Cool Pink</option>
+                                    <option value="Pink">Pink</option>
+                                    <option value="White">White</option>
+                                    <option value="Black">Black</option>
+                                    <option value="Gray">Gray</option>
+                                    <option value="Brown">Brown</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="createPattern" class="form-label">Pattern</label>
+                                <select class="form-select" id="createPattern" required>
+                                    <option value="None">None</option>
+                                    <option value="Alternate">Alternate</option>
+                                    <option value="Confetti">Confetti</option>
+                                    <option value="Ombre">Ombre</option>
+                                    <option value="Patch">Patch</option>
+                                    <option value="Ring">Ring</option>
+                                    <option value="Speckled">Speckled</option>
+                                    <option value="Striped">Striped</option>
+                                    <option value="Sunbeam">Sunbeam</option>
+                                    <option value="Trim">Trim</option>
+                                    <option value="Cosmic">Cosmic</option>
+                                    <option value="Crystal">Crystal</option>
+                                    <option value="Frost">Frost</option>
+                                    <option value="Glitter">Glitter</option>
+                                    <option value="Glow">Glow</option>
+                                    <option value="Iridescent">Iridescent</option>
+                                    <option value="Molten">Molten</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="createSecondaryColor" class="form-label">Secondary Color</label>
+                                <select class="form-select" id="createSecondaryColor" required>
+                                    <option value="None">None</option>
+                                    <option value="Red">Red</option>
+                                    <option value="Coral">Coral</option>
+                                    <option value="Orange">Orange</option>
+                                    <option value="Yellow">Yellow</option>
+                                    <option value="Lime">Lime</option>
+                                    <option value="Green">Green</option>
+                                    <option value="Teal">Teal</option>
+                                    <option value="Sky">Sky</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Indigo">Indigo</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Hot Pink">Hot Pink</option>
+                                    <option value="Magenta">Magenta</option>
+                                    <option value="Warm Pink">Warm Pink</option>
+                                    <option value="Blush">Blush</option>
+                                    <option value="Peach">Peach</option>
+                                    <option value="Cream">Cream</option>
+                                    <option value="Pistachio">Pistachio</option>
+                                    <option value="Mint">Mint</option>
+                                    <option value="Seafoam">Seafoam</option>
+                                    <option value="Cloud">Cloud</option>
+                                    <option value="Ice">Ice</option>
+                                    <option value="Periwinkle">Periwinkle</option>
+                                    <option value="Lilac">Lilac</option>
+                                    <option value="Cool Pink">Cool Pink</option>
+                                    <option value="Pink">Pink</option>
+                                    <option value="White">White</option>
+                                    <option value="Black">Black</option>
+                                    <option value="Gray">Gray</option>
+                                    <option value="Brown">Brown</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4 align-items-end">
+                            <div class="col-md-4">
+                                <label for="createMaxSteps" class="form-label">Max Breeding Steps</label>
+                                <select class="form-select" id="createMaxSteps">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5" selected>5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="createIncludeGridFlowers" checked>
+                                    <label class="form-check-label" for="createIncludeGridFlowers">
+                                        Include flowers already on my grid as available parents
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2 mb-4 create-flower-actions">
+                            <button type="button" class="btn btn-pink rounded-pill" id="generateFlowerPlansButton">
+                                <i class="fas fa-search me-1"></i>Generate Plans
+                            </button>
+                            <button type="button" class="btn btn-caf rounded-pill" id="cancelFlowerPlansButton" hidden>
+                                <i class="fas fa-stop me-1"></i>Cancel
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary rounded-pill" id="clearFlowerPlansButton" hidden>
+                                <i class="fas fa-eraser me-1"></i>Clear
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                                <i class="fas fa-times me-1"></i>Close
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="createFlowerSearching" class="text-center py-3" style="display: none;">
+                        <div class="spinner-border text-pink" role="status" style="color: var(--primary-pink);">
+                            <span class="visually-hidden">Searching...</span>
+                        </div>
+                        <p class="mt-2 mb-0 text-muted">Searching breeding paths and solving exact layouts...</p>
+                    </div>
+
+                    <div class="results-container">
+                        <h6 class="mb-3">
+                            <i class="fas fa-seedling me-2"></i>Breeding Plans
+                        </h6>
+                        <div class="results-list create-flower-results" id="createFlowerPlansList">
+                            <div class="text-muted text-center py-3">Enter a target flower and click Generate Plans.</div>
+                        </div>
+                    </div>
+
+                    <!-- In-modal overwrite confirm (avoids stacked Bootstrap modals breaking mobile grid scroll) -->
+                    <div id="createFlowerOverwriteConfirm" class="create-flower-overwrite-confirm" hidden>
+                        <div class="create-flower-overwrite-card" role="alertdialog" aria-labelledby="createFlowerApplyConfirmTitle" aria-describedby="createFlowerApplyConfirmMessage">
+                            <h6 id="createFlowerApplyConfirmTitle" class="mb-2">
+                                <i class="fas fa-exclamation-triangle me-2 text-warning"></i>Overwrite Plot?
+                            </h6>
+                            <p class="mb-3" id="createFlowerApplyConfirmMessage">
+                                Apply this layout? Plantable cells on your current plot will be cleared, then the suggested parent flowers will be placed.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2 justify-content-end">
+                                <button type="button" class="btn btn-outline-secondary rounded-pill" id="createFlowerApplyConfirmCancel">
+                                    Cancel
+                                </button>
+                                <button type="button" class="btn btn-edit rounded-pill" id="createFlowerApplyConfirmOk">
+                                    Confirm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Analysis Results Modal -->
     <div class="modal fade" id="analysisModal" tabindex="-1">
         <div class="modal-dialog modal-xl">
@@ -508,9 +749,51 @@
                                         <option value="ct1">City West Park</option>
                                     </select>
                                 </div>
-            </div>
 
-        </div>
+                                <!-- Other Preferences (Collapsed) -->
+                                <div class="mb-3 settings-other-block">
+                                    <h6 class="text-pink mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#otherPreferencesCollapse" aria-expanded="false" aria-controls="otherPreferencesCollapse" style="cursor: pointer;">
+                                        <i class="fas fa-cog me-2"></i>Other
+                                        <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                    </h6>
+
+                                    <div class="collapse" id="otherPreferencesCollapse">
+                                        <!-- Event Preferences -->
+                                        <div class="mb-3">
+                                            <h6 class="text-dark mb-3">
+                                                <i class="fas fa-calendar-alt me-2"></i>Event Preferences
+                                            </h6>
+                                            <div class="mb-3">
+                                                <label for="eventFlowerSelect" class="form-label">Simulate Event</label>
+                                                <select class="form-select" id="eventFlowerSelect">
+                                                    <option value="none">No Event (Default)</option>
+                                                    <option value="Month of Meh">Month of Meh (Eggworts)</option>
+                                                    <option value="Jam Jamboree">Jam Jamboree (Petunias)</option>
+                                                    <option value="Colorblaze Carnival">Colorblaze Carnival (Marigolds)</option>
+                                                    <option value="Paper Parade">Paper Parade (Pinwheels)</option>
+                                                    <option value="Interlude of Dreams">Interlude of Dreams (Bowblossoms)</option>
+                                                    <option value="Give and Gather">Give and Gather (Poinsettias)</option>
+                                                    <option value="Lighttime Jubilee">Lighttime Jubilee (Glowbals)</option>
+                                                    <option value="Hugs and Hearts">Hugs and Hearts (Roses)</option>
+                                                    <option value="Happy Haven">Happy Haven (Happadils)</option>
+                                                </select>
+                                                <div class="form-text">Select an event flower to simulate special breeding rates for that event.</div>
+                                            </div>
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" id="eventSimulationToggle" checked>
+                                                <label class="form-check-label" for="eventSimulationToggle">
+                                                    <i class="fas fa-calendar-alt me-2"></i>Automatic Event Spawns
+                                                </label>
+                                                <div class="form-text">When enabled, event flowers get automatic spawn rates. When disabled, only breeding outcomes are shown.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-pink rounded-pill w-100 mt-3" id="applySettingsButton">
+                                <i class="fas fa-check me-1"></i>Apply Settings
+                            </button>
+                        </div>
 
                         <!-- Additional Settings -->
                         <div class="col-md-6">
@@ -549,47 +832,6 @@
                                 <div class="form-text mb-3">
                                     <i class="fas fa-info-circle me-1"></i>Percentages are automatically calculated with Fertilizer use.
                                 </div>
-                                
-                                <!-- Other Preferences (Collapsed) -->
-                                <div class="mb-3">
-                                    <h6 class="text-pink mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#otherPreferencesCollapse" aria-expanded="false" aria-controls="otherPreferencesCollapse" style="cursor: pointer;">
-                                        <i class="fas fa-cog me-2"></i>Other
-                                        <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
-                                    </h6>
-                                    
-                                    <div class="collapse" id="otherPreferencesCollapse">
-                                        <!-- Event Preferences -->
-                                        <div class="mb-4">
-                                            <h6 class="text-dark mb-3">
-                                                <i class="fas fa-calendar-alt me-2"></i>Event Preferences
-                                            </h6>
-                                            <div class="mb-3">
-                                                <label for="eventFlowerSelect" class="form-label">Simulate Event</label>
-                                                <select class="form-select" id="eventFlowerSelect">
-                                                    <option value="none">No Event (Default)</option>
-                                                    <option value="Month of Meh">Month of Meh (Eggworts)</option>
-                                                    <option value="Jam Jamboree">Jam Jamboree (Petunias)</option>
-                                                    <option value="Colorblaze Carnival">Colorblaze Carnival (Marigolds)</option>
-                                                    <option value="Paper Parade">Paper Parade (Pinwheels)</option>
-                                                    <option value="Interlude of Dreams">Interlude of Dreams (Bowblossoms)</option>
-                                                    <option value="Give and Gather">Give and Gather (Poinsettias)</option>
-                                                    <option value="Lighttime Jubilee">Lighttime Jubilee (Glowbals)</option>
-                                                    <option value="Hugs and Hearts">Hugs and Hearts (Roses)</option>
-                                                    <option value="Happy Haven">Happy Haven (Happadils)</option>
-                                                </select>
-                                                <div class="form-text">Select an event flower to simulate special breeding rates for that event.</div>
-                                            </div>
-                                            <div class="form-check form-switch mb-3">
-                                                <input class="form-check-input" type="checkbox" id="eventSimulationToggle" checked>
-                                                <label class="form-check-label" for="eventSimulationToggle">
-                                                    <i class="fas fa-calendar-alt me-2"></i>Automatic Event Spawns
-                                                </label>
-                                                <div class="form-text">When enabled, event flowers get automatic spawn rates. When disabled, only breeding outcomes are shown.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
                             </div>
                         </div>
                         
@@ -617,9 +859,6 @@
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
                         <i class="fas fa-times me-1"></i>Close
-                    </button>
-                    <button type="button" class="btn btn-pink rounded-pill" id="applySettingsButton">
-                        <i class="fas fa-check me-1"></i>Apply Settings
                     </button>
                 </div>
             </div>
@@ -658,6 +897,9 @@
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
                                             <strong>Analyze Results:</strong> Use "Analyze Flowers" to see breeding possibilities and percentages for the entire grid.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Create a Flower:</strong> Use the lightbulb button to open CAF — enter a target flower for ranked breeding recipes and Apply-to-grid layouts. See the Create a Flower section below for details.
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
                                             <strong>View Details:</strong> Click on any cell in View Mode to see detailed breeding information for that individual cell.
@@ -716,6 +958,32 @@
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
                                             <strong>Planning Strategy:</strong> Use Edit Mode to design your layout, then switch to View Mode to analyze breeding possibilities before finalizing your garden design.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Create a Flower -->
+                        <div class="col-md-6">
+                            <div class="tutorial-section">
+                                <h6 class="mb-3 collapsible-header" data-bs-toggle="collapse" data-bs-target="#createFlowerCollapse" aria-expanded="false" aria-controls="createFlowerCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-magic me-2"></i>Create a Flower
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="createFlowerCollapse">
+                                    <ul class="list-group">
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Getting Started:</strong> Choose a target flower that can be planted on your current plot.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Generate Plans:</strong> CAF searches for ranked breeding recipes (including fertilize-to-default patterns and multi-step chains), then solves exact layouts for the final parents when both can be planted here.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Flower Recipes:</strong> Each plan shows steps with method icons (Color Transfer, Pattern Transfer, Fertilize, Clone, etc.). Off-plot parent steps may be hidden.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Plot Layouts:</strong> “Recommended Layout” maximizes chance of ≥1 target on your plantable cells. Use Apply Layout to place the parents in your grid.
                                         </li>
                                     </ul>
                                 </div>
@@ -922,7 +1190,7 @@
                         <img src="assets/logo.png" alt="HKIA Flower Simulator" class="mb-3" style="max-width: 200px;">
                         <h4>Hello Kitty Island Adventure</h4>
                         <h5 class="text-muted">Flower Breeding Simulator</h5>
-                        <p class="text-muted mb-0"><small>Version 2.0.10</small></p>
+                        <p class="text-muted mb-0"><small>Version 2.1.0</small></p>
                     </div>
                     <div class="about-content">
                         <p class="mb-3">
@@ -1190,6 +1458,190 @@
                                     <!-- Dynamic rows will be added here -->
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create a Flower Help Modal -->
+    <div class="modal fade" id="createFlowerHelpModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-pink-gradient text-white border-0 rounded-top-4">
+                    <h5 class="modal-title">
+                        <i class="fas fa-question-circle me-2"></i>Create a Flower Help
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#cafHelpOverviewCollapse" aria-expanded="false" aria-controls="cafHelpOverviewCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-lightbulb me-2"></i>Understanding Create a Flower
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="cafHelpOverviewCollapse">
+                                    <p class="mb-0">Create a Flower (CAF) finds breeding recipes for a flower you want on your <strong>current plot</strong>, then can suggest exact parent layouts for the final breeding step.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#cafHelpTargetCollapse" aria-expanded="false" aria-controls="cafHelpTargetCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-seedling me-2"></i>Target Flower
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="cafHelpTargetCollapse">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">
+                                            <strong>Flower Type / Main Color / Pattern / Secondary Color</strong>
+                                            <p class="small text-muted mb-0">The flower you want to create. Type options are limited to what can be planted on your current plot.</p>
+                                        </li>
+                                        <li>
+                                            <strong>Changing the target</strong>
+                                            <p class="small text-muted mb-0">Clears generated plans so results don’t mix with a different flower.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#cafHelpOptionsCollapse" aria-expanded="false" aria-controls="cafHelpOptionsCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-sliders-h me-2"></i>Search Options
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="cafHelpOptionsCollapse">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">
+                                            <strong>Max Breeding Steps</strong>
+                                            <p class="small text-muted mb-0">How many recipe steps CAF may search (1–6). Higher values find longer chains but take longer.</p>
+                                        </li>
+                                        <li>
+                                            <strong>Include flowers already on my grid</strong>
+                                            <p class="small text-muted mb-0">Treats flowers currently on your plot as flowers you already have when building recipes.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#cafHelpButtonsCollapse" aria-expanded="false" aria-controls="cafHelpButtonsCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-hand-pointer me-2"></i>Buttons
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="cafHelpButtonsCollapse">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">
+                                            <strong>Generate Plans</strong>
+                                            <p class="small text-muted mb-0">Searches for ranked breeding recipes, then solves exact layouts for plantable final parents.</p>
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Cancel</strong>
+                                            <p class="small text-muted mb-0">Stops an in-progress search and clears results.</p>
+                                        </li>
+                                        <li>
+                                            <strong>Clear</strong>
+                                            <p class="small text-muted mb-0">Removes the current plans list after a finished search.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#cafHelpPlansCollapse" aria-expanded="false" aria-controls="cafHelpPlansCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-list-ol me-2"></i>Breeding Plans
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="cafHelpPlansCollapse">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">
+                                            <strong>Recipe steps</strong>
+                                            <p class="small text-muted mb-0">Each plan ends in your target. Steps may be breeds, fertilize (default pattern/effect), or greenhouse clones.</p>
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Method icons</strong>
+                                            <p class="small text-muted mb-0">Color Transfer, Pattern Transfer, Fertilize, Clone, etc. match the Analyze Flowers legend.</p>
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Final-pair %</strong>
+                                            <p class="small text-muted mb-0">Chance for that last breeding pair to produce the target in one relevant empty cell under the recipe’s assumptions.</p>
+                                        </li>
+                                        <li>
+                                            <strong>Off-plot parents</strong>
+                                            <p class="small text-muted mb-0">Acquisition steps may be omitted from the display — bring those parents from elsewhere, then breed here.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#cafHelpLayoutsCollapse" aria-expanded="false" aria-controls="cafHelpLayoutsCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-th me-2"></i>Layouts
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="cafHelpLayoutsCollapse">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">
+                                            <strong>Recommended Layout</strong>
+                                            <p class="small text-muted mb-0">Exact best placement of the final parents on your plantable cells to maximize chance of ≥1 target.</p>
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Alternative #N Layout</strong>
+                                            <p class="small text-muted mb-0">Other strong placements with different scores or shapes.</p>
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Apply Layout</strong>
+                                            <p class="small text-muted mb-0">Clears plantable cells, then places those parents. You’ll confirm before overwriting an occupied plot.</p>
+                                        </li>
+                                        <li>
+                                            <strong>Clone layouts</strong>
+                                            <p class="small text-muted mb-0">Only appear on Clone plans when Greenhouse is enabled. Patterned clones prefer sparse layouts.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="help-section">
+                                <h6 class="mb-3 text-pink collapsible-header" data-bs-toggle="collapse" data-bs-target="#cafHelpTipsCollapse" aria-expanded="false" aria-controls="cafHelpTipsCollapse" style="cursor: pointer;">
+                                    <i class="fas fa-star me-2"></i>Tips
+                                    <i class="fas fa-chevron-down ms-2 collapse-icon"></i>
+                                </h6>
+                                <div class="collapse" id="cafHelpTipsCollapse">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">
+                                            <strong>Set your plot first</strong>
+                                            <p class="small text-muted mb-0">CAF plans for the plot / grid size you’re currently on.</p>
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong>Greenhouse toggle</strong>
+                                            <p class="small text-muted mb-0">Affects whether clone farming plans and layouts are offered.</p>
+                                        </li>
+                                        <li>
+                                            <strong>Large grids</strong>
+                                            <p class="small text-muted mb-0">Exact layouts can take longer; Cancel stops that work.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1530,6 +1982,8 @@
     <script src="custom-grid.js"></script>
     <!-- Glossary Manager -->
     <script src="glossary.js"></script>
+    <!-- Create a Flower planner -->
+    <script src="create-flower.js"></script>
     <!-- Custom JS -->
     <script src="script.js"></script>
     <!-- Compression Library -->

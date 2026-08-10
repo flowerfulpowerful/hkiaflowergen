@@ -163,6 +163,166 @@
                  <article class="blog-post card mb-4" data-category="updates">
                     <div class="card-body">
                         <h2 class="card-title h4">
+                            <i class="fas fa-sync-alt me-2 text-pink"></i>Latest Updates - Version 2.1.0
+                        </h2>
+                        <div class="post-meta mb-3">
+                            <span class="badge bg-pink me-2">
+                                <i class="fas fa-calendar me-1"></i>August 10, 2026
+                            </span>
+                            <span class="badge bg-outline-pink">
+                                <i class="fas fa-tag me-1"></i>Updates
+                            </span>
+                        </div>
+                    <div class="post-content">
+                        <p><strong>🚨BIG FEATURE DROP!🚨</strong> Version 2.1.0 introduces <strong>Create a Flower (CAF)</strong> — a reverse breeding planner that finds recipes for a target flower on your current plot, then suggests exact parent layouts you can apply to the grid. ✨</p>
+
+                        <h5>Create a Flower</h5>
+                        <ul>
+                            <li>Open CAF with the <strong>lightbulb</strong> button next to Analyze Flowers.</li>
+                            <li>Choose a target flower allowed on your <strong>current plot</strong>, then generate ranked breeding recipes (color transfer, pattern transfer, fertilize-to-default pattern/effect, multi-step chains, and more).</li>
+                            <li>Recipe parents may come from other regions when needed — off-plot acquisition steps can be omitted from the display so you focus on what to breed <em>here</em>.</li>
+                            <li>Use <strong>Max Breeding Steps</strong> and <strong>Include flowers already on my grid</strong> to control how deep the search goes and whether your planted flowers count as inventory.</li>
+                            <li><strong>Cancel</strong> stops an in-progress search and clears results; <strong>Clear</strong> resets plans after a finished run. Changing the target flower also clears stale plans.</li>
+                        </ul>
+
+                        <h5>Exact Plot Layouts</h5>
+                        <ul>
+                            <li>When both final parents are plantable on your plot, CAF solves <strong>exact</strong> Empty / Parent A / Parent B placements on your plantable cells (branch-and-bound on larger plots).</li>
+                            <li><strong>Recommended Layout</strong> maximizes the chance of getting at least one target flower; <strong>Alternative #N</strong> layouts offer other strong placements.</li>
+                            <li><strong>Apply Layout</strong> places the parents on your grid (with an in-modal confirm before overwriting occupied cells). Partial applies are never used — both parents must be plantable.</li>
+                            <li>With <strong>Greenhouse</strong> on, CAF can also offer dedicated <strong>clone flower</strong> plans and clone layouts (patterned greenhouse clones prefer sparse 1-neighbor placements for better odds).</li>
+                        </ul>
+
+                        <h5>Help &amp; How to Use</h5>
+                        <ul>
+                            <li>New <strong>Create a Flower</strong> section in How to Use.</li>
+                            <li>CAF’s own <strong>Help</strong> modal (same style as Glossary / Icon Legend help) explains targets, search options, buttons, recipes, layouts, and tips.</li>
+                        </ul>
+
+                        <p>If you have any questions or feedback, please feel free to submit a report on our site under the "Feedback" button in the About menu.</p>
+                        <p>Thank you for your continued support! 🥳🎉</p>
+                    </div>
+                </div>
+                </article>
+
+                 <article class="blog-post card mb-4" data-category="tips">
+                    <div class="card-body">
+                        <h2 class="card-title h4">
+                            <i class="fas fa-lightbulb me-2 text-pink"></i>Create a Flower Guide - Achieve Your Target Flower
+                        </h2>
+                        <div class="post-meta mb-3">
+                            <span class="badge bg-pink me-2">
+                                <i class="fas fa-calendar me-1"></i>August 10, 2026
+                            </span>
+                            <span class="badge bg-outline-pink">
+                                <i class="fas fa-tag me-1"></i>Tips
+                            </span>
+                        </div>
+                        <div class="post-content">
+                            <p>Create a Flower (CAF) is a reverse breeding planner: you pick the flower you want, and it searches for recipes that can produce it on your <strong>current plot</strong>, then (when possible) suggests exact parent layouts you can apply to the grid. This guide walks through the full workflow.</p>
+
+                            <h5>How It Works:</h5>
+                            <p>CAF starts from your target flower and works backwards through breeding, fertilize (default pattern/effect), and greenhouse clone paths. Targets are limited to flower types allowed on the plot/layout you currently have open. Recipe parents can still come from other regions when color or pattern transfer needs them — those “bring from elsewhere” steps may be omitted from the display so you can focus on what to plant and breed here. When both final parents are plantable on this plot, CAF also solves exact Empty / Parent A / Parent B placements on your plantable cells to maximize the chance of getting at least one target.</p>
+
+                            <h5>Before You Open CAF:</h5>
+                            <ol>
+                                <li>In <strong>Settings → Grid Settings</strong>, choose the real plot layout (or custom grid size) that matches the garden you’re breeding in.</li>
+                                <li>If you are breeding in the <strong>Greenhouse</strong>, make sure it is on. Greenhouse changes clone odds and whether CAF offers dedicated clone-farming plans/layouts.</li>
+                                <li>(Optional) Place any parent flowers you already own on the grid if you want CAF to treat them as inventory via the include-grid checkbox.</li>
+                            </ol>
+
+                            <h5>How to Open &amp; Set Your Target:</h5>
+                            <ol>
+                                <li>On the main simulator screen, click the pink <strong>lightbulb</strong> circle button next to <strong>Analyze Flowers</strong>.</li>
+                                <li>In the Create a Flower modal, set:
+                                    <ul>
+                                        <li><strong>Flower Type</strong> — only types allowed on your current plot appear.</li>
+                                        <li><strong>Main Color</strong> — the primary color you want.</li>
+                                        <li><strong>Pattern</strong> — None for solids, or a pattern/effect (Ombre, Speckled, Cosmic, Glow, etc.). Options follow what that flower type allows.</li>
+                                        <li><strong>Secondary Color</strong> — used for patterned flowers that support a second color; effects that don’t use a secondary stay as None.</li>
+                                    </ul>
+                                </li>
+                                <li>Set <strong>Max Breeding Steps</strong> (1–6, default 5). This is how many recipe steps CAF may search. Lower = faster/shorter chains; higher = longer multi-step paths.</li>
+                                <li>Leave <strong>Include flowers already on my grid as available parents</strong> checked if flowers currently on your plot should count as ones you already have. Uncheck it to plan as if the plot were empty inventory-wise.</li>
+                                <li>Click <strong>Generate Plans</strong>.</li>
+                            </ol>
+
+                            <h5>While Searching:</h5>
+                            <ul>
+                                <li>A searching indicator appears while CAF builds recipes and (when applicable) exact layouts.</li>
+                                <li><strong>Cancel</strong> appears only during a search — click it to stop and clear results.</li>
+                                <li>Large custom grids can take longer for exact layout solving. If it’s slow, Cancel, lower Max Breeding Steps, or try a smaller plot first.</li>
+                            </ul>
+
+                            <h5>How to Read a Breeding Plan:</h5>
+                            <ul>
+                                <li>Plans are ranked recipes ending in your target. Expand/scan each plan’s steps from top to bottom.</li>
+                                <li>Each breed step shows parents with <strong>+</strong>, then <strong>→</strong> the result, plus a percentage for that step.</li>
+                                <li><strong>Method icons</strong> (Color Transfer, Pattern Transfer, Fertilize, Clone, Color Mix, etc.) use the same legend as Analyze Flowers / Icon Legend Help.</li>
+                                <li>The final-pair % is the chance for that last breeding pair to produce the target in <em>one relevant empty cell</em> under the recipe’s assumptions — not “guaranteed somewhere on the whole plot.” Layout scores separately optimize chance of ≥1 target across plantable cells.</li>
+                                <li><strong>Fertilize</strong> steps mean: plant the solid, use fertilizer to roll the flower’s default pattern/effect (e.g. Bubbaluna → Cosmic).</li>
+                                <li><strong>Off-plot / acquisition</strong> parents may appear without a full how-to-get-them chain. Obtain those flowers elsewhere (other plots, defaults, trades), then use them in the on-plot breed steps shown.</li>
+                                <li>For <strong>color transfer</strong>, patterned donors are shown with a default secondary — usually <strong>White</strong>, or <strong>Warm Pink</strong> when the main color is White. That secondary does <em>not</em> change color-transfer odds; it’s the practical default to obtain/clone toward.</li>
+                            </ul>
+
+                            <h5>How to Use Layouts:</h5>
+                            <ol>
+                                <li>After plans finish, look for layout cards under a plan: <strong>Recommended Layout</strong>, then <strong>Alternative #1</strong>, <strong>Alternative #2</strong>, etc. Clone plans may say <strong>Recommended Clone Layout</strong> / alternatives.</li>
+                                <li>Each layout shows how to place Parent A, Parent B, and Empty cells on your current plantable squares to maximize chance of ≥1 target.</li>
+                                <li>Click <strong>Apply Layout</strong> on the layout you want.
+                                    <ul>
+                                        <li>CAF clears plantable cells, then places those parents.</li>
+                                        <li>If the plot already has flowers, an in-modal confirm asks before overwriting — choose <strong>Confirm</strong> or cancel.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Apply Layout only appears / succeeds when both final parents are plantable on this plot.</strong> CAF will not partially place one parent.</li>
+                                <li>After applying, close CAF and use <strong>Analyze Flowers</strong> or switch to <strong>View Mode</strong> and click cells to verify odds on the exact layout.</li>
+                            </ol>
+
+                            <h5>Buttons Cheat Sheet:</h5>
+                            <ul>
+                                <li><strong>Generate Plans</strong> — run/search for recipes + layouts.</li>
+                                <li><strong>Cancel</strong> — stop an in-progress search and clear results (only visible while searching).</li>
+                                <li><strong>Clear</strong> — remove finished plans from the list (only visible after a completed search).</li>
+                                <li><strong>Help</strong> (header) — opens the Create a Flower Help modal with field-by-field explanations.</li>
+                                <li><strong>Close</strong> — dismiss the CAF modal without applying anything.</li>
+                            </ul>
+
+                            <h5>Common Goals:</h5>
+                            <ul>
+                                <li><strong>Solid non-default color on this plot:</strong> Often a color-transfer recipe (patterned donor of the desired color + solid of the target type in another color). Apply the Recommended Layout for the final pair.</li>
+                                <li><strong>Default pattern/effect (Ombre, Cosmic, etc.):</strong> Prefer fertilize from the matching solid when the flower gets that pattern from fertilizer — CAF avoids pattern-transferring a native default onto itself as the root plan.</li>
+                                <li><strong>Farm more of a patterned flower (Greenhouse on):</strong> Look for Clone plans/layouts. Patterned greenhouse clones prefer sparse setups — about <strong>1 neighbor ≈ 20%</strong> patterned clone chance vs <strong>2+ neighbors ≈ 1%</strong>.</li>
+                                <li><strong>You already planted useful parents:</strong> Keep “Include flowers already on my grid…” checked so CAF can short-circuit to recipes that use what’s on the plot.</li>
+                            </ul>
+
+                            <h5>Pro Tips:</h5>
+                            <ul>
+                                <li><strong>Match the real plot first.</strong> Wrong layout/size means wrong plantable cells and wrong layout suggestions.</li>
+                                <li><strong>Start with Max Steps 3–5</strong> for everyday targets; bump to 6 only when short recipes aren’t enough.</li>
+                                <li><strong>Changing type / main / pattern / secondary clears plans</strong> so you don’t mix results — click Generate Plans again after edits.</li>
+                                <li><strong>Compare Alternative layouts</strong> if Recommended’s shape is awkward in-game (paths, aesthetics) but the score is still close.</li>
+                                <li><strong>Export before Apply</strong> if your current garden is precious — Apply Layout overwrites plantable cells after confirm.</li>
+                                <li><strong>Use Help + How to Use → Create a Flower</strong> when you need a refresher without leaving the site’s docs.</li>
+                            </ul>
+
+                            <h5>Troubleshooting:</h5>
+                            <ul>
+                                <li><strong>Target type missing from the dropdown:</strong> That flower can’t be planted on your current plot — switch plot layout or pick a different type.</li>
+                                <li><strong>No layouts / no Apply Layout:</strong> The final parents aren’t both plantable here (e.g. one is off-plot only), or the last step isn’t a placeable breed pair.</li>
+                                <li><strong>No clone plans:</strong> Turn Greenhouse on and regenerate; not every target is a clone-farm candidate.</li>
+                                <li><strong>Search feels stuck:</strong> Cancel, lower Max Breeding Steps, or simplify the target (solid vs rare patterned effect).</li>
+                                <li><strong>Odds look different after Apply:</strong> Run Analyze Flowers / View Mode on the applied grid — layout % is “≥1 target across plantable cells,” while a recipe step % is per relevant empty cell for that pair.</li>
+                            </ul>
+
+                            <p>Happy breeding — and may your Recommended Layout deliver that rare flower! 🌸</p>
+                        </div>
+                    </div>
+                </article>
+
+                 <article class="blog-post card mb-4" data-category="updates">
+                    <div class="card-body">
+                        <h2 class="card-title h4">
                             <i class="fas fa-sync-alt me-2 text-pink"></i>Latest Updates - Version 2.0.10
                         </h2>      
                         <div class="post-meta mb-3">

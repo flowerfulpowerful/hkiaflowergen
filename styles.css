@@ -1016,6 +1016,107 @@ body {
     }
 }
 
+/* Analyze + Create-a-Flower actions */
+.analyze-actions-row {
+    flex-wrap: nowrap;
+}
+
+/* Circle CAF button — View Mode pastel-pink, indicator-style circle */
+/* Match Edit Mode switch color (pastel-green light / success-green dark) */
+.btn-edit {
+    background: var(--pastel-green);
+    border-color: var(--pastel-green);
+    color: #fff;
+}
+
+.btn-edit:hover,
+.btn-edit:focus {
+    filter: brightness(1.06);
+    background: var(--pastel-green);
+    border-color: var(--pastel-green);
+    color: #fff;
+}
+
+[data-theme="dark"] .btn-edit {
+    background: var(--success-green);
+    border-color: var(--success-green);
+    color: #fff;
+}
+
+[data-theme="dark"] .btn-edit:hover,
+[data-theme="dark"] .btn-edit:focus {
+    filter: brightness(1.08);
+    background: var(--success-green);
+    border-color: var(--success-green);
+    color: #fff;
+}
+
+/* Match the Create-a-Flower circle button (View Mode pink) */
+.btn-caf {
+    background: var(--pastel-pink);
+    border-color: var(--pastel-pink);
+    color: #fff;
+}
+
+.btn-caf:hover,
+.btn-caf:focus {
+    background: var(--dark-pink);
+    border-color: var(--dark-pink);
+    color: #fff;
+}
+
+[data-theme="dark"] .btn-caf {
+    background: var(--dark-pink);
+    border-color: var(--dark-pink);
+    color: #fff;
+}
+
+[data-theme="dark"] .btn-caf:hover,
+[data-theme="dark"] .btn-caf:focus {
+    filter: brightness(1.08);
+    color: #fff;
+}
+
+.create-flower-circle-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--pastel-pink);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: var(--soft-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    flex-shrink: 0;
+}
+
+.create-flower-circle-btn:hover {
+    transform: scale(1.08);
+    box-shadow: var(--medium-shadow);
+    filter: brightness(1.05);
+    color: #fff;
+}
+
+.create-flower-circle-btn:active {
+    transform: scale(0.95);
+}
+
+.create-flower-circle-btn:focus-visible {
+    outline: 2px solid var(--primary-pink);
+    outline-offset: 2px;
+}
+
+/* Match View Mode switch color in dark mode (--dark-pink, not muted --pastel-pink) */
+[data-theme="dark"] .create-flower-circle-btn {
+    background: var(--dark-pink);
+    color: #fff;
+}
+
 /* Analyze Button - Same size as mode switches */
 #analyzeButton {
     width: 200px;
@@ -1025,6 +1126,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 0 1 auto;
 }
 
 /* Mobile responsive */
@@ -1051,6 +1153,13 @@ body {
         width: 180px;
         height: 36px;
         font-size: 0.8rem;
+    }
+
+    .create-flower-circle-btn {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 0.9rem;
     }
     
     /* Add more spacing for indicators on mobile */
@@ -1081,6 +1190,13 @@ body {
         width: 160px;
         height: 32px;
         font-size: 0.75rem;
+    }
+
+    .create-flower-circle-btn {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        font-size: 0.85rem;
     }
     
     /* Even more spacing for very small screens */
@@ -1370,6 +1486,244 @@ body {
     box-shadow: 0 0 0 0.25rem rgba(255, 105, 180, 0.25);
 }
 
+/* Create a Flower results */
+.create-flower-results {
+    max-height: 520px;
+}
+
+.create-flower-target-banner {
+    background: var(--light-pink);
+    border-left: 4px solid var(--primary-pink);
+    border-radius: var(--border-radius-sm);
+    padding: 0.75rem 1rem;
+}
+
+[data-theme="dark"] .create-flower-target-banner {
+    background: rgba(255, 105, 180, 0.12);
+}
+
+.create-flower-plan-card {
+    background: var(--white);
+    border: 1px solid var(--light-pink);
+    border-radius: var(--border-radius-sm);
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.create-flower-plan-card:last-child {
+    margin-bottom: 0;
+}
+
+.create-flower-plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.bg-pink-soft {
+    background: var(--light-pink);
+    color: var(--dark-gray);
+}
+
+.create-flower-step {
+    padding: 0.5rem 0.65rem;
+    margin-bottom: 0.4rem;
+    background: var(--bg-light, #fff7fb);
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--primary-pink);
+}
+
+.create-flower-step-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.15rem;
+}
+
+.create-flower-step-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-pink);
+}
+
+.create-flower-methods {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    flex-shrink: 0;
+}
+
+.create-flower-methods .source-icon {
+    font-size: 0.85rem;
+}
+
+.create-flower-step-body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+}
+
+.create-flower-plus,
+.create-flower-arrow {
+    color: var(--primary-pink);
+    font-weight: 700;
+}
+
+.create-flower-pct {
+    color: var(--medium-gray, #666);
+    font-size: 0.85rem;
+}
+
+.create-flower-layouts {
+    margin-top: 0.85rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--light-pink);
+}
+
+.create-flower-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255, 182, 193, 0.35);
+}
+
+.create-flower-layout:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.create-flower-layout-info {
+    min-width: 0;
+}
+
+/* CAF modal — mobile-friendly layout */
+@media (max-width: 576px) {
+    .create-flower-modal-content {
+        border-radius: 0 !important;
+    }
+
+    .create-flower-modal-content .modal-header {
+        border-radius: 0 !important;
+        padding: 0.85rem 1rem;
+    }
+
+    .create-flower-modal-body {
+        padding: 1rem !important;
+    }
+
+    .create-flower-intro {
+        padding: 0.75rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .create-flower-intro-lead {
+        font-size: 0.9rem;
+    }
+
+    .create-flower-intro-extra {
+        display: none;
+    }
+
+    .create-flower-actions {
+        flex-direction: column;
+    }
+
+    .create-flower-actions .btn {
+        width: 100%;
+    }
+
+    .create-flower-results.results-list,
+    #createFlowerPlansList.results-list {
+        max-height: none;
+        border: none;
+        padding: 0;
+    }
+
+    .create-flower-plan-card {
+        padding: 0.85rem;
+    }
+
+    .create-flower-plan-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+    }
+
+    .create-flower-step-body {
+        font-size: 0.85rem;
+        gap: 0.25rem;
+    }
+
+    .create-flower-layout {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .create-flower-layout .btn {
+        width: 100%;
+    }
+
+    .create-flower-target-banner {
+        font-size: 0.9rem;
+        padding: 0.65rem 0.75rem;
+    }
+}
+
+[data-theme="dark"] .create-flower-plan-card {
+    background: var(--card-bg, #2a2a2a);
+    border-color: rgba(255, 182, 193, 0.35);
+}
+
+[data-theme="dark"] .create-flower-step {
+    background: rgba(255, 105, 180, 0.08);
+}
+
+[data-theme="dark"] .bg-pink-soft {
+    background: rgba(255, 105, 180, 0.25);
+    color: #fff;
+}
+
+.create-flower-final-pct {
+    background: rgba(255, 105, 180, 0.18);
+    color: var(--dark-gray, #333);
+    font-weight: 600;
+}
+
+[data-theme="dark"] .create-flower-final-pct {
+    background: rgba(255, 105, 180, 0.28);
+    color: #fff;
+}
+
+/* In-modal overwrite confirm (inside Create a Flower, not a second Bootstrap modal) */
+.create-flower-overwrite-confirm {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+}
+
+.create-flower-overwrite-card {
+    background: var(--white, #fff);
+    border: 2px solid var(--primary-pink);
+    border-radius: var(--border-radius-md);
+    padding: 1rem 1.1rem;
+    box-shadow: var(--medium-shadow);
+}
+
+[data-theme="dark"] .create-flower-overwrite-card {
+    background: var(--card-bg, #2a2a2a);
+    border-color: var(--primary-pink);
+}
+
 /* Analysis Results */
 .analysis-summary {
     border-left: 4px solid var(--primary-pink);
@@ -1423,25 +1777,29 @@ body {
     margin-right: 4px;
 }
 
-.flower-icons i {
+.flower-icons i,
+.flower-icons .source-icon i {
     font-size: 0.9rem;
     opacity: 0.8;
     transition: opacity 0.2s ease;
 }
 
-.flower-icons i:hover {
+.flower-icons i:hover,
+.flower-icons .source-icon i:hover {
     opacity: 1;
 }
 
 /* Mobile responsive icon sizing */
 @media (max-width: 768px) {
-    .flower-icons i {
+    .flower-icons i,
+    .flower-icons .source-icon i {
         font-size: 0.75rem;
     }
 }
 
 @media (max-width: 480px) {
-    .flower-icons i {
+    .flower-icons i,
+    .flower-icons .source-icon i {
         font-size: 0.7rem;
     }
     
@@ -1499,6 +1857,16 @@ body {
 }
 
 /* Settings Sections */
+.settings-other-block {
+    margin-top: 1.5rem;
+    padding-top: 1.15rem;
+    border-top: 1px solid rgba(242, 138, 159, 0.22);
+}
+
+[data-theme="dark"] .settings-other-block {
+    border-top-color: rgba(255, 105, 180, 0.22);
+}
+
 .settings-section {
     background: var(--light-gray);
     padding: 1.5rem;
