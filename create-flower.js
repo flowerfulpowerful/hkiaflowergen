@@ -339,6 +339,17 @@ class FlowerPlanSolver {
             }
         }
 
+        // Same-type color mix early (Red + Yellow → Orange). Must beat the huge
+        // cross-type color-transfer candidate list or it never reaches verify.
+        const mixParents = reverseMix[color] || [];
+        mixParents.forEach(([c1, c2]) => {
+            this.addCandidate(candidates, seen, this.solid(type, c1), this.solid(type, c2));
+            if (isPatterned) {
+                this.addCandidate(candidates, seen, this.patterned(type, c1, pattern, c2), this.solid(type, c2));
+                this.addCandidate(candidates, seen, this.patterned(type, c1, pattern, secondary), this.solid(type, c2));
+            }
+        });
+
         // Hybridization first (before cross-type pattern-transfer donors): same type + same
         // pattern; child keeps one parent's main/pattern, secondary = other parent's main.
         // Example: Tulias Blue Ombre White + Tulias Orange Ombre White
@@ -472,16 +483,6 @@ class FlowerPlanSolver {
             });
         }
 
-        // Same-type color mix reverse
-        const mixParents = reverseMix[color] || [];
-        mixParents.forEach(([c1, c2]) => {
-            this.addCandidate(candidates, seen, this.solid(type, c1), this.solid(type, c2));
-            if (isPatterned) {
-                this.addCandidate(candidates, seen, this.patterned(type, c1, pattern, c2), this.solid(type, c2));
-                this.addCandidate(candidates, seen, this.patterned(type, c1, pattern, secondary), this.solid(type, c2));
-            }
-        });
-
         // Default-color partners for same-type mixes
         defaults.forEach(d1 => {
             defaults.forEach(d2 => {
@@ -524,6 +525,17 @@ class FlowerPlanSolver {
                 if (this.canUseType(pair[0].type)) s += 5;
                 if (this.canUseType(pair[1].type)) s += 5;
                 if (this.canUseType(pair[0].type) && this.canUseType(pair[1].type)) s += 8;
+
+                // Solid color mix (Red + Yellow → Orange): same-type solids that reverse-mix
+                // to the target color. Strongly prefer over color-transfer donors.
+                if (target && this.isSolidColorMixPair(pair[0], pair[1], target)) {
+                    s += 70;
+                    if (terminals) {
+                        if (this.isKnownOwned(pair[0], terminals)) s += 8;
+                        if (this.isKnownOwned(pair[1], terminals)) s += 8;
+                    }
+                }
+
                 // Prefer cross-type donors over needing the target itself as a parent
                 if (tKey) {
                     if (this.flowerKey(pair[0]) === tKey || this.flowerKey(pair[1]) === tKey) s -= 5;
@@ -588,6 +600,25 @@ class FlowerPlanSolver {
             };
             return scorePair(b) - scorePair(a);
         });
+    }
+
+    /**
+     * Same-type solid pair whose mains color-mix to the target's main color.
+     * Example: Bellbutton Red + Bellbutton Yellow → Bellbutton Orange.
+     */
+    isSolidColorMixPair(parent1, parent2, target) {
+        if (!parent1 || !parent2 || !target) return false;
+        if ((target.pattern || 'None') !== 'None') return false;
+        if (parent1.type !== target.type || parent2.type !== target.type) return false;
+        if ((parent1.pattern || 'None') !== 'None' || (parent2.pattern || 'None') !== 'None') {
+            return false;
+        }
+        if (parent1.mainColor === parent2.mainColor) return false;
+        try {
+            return this.sim.color_mix(parent1.mainColor, parent2.mainColor) === target.mainColor;
+        } catch (e) {
+            return false;
+        }
     }
 
     /**
@@ -762,8 +793,10 @@ class FlowerPlanSolver {
                 // Prefer parents that can actually be planted on the current plot
                 if (this.canUseType(pair.parent1.type)) s += 4;
                 if (this.canUseType(pair.parent2.type)) s += 4;
-                // Hybridization unlocks custom secondaries without needing that secondary elsewhere
-                if (this.isHybridizationPair(pair.parent1, pair.parent2, target)) {
+                // Color mix / hybridization beat cross-type transfer for acquisition recipes
+                if (this.isSolidColorMixPair(pair.parent1, pair.parent2, target)) {
+                    s += 25;
+                } else if (this.isHybridizationPair(pair.parent1, pair.parent2, target)) {
                     s += 20;
                     const defaultish = (p) => {
                         const sec = p.secondaryColor || 'None';
@@ -851,7 +884,11 @@ class FlowerPlanSolver {
         }
 
         let hybridBonus = 0;
+        let colorMixBonus = 0;
         if (finalStep?.parent1 && finalStep?.parent2 && finalStep?.result) {
+            if (this.isSolidColorMixPair(finalStep.parent1, finalStep.parent2, finalStep.result)) {
+                colorMixBonus = 6000;
+            }
             const tgtSec = finalStep.result.secondaryColor || 'None';
             if (
                 tgtSec !== 'None' && tgtSec !== 'White' && tgtSec !== 'Warm Pink'
@@ -886,10 +923,11 @@ class FlowerPlanSolver {
             }
         }
 
-        // Prefer native fertilize, on-plot finals, hybridization unlocks, fewer steps, higher odds
+        // Prefer native fertilize, on-plot finals, color mix / hybridization, fewer steps, higher odds
         return (
             defaultFertilizeBonus +
             onPlotFinalBonus +
+            colorMixBonus +
             hybridBonus +
             effectBridgeBonus +
             (8 - stepCount) * 1000 +
