@@ -1505,61 +1505,119 @@ class FlowerPlanSolver {
 
     /**
      * Attach exact optimal layouts to plans (async, yields so the UI stays responsive).
-     * Uses row DP (or B&B fallback). When Greenhouse is on, also attaches clone-farming
-     * layouts using in-game single-parent clone odds.
+     * Pairs that share the same breeding-odds LUT fingerprint are solved once and
+     * assigned the same layoutGroupId so the UI can collapse them into one layout block.
      */
     async attachExactLayouts(plans, target, onProgress = null, options = {}) {
         const isCancelled = options.isCancelled || null;
-        const layoutCache = new Map();
-        const uniquePairs = [];
-        // Equivalent breeding LUTs (same odds shape) share one expensive geometry solve.
         this._layoutAbstractCache = new Map();
         this._layoutExpensiveSolves = 0;
-        // Large plots: only fully solve a couple of distinct odds-shapes (best plans first).
         const plantableCount = this.getPlantableCells().length;
-        this._layoutMaxExpensiveSolves = plantableCount > 40 ? 2 : (plantableCount > 24 ? 4 : 12);
+        this._layoutMaxExpensiveSolves = plantableCount > 64
+            ? 1
+            : (plantableCount > 40 ? 2 : (plantableCount > 24 ? 4 : 12));
+        this._layoutLutCache = new Map();
+
         const cloneEligible = this.isGreenhouseEnabled()
             && this.canCloneFlowerToTarget(target, target)
             && this.canUseType(target.type);
-        const clonePairKey = this.pairLayoutKey(target, target);
 
-        const queuePair = (parent1, parent2) => {
+        // Unique pairs in plan order (best recipes first)
+        const pairKeyToParents = new Map();
+        const orderedPairKeys = [];
+        const enqueue = (parent1, parent2) => {
             if (!parent1 || !parent2) return;
             const pairKey = this.pairLayoutKey(parent1, parent2);
-            if (layoutCache.has(pairKey)) return;
-            layoutCache.set(pairKey, null);
-            uniquePairs.push({ pairKey, parent1, parent2 });
+            if (pairKeyToParents.has(pairKey)) return;
+            pairKeyToParents.set(pairKey, { parent1, parent2 });
+            orderedPairKeys.push(pairKey);
         };
 
         for (const plan of plans || []) {
             if (plan.finalParentsOnPlot && plan.parent1 && plan.parent2) {
-                queuePair(plan.parent1, plan.parent2);
+                enqueue(plan.parent1, plan.parent2);
             }
         }
-        if (cloneEligible) queuePair(target, target);
+        if (cloneEligible) enqueue(target, target);
+
+        // Fingerprint each pair; keep one representative per odds-shape
+        const pairKeyToLutKey = new Map();
+        const lutKeyToRep = new Map();
+        const orderedLutKeys = [];
+
+        for (const pairKey of orderedPairKeys) {
+            this.throwIfCancelled(isCancelled);
+            const { parent1, parent2 } = pairKeyToParents.get(pairKey);
+            const { p1, p2 } = this.canonicalizeLayoutParents(parent1, parent2);
+            const canonKey = this.pairLayoutKey(p1, p2);
+            let precomputed = this._layoutLutCache.get(canonKey);
+            if (!precomputed) {
+                precomputed = this.buildTargetProbabilityLut(p1, p2, target);
+                this._layoutLutCache.set(canonKey, precomputed);
+            }
+            if (precomputed.maxP <= 0) {
+                pairKeyToLutKey.set(pairKey, null);
+                continue;
+            }
+            const lutKey = this.fingerprintLut(precomputed.lut, precomputed.same);
+            pairKeyToLutKey.set(pairKey, lutKey);
+            if (!lutKeyToRep.has(lutKey)) {
+                lutKeyToRep.set(lutKey, { parent1, parent2 });
+                orderedLutKeys.push(lutKey);
+            }
+            await this.yieldCancelled(isCancelled);
+        }
+
+        const lutKeyToGroupId = new Map();
+        orderedLutKeys.forEach((lutKey, i) => lutKeyToGroupId.set(lutKey, `g${i}`));
 
         try {
-            for (let i = 0; i < uniquePairs.length; i++) {
+            // One geometry solve per fingerprint (fills _layoutAbstractCache)
+            for (let i = 0; i < orderedLutKeys.length; i++) {
                 this.throwIfCancelled(isCancelled);
-                const { pairKey, parent1, parent2 } = uniquePairs[i];
+                const lutKey = orderedLutKeys[i];
+                const { parent1, parent2 } = lutKeyToRep.get(lutKey);
                 if (typeof onProgress === 'function') {
                     onProgress({
                         phase: 'layouts',
                         current: i + 1,
-                        total: uniquePairs.length
+                        total: orderedLutKeys.length
                     });
                 }
+                await this.generateLayoutsAsync(parent1, parent2, target, isCancelled);
+                await this.yieldCancelled(isCancelled);
+            }
+
+            // Rematerialize onto each plan's parents (cache hit) + assign group ids
+            for (const plan of plans || []) {
+                plan.layoutGroupId = null;
+                plan.layouts = [];
+                plan.layoutsPending = false;
+
+                let parent1 = plan.parent1;
+                let parent2 = plan.parent2;
+                if (plan.isClonePlan && cloneEligible) {
+                    parent1 = target;
+                    parent2 = target;
+                } else if (!plan.finalParentsOnPlot || !parent1 || !parent2) {
+                    continue;
+                }
+
+                const pairKey = this.pairLayoutKey(parent1, parent2);
+                const lutKey = pairKeyToLutKey.get(pairKey);
+                if (!lutKey) continue;
+
+                plan.layoutGroupId = lutKeyToGroupId.get(lutKey) || null;
                 let layouts = this.collapseEquivalentLayouts(
                     await this.generateLayoutsAsync(parent1, parent2, target, isCancelled)
                 );
                 const isClonePair = this.flowerKey(parent1) === this.flowerKey(parent2)
                     && this.isGreenhouseEnabled()
                     && this.canCloneFlowerToTarget(parent1, target);
-                if (isClonePair) {
+                if (isClonePair || plan.isClonePlan) {
                     layouts = this.tagCloneLayouts(layouts);
                 }
-                layoutCache.set(pairKey, layouts);
-                await this.yieldCancelled(isCancelled);
+                plan.layouts = layouts.slice(0, 3);
             }
         } catch (err) {
             if (err && err.code === 'CAF_SEARCH_CANCELLED') {
@@ -1574,46 +1632,9 @@ class FlowerPlanSolver {
             throw err;
         } finally {
             this._layoutAbstractCache = null;
+            this._layoutLutCache = null;
             this._layoutExpensiveSolves = 0;
             this._layoutMaxExpensiveSolves = null;
-        }
-
-        const sharedCloneLayouts = cloneEligible
-            ? (layoutCache.get(clonePairKey) || [])
-            : [];
-
-        for (const plan of plans || []) {
-            const merged = [];
-            const seen = new Set();
-            const addLayouts = (list) => {
-                for (const layout of list || []) {
-                    const sig = [
-                        layout.isCloneLayout ? 'c' : 'b',
-                        layout.name,
-                        layout.score,
-                        layout.expectedCount,
-                        layout.placements?.length
-                    ].join('|');
-                    if (seen.has(sig)) continue;
-                    seen.add(sig);
-                    merged.push(layout);
-                }
-            };
-
-            const planPairKey = (plan.parent1 && plan.parent2)
-                ? this.pairLayoutKey(plan.parent1, plan.parent2)
-                : '';
-
-            if (plan.finalParentsOnPlot && planPairKey) {
-                addLayouts(layoutCache.get(planPairKey));
-            } else if (plan.isClonePlan && cloneEligible) {
-                addLayouts(sharedCloneLayouts);
-            }
-
-            merged.sort((a, b) => this.compareLayoutScores(a, b));
-
-            plan.layouts = merged.slice(0, 3);
-            plan.layoutsPending = false;
         }
 
         return plans;
@@ -2000,8 +2021,29 @@ class FlowerPlanSolver {
     }
 
     /**
+     * Fast heuristic layouts from seed patterns (no DP/B&B). Used on huge plots or when
+     * the expensive-solve budget is exhausted so CAF still offers Apply Layout.
+     */
+    buildSeedLayouts(parent1, parent2, cells, lut, parentsDifferent, keepTop = 1) {
+        const neighborIdx = this.buildPlantableGraph(cells);
+        const top = [];
+        for (const state of this.seedIncumbentStates(cells, parentsDifferent)) {
+            const metrics = this.scoreStateExact(state, neighborIdx, lut, parentsDifferent);
+            if (metrics.score < 0) continue;
+            const candidate = this.stateToLayout(state, cells, parent1, parent2, metrics, false);
+            this.considerTopLayout(top, candidate, keepTop);
+        }
+        return top.map((layout, i) => {
+            layout.name = this.layoutOptionName(i);
+            layout.exact = false;
+            return layout;
+        });
+    }
+
+    /**
      * Exact global optimum for P(≥1 target). Uses row DP on typical grids (incl. 5×5);
      * falls back to branch-and-bound with tight bounds. Seeds only tighten the incumbent.
+     * Very large plots (e.g. 10×10 custom) use seed heuristics only — B&B freezes the tab.
      */
     async findExactOptimalLayoutsAsync(parent1, parent2, target, cells, isCancelled = null, precomputed = null) {
         const n = cells.length;
@@ -2013,6 +2055,11 @@ class FlowerPlanSolver {
 
         const parentsDifferent = !same;
         const keepTop = n <= 12 ? 3 : 1;
+
+        // Full 10×10 / 80+ plantable: seed patterns are strong enough and finish instantly.
+        if (n > 80) {
+            return this.buildSeedLayouts(parent1, parent2, cells, lut, parentsDifferent, keepTop);
+        }
 
         const rowDp = await this.findExactOptimalLayoutsRowDp(
             parent1, parent2, cells, lut, parentsDifferent, keepTop, isCancelled
@@ -2341,9 +2388,12 @@ class FlowerPlanSolver {
         const startedAt = (typeof performance !== 'undefined' && performance.now)
             ? performance.now()
             : Date.now();
-        // ~3s / 250k nodes keeps large plots usable; small plots usually finish earlier.
-        const maxNodes = n <= 20 ? Infinity : (n <= 36 ? 400000 : 250000);
-        const maxMs = n <= 20 ? Infinity : (n <= 36 ? 4000 : 2500);
+        // Budget scales with plot size. Large n makes each node expensive (score walks all
+        // cells), so keep chunks small and check the clock inside the inner loop — otherwise
+        // a single 12k-node chunk can freeze the tab for many seconds on 10×10.
+        const maxNodes = n <= 20 ? Infinity : (n <= 36 ? 400000 : (n <= 64 ? 120000 : 40000));
+        const maxMs = n <= 20 ? Infinity : (n <= 36 ? 4000 : (n <= 64 ? 1800 : 800));
+        const chunkNodes = n <= 36 ? 12000 : (n <= 64 ? 2500 : 600);
 
         const considerState = (state) => {
             const metrics = this.scoreStateExact(state, neighborIdx, lut, parentsDifferent);
@@ -2361,7 +2411,6 @@ class FlowerPlanSolver {
         const state = new Uint8Array(n);
         const stack = [{ depth: 0, choiceIdx: 0, has1: false, has2: false }];
         let nodes = 0;
-        const chunkNodes = 12000;
         let finished = true;
 
         const pruneThreshold = () => {
@@ -2385,7 +2434,7 @@ class FlowerPlanSolver {
 
             const chunkStart = nodes;
             while (stack.length && nodes - chunkStart < chunkNodes) {
-                if (nodes >= maxNodes) {
+                if (nodes >= maxNodes || ((nodes & 511) === 0 && timedOut())) {
                     finished = false;
                     stack.length = 0;
                     break;
@@ -2552,7 +2601,12 @@ class FlowerPlanSolver {
             const { p1, p2, swapped } = this.canonicalizeLayoutParents(parent1, parent2);
 
             // Shared across attachExactLayouts: identical LUTs reuse geometry.
-            const precomputed = this.buildTargetProbabilityLut(p1, p2, target);
+            const pairLutKey = this.pairLayoutKey(p1, p2);
+            let precomputed = this._layoutLutCache?.get(pairLutKey);
+            if (!precomputed) {
+                precomputed = this.buildTargetProbabilityLut(p1, p2, target);
+                if (this._layoutLutCache) this._layoutLutCache.set(pairLutKey, precomputed);
+            }
             if (precomputed.maxP <= 0) return [];
             const lutKey = this.fingerprintLut(precomputed.lut, precomputed.same);
             if (this._layoutAbstractCache && this._layoutAbstractCache.has(lutKey)) {
@@ -2569,8 +2623,26 @@ class FlowerPlanSolver {
                 && this._layoutMaxExpensiveSolves != null
                 && (this._layoutExpensiveSolves || 0) >= this._layoutMaxExpensiveSolves
             ) {
-                // Skip additional distinct LUT solves on huge plots — recipes still show.
-                return [];
+                // Budget spent — still offer fast seed layouts so Apply Layout works.
+                const seeds = this.buildSeedLayouts(
+                    p1, p2, cells, precomputed.lut, !precomputed.same, 1
+                );
+                if (this._layoutAbstractCache && seeds.length) {
+                    this._layoutAbstractCache.set(lutKey, this.toAbstractLayouts(seeds));
+                }
+                if (swapped) {
+                    const abstracts = this.toAbstractLayouts(seeds).map((abs) => ({
+                        ...abs,
+                        signature: this.swapLayoutSignatureRoles(abs.signature)
+                    }));
+                    return this.materializeAbstractLayouts(abstracts, parent1, parent2, cells);
+                }
+                return this.materializeAbstractLayouts(
+                    this.toAbstractLayouts(seeds),
+                    parent1,
+                    parent2,
+                    cells
+                );
             }
             if (this._layoutAbstractCache && this._layoutMaxExpensiveSolves != null) {
                 this._layoutExpensiveSolves = (this._layoutExpensiveSolves || 0) + 1;

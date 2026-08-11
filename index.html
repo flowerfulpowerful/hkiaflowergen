@@ -13,26 +13,44 @@
         <!-- Google tag (gtag.js) -->
 
     <!--Google SEO-->
-        <meta name="description" content="The Hello Kitty Island Adventure (HKIA) Flower Generator is an interactive website that can be used to assist you with flower breeding, color/pattern transfers, and organizing flower plots with accurate calculations.">
-    <link rel="icon" href="https://flowerfulpowerful.github.io/hkiaflowergen/assets/favicon.png">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKIA Flower Breeding Simulator</title>
+    <meta name="description" content="The Hello Kitty Island Adventure (HKIA) Flower Generator is an interactive website that can be used to assist you with flower breeding, color/pattern transfers, and organizing flower plots with accurate calculations.">
+    <!-- Tell Google the homepage is the clean URL (not shared ?id= garden links) -->
+    <link rel="canonical" href="https://flowerfulpowerful.github.io/hkiaflowergen/">
+    <script>
+      // Shared garden URLs (?id=...) should not become the Google result
+      if (/\bid=/.test(location.search)) {
+        var robots = document.createElement('meta');
+        robots.name = 'robots';
+        robots.content = 'noindex, follow';
+        document.head.appendChild(robots);
+      }
+    </script>
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "HKIA Flower Generator",
+      "alternateName": ["HKIA Flower Breeding Simulator", "Flowerful Flower Generator"],
+      "url": "https://flowerfulpowerful.github.io/hkiaflowergen/"
+    }
+    </script>
     <!--Google SEO-->
-    
+
             <!--Embedding Stuff -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://flowerfulpowerful.github.io/hkiaflowergen/" />
     <meta property="og:title" content="HKIA Flower Generator" />
     <meta property="og:description" content="The HKIA Flower Generator is an interactive website that can be used to assist you with flower breeding, color/pattern transfers, and organizing flower plots with accurate calculations." />
-    <meta property="og:image" content="https://github.com/flowerfulpowerful/hkiaflowergen/raw/refs/heads/main/assets/embed1.png" />
+    <meta property="og:image" content="https://flowerfulpowerful.github.io/hkiaflowergen/assets/embed1.png" />
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="theme-color" content="#b2e48f"/>
-    
-        <!--Embedding Stuff -->   
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HKIA Flower Breeding Simulator</title>
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+        <!--Embedding Stuff -->
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -408,9 +426,9 @@
                         <div class="form-text mt-2" id="createFlowerContextNote">
                             <i class="fas fa-info-circle me-1"></i>Target flowers are limited to this plot. Recipe parents may include flowers from other regions when needed for color/pattern transfer.
                         </div>
-                        <div class="form-text mt-1 create-flower-intro-extra">
+                        <!--<div class="form-text mt-1 create-flower-intro-extra">
                             <i class="fas fa-trophy me-1"></i>Layouts are solved exactly: every Empty / Parent A / Parent B assignment on your plantable cells is considered (branch-and-bound on large plots), maximizing chance of at least one target flower.
-                        </div>
+                        </div>-->
                     </div>
 
                     <form id="createFlowerForm">
@@ -1638,14 +1656,6 @@
                                         <li class="mb-2">
                                             <strong>Greenhouse toggle</strong>
                                             <p class="small text-muted mb-0">Affects whether clone farming plans and layouts are offered.</p>
-                                        </li>
-                                        <li class="mb-2">
-                                            <strong>Custom secondaries</strong>
-                                            <p class="small text-muted mb-0">Unlock a secondary via hybridization first (same type/pattern, mains = desired main + secondary). Pattern-transferring a flower that already has that secondary is a later option.</p>
-                                        </li>
-                                        <li class="mb-2">
-                                            <strong>Effects on this plot</strong>
-                                            <p class="small text-muted mb-0">If the native effect flower can’t be planted here (e.g. Blazebulb/Molten), CAF bridges through an on-plot carrier first — then pattern-transfers onto your target so both final parents are plantable.</p>
                                         </li>
                                         <li>
                                             <strong>Large grids</strong>
