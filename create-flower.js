@@ -35,10 +35,10 @@ class FlowerPlanSolver {
     }
 
     /**
-     * Layout scoring must use the real Greenhouse toggle so clone odds match in-game:
-     * GH single-parent patterned = FallbackPatternCloneChance (20%),
-     * outdoor single-parent patterned = PatternedClone (1%),
-     * identical pair patterned = PatternedClone (1%) either mode.
+     * Layout scoring must use the real Greenhouse toggle so spawn/clone paths match in-game:
+     * single-parent patterned (1 neighbor) = FallbackPatternCloneChance (20%) in GH or outdoor,
+     * identical pair patterned (2+ neighbors) = PatternedClone (1%) either mode.
+     * Greenhouse mainly forces 100% grow chance (vs outdoor fertilized ~10%).
      */
     withLayoutBreedContext(fn) {
         const prevEffects = this.sim.patternNoSecondaries;
@@ -645,8 +645,8 @@ class FlowerPlanSolver {
 
     /**
      * Single-parent clone odds matching calculateCellPossibilities (1 neighbor).
-     * Greenhouse patterned: FallbackPatternCloneChance (20%).
-     * Outdoor patterned: PatternedClone (1%). Solids: 100% of the breed pool.
+     * Patterned: FallbackPatternCloneChance (20%) / 80% solid (GH or outdoor).
+     * Solids: 100% of the breed pool.
      */
     verifySingleParentClone(parent, target) {
         if (!this.canCloneFlowerToTarget(parent, target)) return null;
@@ -698,8 +698,8 @@ class FlowerPlanSolver {
         this._verifyCount += 1;
 
         // Identical parents: report accurate single-parent clone % (layout-optimal path)
-        // when Greenhouse is on — in-game 1-neighbor patterned clone is 20%, not the
-        // 1% identical-pair PatternedClone from breedTwoFlowers.
+        // — in-game 1-neighbor patterned clone is Fallback 20%, not the 1% identical-pair
+        // PatternedClone from breedTwoFlowers (2+ neighbors).
         if (this.flowerKey(parent1) === this.flowerKey(parent2)) {
             const cloneHit = this.verifySingleParentClone(parent1, target);
             if (cloneHit) return cloneHit;
@@ -1978,7 +1978,7 @@ class FlowerPlanSolver {
             }
         ];
 
-        // Greenhouse patterned clones prefer exactly 1 neighbor (20% vs 1% for 2+).
+        // Patterned clones prefer exactly 1 neighbor (Fallback 20% vs pair PatternedClone 1%).
         // Seed a sparse every-other-cell lattice for same-parent search.
         if (!parentsDifferent) {
             patterns.push((cell) => ((cell.row + cell.col * 2) % 5 === 0 ? 1 : 0));

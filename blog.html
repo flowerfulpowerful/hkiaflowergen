@@ -170,6 +170,41 @@
                  <article class="blog-post card mb-4" data-category="updates">
                     <div class="card-body">
                         <h2 class="card-title h4">
+                            <i class="fas fa-bug me-2 text-pink"></i>Bug Fix - Version 2.1.1
+                        </h2>
+                        <div class="post-meta mb-3">
+                            <span class="badge bg-pink me-2">
+                                <i class="fas fa-calendar me-1"></i>August 13, 2026
+                            </span>
+                            <span class="badge bg-outline-pink">
+                                <i class="fas fa-tag me-1"></i>Updates
+                            </span>
+                        </div>
+                    <div class="post-content">
+                        <p>Quick accuracy fix for patterned single-parent cloning outdoors — thank you to everyone who said outdoor patterned clones still felt closer to 20% of breed spawns than 1%! ❤️</p>
+
+                        <h5>Bug Fixes</h5>
+                        <ul>
+                            <li><strong>Outdoor single-parent patterned clones</strong> now use <code>FallbackPatternCloneChance</code> (<strong>20% patterned / 80% solid</strong>), matching the greenhouse single-neighbor path. The simulator previously treated outdoor 1-neighbor clones as <code>PatternedClone</code> / <code>UnpatternedClone</code> (<strong>1% / 99%</strong>), which only applies to <strong>identical-pair</strong> breeding when there are <strong>2+</strong> neighbors.</li>
+                            <li>Confirmed from live game logic (<code>TryBreedFlowers</code>): with exactly one neighbor, pair breeding is skipped and the fallback clone weights are used in <strong>both</strong> greenhouse and outdoor. Greenhouse still differs mainly by forcing <strong>100% grow chance</strong> (outdoors fertilized grow remains ~10%).</li>
+                        </ul>
+
+                        <h5>What this means in practice</h5>
+                        <ul>
+                            <li><strong>1 neighbor:</strong> among breed outcomes, ~20% patterned clone / ~80% solid (GH or outdoor).</li>
+                            <li><strong>2+ identical neighbors:</strong> still ~1% patterned clone via <code>PatternedClone</code>.</li>
+                            <li>Outdoor absolute rates stay lower because spawn chance is low — but the patterned share of successful breed spawns is the 20% fallback, not 1%.</li>
+                        </ul>
+
+                        <p>If you have any questions or feedback, please feel free to submit a report on our site under the "Feedback" button in the About menu.</p>
+                        <p>Thank you for your continued support! 🌸</p>
+                    </div>
+                </div>
+                </article>
+
+                 <article class="blog-post card mb-4" data-category="updates">
+                    <div class="card-body">
+                        <h2 class="card-title h4">
                             <i class="fas fa-sync-alt me-2 text-pink"></i>Latest Updates - Version 2.1.0
                         </h2>
                         <div class="post-meta mb-3">
@@ -299,7 +334,6 @@
                             <ul>
                                 <li><strong>Solid non-default color on this plot:</strong> Often a color-transfer recipe (patterned donor of the desired color + solid of the target type in another color). Apply the Recommended Layout for the final pair.</li>
                                 <li><strong>Default pattern/effect (Ombre, Cosmic, etc.):</strong> Prefer fertilize from the matching solid when the flower gets that pattern from fertilizer — CAF avoids pattern-transferring a native default onto itself as the root plan.</li>
-                                <li><strong>Farm more of a patterned flower (Greenhouse on):</strong> Look for Clone plans/layouts. Patterned greenhouse clones prefer sparse setups — about <strong>1 neighbor ≈ 20%</strong> patterned clone chance vs <strong>2+ neighbors ≈ 1%</strong>.</li>
                                 <li><strong>You already planted useful parents:</strong> Keep “Include flowers already on my grid…” checked so CAF can short-circuit to recipes that use what’s on the plot.</li>
                             </ul>
 
@@ -380,7 +414,7 @@
                         <h5>Breeding Accuracy (Live Game Data)</h5>
                         <ul>
                             <li>Breeding weights were slightly updated from data loaded and sourced from game v2.17.1 (clone, color mix, pattern transfer, color transfer, grow rates, and event chance).</li>
-                            <li><strong>Single-parent patterned breeding</strong> now distinguishes greenhouse vs outdoor: in the <strong>greenhouse</strong>, one patterned neighbor gives <strong>80% solid / 20% patterned</strong> (<code>FallbackPatternCloneChance</code>); outdoors it stays <strong>99% / 1%</strong> within the breeding roll (<code>UnpatternedClone</code> / <code>PatternedClone</code>).</li>
+                            <li><strong>Single-parent patterned breeding</strong> (corrected in <strong>2.1.1</strong>): one patterned neighbor gives <strong>80% solid / 20% patterned</strong> (<code>FallbackPatternCloneChance</code>) in <strong>both</strong> greenhouse and outdoor. The earlier note that outdoors used <strong>99% / 1%</strong> was wrong — that split is for identical-pair clones with <strong>2+</strong> neighbors (<code>UnpatternedClone</code> / <code>PatternedClone</code>).</li>
                             <li><strong>Two patterned parents + color mix</strong> (e.g. Red/White Ombre + Orange/White Ombre) now uses the <code>CrossBlend*</code> weight family from live data — parent patterned clones at <strong>4.44%</strong> each vs cross-secondary hybrids at <strong>1.11%</strong> each (not equal 1.06% lines from the wrong <code>Crossbreed*</code> fields).</li>
                             <li><strong>Live weight values (game v2.17.1) use the game's actual weights for breeding, grow rates, and event chance.</strong></li>
                         </ul>
