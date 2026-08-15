@@ -3996,7 +3996,8 @@ body {
     transition: var(--transition, all 0.3s ease);
     backdrop-filter: blur(10px);
     font-size: 1.2rem;
-    z-index: 9999;
+    /* Above page content / sticky nav; below Bootstrap modal backdrop (1050) */
+    z-index: 1030;
     box-shadow: 0 4px 15px rgba(242, 138, 159, 0.25);
     cursor: pointer;
     padding: 0;
