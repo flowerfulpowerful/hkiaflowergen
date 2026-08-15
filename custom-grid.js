@@ -411,7 +411,7 @@ class CustomGridManager {
 
         // Fully upgraded greenhouse — full 10×11 plantable grid (cols × rows)
         this.addCustomLayout('greenhouse', {
-            name: 'Fully Upgraded Greenhouse (10x11)',
+            name: 'Fully Upgraded Greenhouse',
             rows: 11,
             cols: 10,
             disabledCells: []
