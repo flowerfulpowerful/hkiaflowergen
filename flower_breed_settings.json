@@ -2,7 +2,12 @@
   "flowerSettings": {
     "FertilizePatternChance": 0.01,
     "MinigameFlowerLuckPatternChance": 0.05,
-    "DefaultPatternColor": "White"
+    "DefaultPatternColor": "White",
+    "OptimizedCooldownDays": 4,
+    "OptimizedPityDays": 14,
+    "OptimizedRareChanceFirst": 0.05,
+    "OptimizedRareChanceSecond": 0.1,
+    "OptimizedRareChanceThird": 0.85
   },
   "default": {
     "GrowFlowerChance": 0.005,

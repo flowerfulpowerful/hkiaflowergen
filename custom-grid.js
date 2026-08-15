@@ -34,7 +34,7 @@ class CustomGridManager {
         this.addCustomLayout('sr3', {
             name: 'Resort Cabin',
             rows: 4,
-            cols: 3,
+            cols: 2,
             disabledCells: this.generateResortCabinLayout()
         });
         
@@ -405,6 +405,14 @@ class CustomGridManager {
         this.addCustomLayout('custom', {
             name: 'Custom Grid',
             rows: 10,
+            cols: 10,
+            disabledCells: []
+        });
+
+        // Fully upgraded greenhouse — full 10×11 plantable grid (cols × rows)
+        this.addCustomLayout('greenhouse', {
+            name: 'Fully Upgraded Greenhouse (10x11)',
+            rows: 11,
             cols: 10,
             disabledCells: []
         });

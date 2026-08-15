@@ -73,6 +73,11 @@
     <audio id="multipopAudio" src="assets/audio/multipop.mp3"></audio>
     <audio id="popAudio" src="assets/audio/pop.mp3"></audio>
 
+    <!-- Floating Dark Mode Toggle (settings switch stays in Preferences) -->
+    <button type="button" id="floatingDarkModeToggle" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon" aria-hidden="true"></i>
+    </button>
+
     <!-- Navigation Header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-pink-gradient sticky-top">
         <div class="container-fluid">
@@ -156,6 +161,10 @@
                                     <div class="paint-mode-indicator clickable" id="copyModeIndicator" title="Click to switch to copy mode">
                                         <i class="fas fa-copy"></i>
                                         <span>Copy</span>
+                                    </div>
+                                    <div class="paint-mode-indicator clickable" id="reimagineModeIndicator" title="Click to switch to Reimagine mode">
+                                        <i class="fas fa-rainbow"></i>
+                                        <span>Reimagine</span>
                                     </div>
                                 </div>
 
@@ -711,6 +720,7 @@
                                     <label for="plotLayout" class="form-label">Plot Layout</label>
                                     <select class="form-select" id="plotLayout">
                                         <option value="none">Custom Grid</option>
+                                        <option value="greenhouse">Fully Upgraded Greenhouse (10x11)</option>
                                         <option value="sr1">Resort Hopscotch Islands</option>
                                         <option value="sr2">Resort Cozy Islands</option>
                                         <option value="sr3">Resort Cabin</option>
@@ -944,6 +954,9 @@
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
                                             <strong>Copy Flowers:</strong> Click a flower to copy it, then click another empty cell to paste the copied flower.
+                                        </li>
+                                        <li class="list-group-item border-0 bg-light-pink">
+                                            <strong>Reimagine:</strong> Mark plots with Usahana’s Reimagine (Optimize) ability. Analyze remaps breed picks onto the three rarest outcomes at <strong>5% / 10% / 85%</strong> (cooldown/pity calendar not simulated).
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
                                             <strong>Create Patterns:</strong> Use paint mode to create symmetrical designs.
@@ -1208,7 +1221,7 @@
                         <img src="assets/logo.png" alt="HKIA Flower Simulator" class="mb-3" style="max-width: 200px;">
                         <h4>Hello Kitty Island Adventure</h4>
                         <h5 class="text-muted">Flower Breeding Simulator</h5>
-                        <p class="text-muted mb-0"><small>Version 2.1.1</small></p>
+                        <p class="text-muted mb-0"><small>Version 2.1.2</small></p>
                     </div>
                     <div class="about-content">
                         <p class="mb-3">
