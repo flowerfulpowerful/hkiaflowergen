@@ -184,10 +184,16 @@ body {
 }
 
 [data-theme="dark"] #viewInfoModal .badge,
-[data-theme="dark"] #viewInfoModal .alert {
+[data-theme="dark"] #viewInfoModal .alert,
+[data-theme="dark"] #viewInfoModal .alert-info {
     background-color: var(--medium-gray);
     color: var(--dark-gray);
     border-color: var(--medium-gray);
+}
+
+[data-theme="dark"] #viewInfoModal .alert-info strong,
+[data-theme="dark"] #viewInfoModal .alert-info i {
+    color: var(--dark-gray);
 }
 
 [data-theme="dark"] #viewInfoModal .text-muted {
@@ -338,6 +344,19 @@ body {
 [data-theme="dark"] .analysis-summary {
     background-color: var(--light-gray);
     border-left-color: var(--primary-pink);
+}
+
+/* Match Reimagine note styling from #viewInfoModal */
+[data-theme="dark"] #analysisModal .alert,
+[data-theme="dark"] #analysisModal .alert-info {
+    background-color: var(--medium-gray);
+    color: var(--dark-gray);
+    border-color: var(--medium-gray);
+}
+
+[data-theme="dark"] #analysisModal .alert-info strong,
+[data-theme="dark"] #analysisModal .alert-info i {
+    color: var(--dark-gray);
 }
 
 [data-theme="dark"] .results-list {
