@@ -102,7 +102,7 @@ body {
     color: var(--dark-gray);
 }
 
-[data-theme="dark"] .grid-cell:hover {
+[data-theme="dark"] .grid-cell:hover:not(.disabled) {
     border-color: var(--primary-pink);
 }
 
@@ -1409,7 +1409,7 @@ body {
     font-size: 0.55rem;
 }
 
-.grid-cell:hover {
+.grid-cell:hover:not(.disabled) {
     transform: scale(1.1);
     border-color: var(--primary-pink);
     box-shadow: var(--soft-shadow);
@@ -1428,23 +1428,33 @@ body {
 }
 
 .grid-cell.reimagine {
-    /* Pastel rainbow replaces the normal cell border (not an inner inset ring) */
-    border-width: 0;
+    /* Cells clip content; the ring has to paint on the 2px border, which lives outside that clip. */
+    overflow: visible;
+    z-index: 2;
+    border-color: transparent;
     box-shadow: none;
     background-image: none;
 }
 
 .grid-cell.reimagine:hover {
-    border-width: 0;
     border-color: transparent;
+}
+
+/* Edit mode: empty Reimagine plots are not plantable (View / Paint keep a normal pointer). */
+#flowerGrid:not(.view-mode):not(.paint-mode) .grid-cell.reimagine:not(.occupied) {
+    cursor: not-allowed;
 }
 
 .grid-cell.reimagine::after {
     content: '';
     position: absolute;
-    inset: 0;
+    /* Absolute inset is the padding box; -2px covers the real 2px cell border. */
+    inset: -2px;
     border-radius: inherit;
-    padding: 2px; /* same thickness as .grid-cell border */
+    box-sizing: border-box;
+    padding: 2px;
+    pointer-events: none;
+    z-index: 2;
     background: linear-gradient(
         135deg,
         #ffb3c6,
@@ -1461,19 +1471,23 @@ body {
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
+            mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
             mask-composite: exclude;
-    pointer-events: none;
-    z-index: 2;
 }
 
 .grid-cell.reimagine.occupied {
-    border-width: 0;
     border-color: transparent;
     box-shadow: none;
+    background-image: none;
+}
+
+.grid-cell.reimagine.adjacent-tint {
+    border-color: transparent;
 }
 
 [data-theme="dark"] .grid-cell.reimagine {
-    border-width: 0;
     border-color: transparent;
     background-image: none;
     box-shadow: none;
@@ -1494,6 +1508,7 @@ body {
     );
 }
 
+.grid-cell.disabled,
 .grid-cell.disabled:hover {
     transform: none;
     box-shadow: none;
@@ -1505,12 +1520,13 @@ body {
     transition: all 0.3s ease;
 }
 
-.grid-cell.disabled.adjacent-tint {
+.grid-cell.disabled.adjacent-tint,
+.grid-cell.disabled.adjacent-tint:hover {
     background: var(--medium-gray) !important;
     border-color: var(--dark-gray) !important;
 }
 
-.grid-cell.adjacent-tint:hover {
+.grid-cell.adjacent-tint:hover:not(.disabled) {
     background: rgba(40, 167, 69, 0.3) !important;
     border-color: rgba(40, 167, 69, 0.6);
 }
@@ -1962,7 +1978,6 @@ body {
 }
 
 .result-item:hover {
-    transform: translateX(5px);
     box-shadow: var(--soft-shadow);
 }
 
@@ -2614,7 +2629,7 @@ body {
         touch-action: manipulation;
     }
     
-    .grid-cell:hover {
+    .grid-cell:hover:not(.disabled) {
         transform: scale(1.08);
     }
     
@@ -2747,7 +2762,7 @@ body {
         touch-action: manipulation;
     }
     
-    .grid-cell:hover {
+    .grid-cell:hover:not(.disabled) {
         transform: scale(1.1);
     }
     
@@ -2858,7 +2873,7 @@ body {
         touch-action: manipulation;
     }
     
-    .grid-cell:hover {
+    .grid-cell:hover:not(.disabled) {
         transform: scale(1.05); /* Reduced scale for mobile */
     }
     
@@ -3948,9 +3963,9 @@ body {
     pointer-events: none;
 }
 
-/* flower srcs */
+/* flower srcs — tooltip is a body-level layer so overflow/transform parents cannot clip or offset it */
 .source-icon {
-    cursor: pointer;
+    cursor: help;
     color: #666;
     transition: color 0.2s;
     position: relative;
@@ -3958,44 +3973,37 @@ body {
     padding: 2px 4px;
 }
 
-.source-icon .tooltip-text {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
+.source-icon:hover {
+    color: #333;
+}
+
+#sourceIconTooltipLayer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: max-content;
+    z-index: 20000;
+    max-width: min(260px, calc(100vw - 16px));
     padding: 6px 10px;
     border-radius: 4px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
     font-size: 0.85em;
+    line-height: 1.35;
     white-space: nowrap;
-    margin-bottom: 5px;
-    transition: opacity 0.2s, visibility 0.2s;
-    z-index: 1000;
     pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
 }
 
-
-@media (hover: hover) and (pointer: fine) {
-    .source-icon:hover .tooltip-text {
-        visibility: visible;
-        opacity: 1;
-    }
-    
-    .source-icon:hover {
-        color: #333;
-    }
-}
-
-.source-icon.active .tooltip-text {
+#sourceIconTooltipLayer.is-visible {
     visibility: visible;
     opacity: 1;
 }
 
-.source-icon.active {
-    color: #333;
+#sourceIconTooltipLayer.is-multiline {
+    white-space: normal;
+    text-align: left;
 }
 
 /* Floating dark/light mode toggle (matches blog) */

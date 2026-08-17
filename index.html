@@ -963,7 +963,7 @@
                                             <strong>Copy Flowers:</strong> Click a flower to copy it, then click another empty cell to paste the copied flower.
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
-                                            <strong>Reimagine:</strong> Mark plots with Usahana’s Reimagine (Optimize) ability. For each parent pair, Analyze remaps that pair’s breed results onto its three rarest outcomes, then averages pairs (cooldown/pity calendar not simulated).
+                                            <strong>Reimagine:</strong> Mark plots with Usahana’s Reimagine (Optimize) ability. With at least one eligible neighbor, spawn is 100%. Analyze remaps each pair’s breed results onto its three rarest outcomes, then averages pairs (cooldown/pity calendar not simulated).
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
                                             <strong>Create Patterns:</strong> Use paint mode to create symmetrical designs.
@@ -1041,7 +1041,7 @@
                                             <strong>Breeding Analysis:</strong> See all possible flowers and their exact breeding probabilities from your current setup. You can analyze the entire grid ("Analyze Flowers" button) or individual plots in "View" mode.
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
-                                            <strong>Breeding Details:</strong> In "View" mode, how much of the final spawn chance for that flower comes from a specific breeding category, including: Color Mix, Color Transfer, Pattern Transfer, and Single Clone.
+                                            <strong>Breeding Details:</strong> In "View" mode, how much of the final spawn chance for that flower comes from a specific breeding category, including: Color Mix, Color Transfer, Pattern Transfer, and Single Clone. A mint rainbow means that plot’s Reimagine remap influenced the result (not a separate breed-method share).
                                         </li>
                                         <li class="list-group-item border-0 bg-light-pink">
                                             <strong>Greenhouse Mode:</strong> Toggle for greenhouse breeding percentages (cannot toggle "ON" for event flowers or preset plot layouts).
@@ -1228,7 +1228,7 @@
                         <img src="assets/logo.png" alt="HKIA Flower Simulator" class="mb-3" style="max-width: 200px;">
                         <h4>Hello Kitty Island Adventure</h4>
                         <h5 class="text-muted">Flower Breeding Simulator</h5>
-                        <p class="text-muted mb-0"><small>Version 2.1.2</small></p>
+                        <p class="text-muted mb-0"><small>Version 2.1.3</small></p>
                     </div>
                     <div class="about-content">
                         <p class="mb-3">
@@ -1968,6 +1968,17 @@
                                     <div>
                                         <strong>Simple Clone</strong>
                                         <br><small class="text-muted">Flower is an exact clone of one parent</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                    <span class="me-3" style="font-size: 1.5rem;">
+                                        <i class="fas fa-rainbow" style="color: #5ecfc6;"></i>
+                                    </span>
+                                    <div>
+                                        <strong>Reimagine</strong>
+                                        <br><small class="text-muted">This outcome was remapped by Usahana’s Reimagine (rarest-bias). It is an influence flag, not a breed-method share.</small>
                                     </div>
                                 </div>
                             </div>
