@@ -170,6 +170,41 @@
                  <article class="blog-post card mb-4" data-category="updates">
                     <div class="card-body">
                         <h2 class="card-title h4">
+                            <i class="fas fa-bug me-2 text-pink"></i>Bug Fix - Version 2.1.4
+                        </h2>
+                        <div class="post-meta mb-3">
+                            <span class="badge bg-pink me-2">
+                                <i class="fas fa-calendar me-1"></i>October 12, 2026
+                            </span>
+                            <span class="badge bg-outline-pink">
+                                <i class="fas fa-tag me-1"></i>Updates
+                            </span>
+                        </div>
+                    <div class="post-content">
+                        <p>Reimagine View now follows the same game logic as live <code>TryBreedFlowers(..., isOptimized)</code> active window: one consolidated child-weight dictionary for the plot, then <code>CompareFlowerWeight</code> (ascending weight) and the 5% / 10% / 85% remap onto the three rarest <em>ranks</em>. Huge thank you to <strong>NH3Maser</strong> for flagging the bad per-pair remap, walking through the rank/tie model from months of flower-chat experiments, and sending the Anemone garden that made the bug obvious. ❤️</p>
+
+                        <h5>What was wrong</h5>
+                        <p>2.1.3 treated Reimagine like a per-pair <code>CalculateResultChances</code> remap: sort each pair, <code>slice(0, 3)</code> by name, assign <code>OptimizedRareChanceFirst / Second / Third</code>, then average those remaps. A stable name tie-break made two equal-weight flowers look like different rarity slots, and could drop a tied flower entirely.</p>
+                        <p>Example — Red &amp; White Ombré Anemone × Orange &amp; White Ombré Anemone used to show Orange &amp; White at 85%, and the two <code>CrossBlendBlendedPattern</code> hybrids at 10% and 5%, with the Red &amp; White <code>CrossBlendPatternedClone</code> missing.</p>
+
+                        <h5>What it does now</h5>
+                        <ul>
+                            <li><strong>Consolidated list:</strong> every neighbor pair is merged (weights summed) before ranking, the same way the game adds into one result dictionary. A flower that is rare in only one pair does not keep a First/Second/Third slot if it is not among the three lowest ranks of the merged table.</li>
+                            <li><strong>Weight ranks, not three names:</strong> the knobs land on the three lowest weights. Every flower tied at that weight — including ones past the third slot in the sort — splits that rank’s mass evenly. On a single spawn the game randomly tie-breaks equal weights; View shows the expected value of that coin flip.</li>
+                            <li><strong>That Anemone garden</strong> is now Red &amp; White 42.5%, Orange &amp; White 42.5%, Red &amp; Orange 7.5%, Orange &amp; Red 7.5%. The two 0.01 hybrids share First+Second <code>(5+10)/2</code>; the two 0.04 clones share Third <code>85/2</code>.</li>
+                            <li><strong>Pattern transfer vs hybridization:</strong> a non-effect pattern transfer is one ranked outcome (<code>PatternCrosstypeClone</code> / <code>PatternCrosstype</code> at full weight); the secondary coin flip (<code>SelectNewPatternColor</code>) is split 50/50 for display. Hybridization residuals from <code>AddBlendedPatterns</code> stay separate dictionary keys — different secondaries are different flowers.</li>
+                            <li>Spawn is still <code>breedChance = 1.0</code> with an eligible neighbor. <code>OptimizedCooldownDays</code> (4) and <code>OptimizedPityDays</code> (14) are still not calendar-simulated — View shows the active-window remap only.</li>
+                        </ul>
+
+                        <p>If you have any questions or feedback, please feel free to submit a report on our site under the "Feedback" button in the About menu.</p>
+                        <p>Thank you for your continued support! 🌸</p>
+                    </div>
+                    </div>
+                </article>
+
+                 <article class="blog-post card mb-4" data-category="updates">
+                    <div class="card-body">
+                        <h2 class="card-title h4">
                             <i class="fas fa-bug me-2 text-pink"></i>Bug Fix - Version 2.1.3
                         </h2>
                         <div class="post-meta mb-3">
